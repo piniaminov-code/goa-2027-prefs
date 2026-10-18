@@ -102,14 +102,15 @@ setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},600);
 <iframe id="goa-gal-frame" src="about:blank" style="width:100%;height:100%;border:0" title="גלריית פיני טורס"></iframe>
 </div>
 <script>
-(function(){
+function goaGalInit(){
 var ov=document.getElementById('goa-gal'),fr=document.getElementById('goa-gal-frame');
 function openGal(e){if(e)e.preventDefault();if(!fr.dataset.loaded){fr.src='gallery.html?embed=1';fr.dataset.loaded='1';}ov.style.display='block';document.body.style.overflow='hidden';}
 function closeGal(){ov.style.display='none';document.body.style.overflow='';}
 var l=document.getElementById('gal-link');if(l)l.addEventListener('click',openGal);
 document.getElementById('goa-gal-close').addEventListener('click',closeGal);
 window.addEventListener('message',function(e){if(e.data==='goa-close-gallery')closeGal();});
-})();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',goaGalInit);else goaGalInit();
 </script>
 <div class="bar"><i id="prog"></i></div>
 <header class="hero">
