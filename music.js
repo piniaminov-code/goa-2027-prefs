@@ -213,13 +213,14 @@
     try { return localStorage.getItem('goa27music') !== 'off'; } catch (e) { return true; }
   }
   if (wantsMusic()) {
-    var started = false;
+    // מנסים שוב בכל מגע עד שבאמת מתנגן (מחווה ראשונה כמו גלילה לא תמיד מספיקה לדפדפן)
     var kick = function () {
-      if (started) return;
-      started = true;
-      ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(function (ev) {
-        document.removeEventListener(ev, kick);
-      });
+      if (playing) {
+        ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(function (ev) {
+          document.removeEventListener(ev, kick);
+        });
+        return;
+      }
       start();
     };
     ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(function (ev) {
