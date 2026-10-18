@@ -23,6 +23,15 @@
   function loadFile() {
     if (fileBuf) return Promise.resolve(fileBuf);
     if (fileFailed) return Promise.resolve(null);
+    if (window.__ga1 && window.__ga2) {
+      try {
+        var bin = atob(window.__ga1 + window.__ga2);
+        var u8 = new Uint8Array(bin.length);
+        for (var i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+        return ctx.decodeAudioData(u8.buffer).then(function (buf) { fileBuf = buf; return buf; })
+          .catch(function () { fileFailed = true; return null; });
+      } catch (e) { fileFailed = true; return Promise.resolve(null); }
+    }
     return fetch(FILE_URL)
       .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.arrayBuffer(); })
       .then(function (ab) { return ctx.decodeAudioData(ab); })
