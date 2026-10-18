@@ -1,9 +1,9 @@
 /* גואה 2027 - מוזיקת רקע מקורית ב-Web Audio. בלי קבצים, בלי יצירות מוגנות.
-   לולאת גואה-טראנס ~140BPM: קיק, בס אסיד, האטים, קלאפ וליד עם דיליי.
+   לולאת גואה-טראנס ~146BPM: קיק, בס אסיד, טבלה, טאנפורה, סיטאר-ראגה עם דיליי ופדים מנצנצים.
    מתנגנת רק אחרי לחיצה של המשתמש, בעוצמה נמוכה, עם כפתור השתקה גלוי. */
 (function () {
   'use strict';
-  var BPM = 140;
+  var BPM = 146;
   var SPB = 60 / BPM;
   var STEP = SPB / 4;          // שישית-עשרית
   var BARS = 8;
@@ -264,7 +264,7 @@
       '#goa-music .goa-ic{font-size:20px;line-height:1}' +
       '#goa-music .goa-tx{color:#e8dcff;font-size:13px;font-weight:700}' +
       '#goa-music.goa-playing{border-color:#c96bff;box-shadow:0 0 18px rgba(190,90,255,.55)}' +
-      '@media (prefers-reduced-motion:no-preference){#goa-music.goa-playing .goa-ic{animation:goaPulse 1.714s ease-in-out infinite}}' +
+      '@media (prefers-reduced-motion:no-preference){#goa-music.goa-playing .goa-ic{animation:goaPulse 1.644s ease-in-out infinite}}' +
       '@keyframes goaPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}';
     document.head.appendChild(st);
     btn = document.createElement('div');
