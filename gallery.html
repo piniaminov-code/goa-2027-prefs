@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
-<script src="music.js?v=7" defer></script>
+<script src="music.js?v=8" defer></script>
 <script src="goa-assets-1.js?v=3" defer></script>
 <script src="goa-assets-2.js?v=3" defer></script>
 <script src="goa-assets-3.js?v=2" defer></script>
@@ -95,7 +95,7 @@ footer{text-align:center;padding:30px 10px 50px;color:#b9a3ee;font-size:14px}
 (function(){
 var s=document.getElementById('goa-splash');
 if(!s)return;
-try{if(localStorage.getItem('goa27_entered')==='1'){s.parentNode.removeChild(s);return;}}catch(e){}
+try{if(localStorage.getItem('goa27_entered')==='1'||/([?&])embed=1/.test(location.search)){s.parentNode.removeChild(s);return;}}catch(e){}
 document.getElementById('goa-enter').addEventListener('click',function(){
 try{localStorage.setItem('goa27_entered','1');}catch(e){}
 if(window.goaMusic&&window.goaMusic.start){window.goaMusic.start();}
@@ -110,6 +110,15 @@ setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},600);
 <h1><span class="g">גלריית פיני טורס</span><br>מטיולי עבר 🌴</h1>
 <p class="tag">טיולי העבר של החבורה, עם שדרוג ניאון לקראת גואה 2027 ✨</p>
 <a class="btn" href="index.html" style="text-decoration:none">חזרה לסקר ההעדפות ←</a>
+<script>
+(function(){
+if(!/([?&])embed=1/.test(location.search))return;
+document.addEventListener('click',function(e){
+var a=e.target.closest&&e.target.closest('a[href="index.html"]');
+if(a){e.preventDefault();try{parent.postMessage('goa-close-gallery','*');}catch(err){}}
+},true);
+})();
+</script>
 </header>
 
 <footer>
