@@ -6,9 +6,9 @@
 
   var PHOTOS = [
     { src: 'GOA_CUT2',   type: 'cut',   hero: true, caption: 'החבורה של גואה 2027 💜', alt: 'כל החבורה מול ארמון שנברון' },
-    { src: 'GOA_CUT7',   type: 'cut',   caption: 'מוכנים לגלשנים 🏄', alt: 'החבורה עם גלשנים' },
+    { src: 'GOA_PHOTO7', type: 'frame', caption: 'מוכנים לגלשנים 🏄', alt: 'החבורה עם גלשנים' },
     { src: 'GOA_CUT3',   type: 'cut',   caption: 'כבר במוד דקלים 🌴', alt: 'החבורה מול בריכה ודקלים' },
-    { src: 'GOA_CUT1',   type: 'cut',   caption: 'מפגש מפקדה ⛲', alt: 'החבורה מול המזרקה' },
+    { src: 'GOA_PHOTO1', type: 'frame', caption: 'מפגש מפקדה ⛲', alt: 'החבורה מול המזרקה' },
     { src: 'GOA_CUT4',   type: 'cut',   caption: 'אימון מערות 🕉️', alt: 'החבורה במערה' },
     { src: 'GOA_PHOTO5', type: 'frame', caption: 'ארוחת צוות 🍛', alt: 'סלפי סביב שולחן במסעדה' },
     { src: 'GOA_PHOTO6', type: 'frame', caption: 'סיור ג׳ונגל 🌿', alt: 'סלפי של החבורה ביער' },
