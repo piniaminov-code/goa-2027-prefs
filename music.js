@@ -169,7 +169,7 @@
     if (!btn) return;
     btn.setAttribute('aria-pressed', on ? 'true' : 'false');
     btn.classList.toggle('goa-playing', on);
-    lbl.textContent = on ? '🔊 מושמע' : '🎵 מוזיקה';
+    lbl.textContent = on ? 'מושמע' : 'מוזיקה';
     btn.title = on ? 'השתק מוזיקה' : 'הפעל מוזיקת רקע';
   }
   function build() {
@@ -191,10 +191,10 @@
     btn.setAttribute('tabindex', '0');
     btn.setAttribute('aria-pressed', 'false');
     var ic = document.createElement('span'); ic.className = 'goa-ic'; ic.textContent = '🎵';
-    lbl = document.createElement('span'); lbl.className = 'goa-tx'; lbl.textContent = '🎵 מוזיקה';
+    lbl = document.createElement('span'); lbl.className = 'goa-tx'; lbl.textContent = 'מוזיקה';
     lbl.classList.add('goa-tx');
     btn.appendChild(ic); btn.appendChild(lbl);
-    function onLabel(on) { lbl.textContent = on ? '🔊 מושמע' : '🎵 מוזיקה'; }
+    function onLabel(on) { lbl.textContent = on ? 'מושמע' : 'מוזיקה'; }
     var origUi = ui;
     ui = function (on) { origUi(on); onLabel(on); ic.textContent = on ? '🔊' : '🎵'; };
     btn.title = 'הפעל מוזיקת רקע';
