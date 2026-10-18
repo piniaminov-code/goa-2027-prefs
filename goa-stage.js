@@ -29,7 +29,7 @@
     '.goa-item img.goa-group{position:absolute;bottom:0;left:50%;width:94%;height:auto;' +
     'transform:translateX(-50%);transform-origin:50% 100%;' +
     'filter:drop-shadow(0 0 14px rgba(220,120,255,.55)) drop-shadow(0 6px 10px rgba(0,0,0,.45));' +
-    'animation:goaDance .857s ease-in-out infinite alternate}' +
+    'animation:goaDance .822s ease-in-out infinite alternate}' +
     '.goa-item .goa-shadow{position:absolute;bottom:2%;left:50%;width:80%;height:26px;transform:translateX(-50%);' +
     'background:radial-gradient(ellipse at center,rgba(0,0,0,.5),transparent 70%);pointer-events:none}' +
     '.goa-item figcaption{position:absolute;top:10px;right:10px;z-index:3;background:rgba(18,4,40,.78);' +
@@ -38,7 +38,7 @@
     '.goa-item.frame{background:#160736;padding:10px}' +
     '.goa-item.frame img{display:block;width:100%;height:auto;border-radius:14px;' +
     'border:2px solid rgba(200,100,255,.75);box-shadow:0 0 22px rgba(180,70,255,.55);' +
-    'animation:goaSway 3.43s ease-in-out infinite alternate}' +
+    'animation:goaSway 3.288s ease-in-out infinite alternate}' +
     '@keyframes goaDance{from{transform:translateX(-50%) translateY(0) rotate(-.8deg)}to{transform:translateX(-50%) translateY(-2.4%) rotate(.8deg)}}' +
     '@keyframes goaSway{from{transform:rotate(-.6deg)}to{transform:rotate(.6deg)}}' +
     '@media (prefers-reduced-motion:reduce){.goa-item img.goa-group,.goa-item.frame img{animation:none}}';
