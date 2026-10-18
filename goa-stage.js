@@ -12,7 +12,9 @@
     { src: 'GOA_CUT4',   type: 'cut',   caption: 'אימון מערות 🕉️', alt: 'החבורה במערה' },
     { src: 'GOA_PHOTO5', type: 'frame', caption: 'ארוחת צוות 🍛', alt: 'סלפי סביב שולחן במסעדה' },
     { src: 'GOA_PHOTO6', type: 'frame', caption: 'סיור ג׳ונגל 🌿', alt: 'סלפי של החבורה ביער' },
-    { src: 'GOA_PHOTO8', type: 'frame', caption: 'סעודת לילה 🌙', alt: 'סלפי סביב שולחן ערב' }
+    { src: 'GOA_PHOTO8', type: 'frame', caption: 'סעודת לילה 🌙', alt: 'סלפי סביב שולחן ערב' },
+    { src: 'GOA_PHOTO9', type: 'frame', caption: 'שולחן הסיום 🥂', alt: 'סלפי סביב שולחן ארוחת ערב ארוך' },
+    { src: 'GOA_PHOTO10', type: 'frame', caption: 'מסעדת המלון 🍽️', alt: 'סלפי במסעדת המלון' }
   ];
 
   var CSS =
