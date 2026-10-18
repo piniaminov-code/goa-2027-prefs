@@ -321,4 +321,11 @@
     if (document.hidden) ctx.suspend();
     else if (playing) ctx.resume();
   });
+
+  // API ציבורי למסך הפתיחה: התחלה מפורשת במחוות משתמש + שאילת מצב
+  window.goaMusic = {
+    start: function () { return start(pendingStep); },
+    stop: stop,
+    isPlaying: function () { return playing; }
+  };
 })();
