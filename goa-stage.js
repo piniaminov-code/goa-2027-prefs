@@ -18,11 +18,11 @@
   ];
 
   var CSS =
-    '#goa-crew{margin:18px auto 26px;max-width:960px;padding:0 14px}' +
+    '#goa-crew{margin:18px auto 26px;max-width:960px;width:100%;box-sizing:border-box;padding:0 14px}' +
     '#goa-crew h2{text-align:center;color:#f3e8ff;font-size:26px;margin:6px 0 2px;text-shadow:0 0 18px rgba(190,80,255,.65)}' +
     '#goa-crew .goa-sub{text-align:center;color:#c9b3e8;font-size:14px;margin:0 0 16px}' +
-    '.goa-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}' +
-    '.goa-item{margin:0;position:relative;border-radius:20px;overflow:hidden;' +
+    '.goa-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px;width:100%}' +
+    '.goa-item{margin:0;min-width:0;width:100%;box-sizing:border-box;position:relative;border-radius:20px;overflow:hidden;' +
     'border:1px solid rgba(190,110,255,.45);box-shadow:0 0 26px rgba(140,40,220,.35),inset 0 0 40px rgba(60,0,90,.35);' +
     'background-color:#160736;background-size:cover;background-position:center}' +
     '.goa-item.hero{grid-column:1/-1}' +
@@ -51,7 +51,7 @@
     var sec = document.createElement('section');
     sec.id = 'goa-crew';
     var h = document.createElement('h2');
-    h.textContent = 'החבורה כבר מתאמנת על גואה 🕉️';
+    h.textContent = 'החבורה מתאמנת על גואה';
     var sub = document.createElement('p');
     sub.className = 'goa-sub';
     sub.textContent = 'כולם אמיתיים, רק הרקע התחדש בניאון';
