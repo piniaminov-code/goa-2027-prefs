@@ -76,6 +76,13 @@
         var shadow = document.createElement('div');
         shadow.className = 'goa-shadow';
         fig.appendChild(shadow);
+        var fixAspect = function () {
+          if (!img.naturalWidth) return;
+          var headroom = p.hero ? 1.9 : 1.35;
+          fig.style.aspectRatio = ((img.naturalWidth / img.naturalHeight) / (0.94 * headroom)).toFixed(3);
+        };
+        img.addEventListener('load', fixAspect);
+        fixAspect();
       }
       fig.appendChild(img);
       var cap = document.createElement('figcaption');
