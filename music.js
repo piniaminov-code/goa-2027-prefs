@@ -207,18 +207,25 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);
   else build();
 
-  // אם המשתמש כבר בחר מוזיקה בעבר - מתחילים במגע הראשון עם הדף (דרישת דפדפנים)
-  try {
-    if (localStorage.getItem('goa27music') === 'on') {
-      var once = function () {
-        document.removeEventListener('pointerdown', once);
-        document.removeEventListener('keydown', once);
-        start();
-      };
-      document.addEventListener('pointerdown', once);
-      document.addEventListener('keydown', once);
-    }
-  } catch (e) {}
+  // ברירת מחדל: המוזיקה דולקת. הדפדפן דורש מגע ראשון - מתחילים בכל מגע/גלילה/מקש.
+  // אם המשתמש השתיק בעבר - נזכור ולא ננגן.
+  function wantsMusic() {
+    try { return localStorage.getItem('goa27music') !== 'off'; } catch (e) { return true; }
+  }
+  if (wantsMusic()) {
+    var started = false;
+    var kick = function () {
+      if (started) return;
+      started = true;
+      ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(function (ev) {
+        document.removeEventListener(ev, kick);
+      });
+      start();
+    };
+    ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(function (ev) {
+      document.addEventListener(ev, kick, { passive: true });
+    });
+  }
   document.addEventListener('pagehide', function () { if (ctx && playing) ctx.suspend(); });
   document.addEventListener('visibilitychange', function () {
     if (!ctx) return;
