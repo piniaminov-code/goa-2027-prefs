@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
-<script src="music.js?v=7" defer></script>
+<script src="music.js?v=8" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>פיני טורס טסים להודו | גואה 2027</title>
 <meta name="description" content="הטיול הגדול לגואה. ממלאים העדפות בדקה וחצי, פיני טורס דואג לשאר.">
@@ -97,6 +97,20 @@ setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},600);
 });
 })();
 </script>
+<div id="goa-gal" style="display:none;position:fixed;inset:0;z-index:9000;background:#0b0420">
+<button id="goa-gal-close" type="button" style="position:absolute;top:10px;left:10px;z-index:9001;background:rgba(20,6,45,.85);color:#e8dcff;border:1px solid rgba(190,120,255,.5);border-radius:999px;padding:8px 16px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer">✕ חזרה לסקר</button>
+<iframe id="goa-gal-frame" src="about:blank" style="width:100%;height:100%;border:0" title="גלריית פיני טורס"></iframe>
+</div>
+<script>
+(function(){
+var ov=document.getElementById('goa-gal'),fr=document.getElementById('goa-gal-frame');
+function openGal(e){if(e)e.preventDefault();if(!fr.dataset.loaded){fr.src='gallery.html?embed=1';fr.dataset.loaded='1';}ov.style.display='block';document.body.style.overflow='hidden';}
+function closeGal(){ov.style.display='none';document.body.style.overflow='';}
+var l=document.getElementById('gal-link');if(l)l.addEventListener('click',openGal);
+document.getElementById('goa-gal-close').addEventListener('click',closeGal);
+window.addEventListener('message',function(e){if(e.data==='goa-close-gallery')closeGal();});
+})();
+</script>
 <div class="bar"><i id="prog"></i></div>
 <header class="hero">
   <div class="badge">GOA 2027 · אפריל</div>
@@ -110,7 +124,7 @@ setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},600);
 <section class="card" style="text-align:center">
 <h2>📸 גלריית פיני טורס - מטיולי עבר</h2>
 <p class="hint">כל התמונות של החבורה מטיולי העבר, בסטייל גואה מלא</p>
-<a class="btn" href="gallery.html" style="display:inline-block;text-decoration:none">לגלריה 🕉️</a>
+<a class="btn" href="gallery.html" id="gal-link" style="display:inline-block;text-decoration:none">לגלריה 🕉️</a>
 </section>
 
   <section class="card">
