@@ -113,6 +113,7 @@ setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},600);
 <script>
 (function(){
 if(!/([?&])embed=1/.test(location.search))return;
+var bl=document.querySelector('a[href="index.html"]');if(bl)bl.style.display='none';
 document.addEventListener('click',function(e){
 var a=e.target.closest&&e.target.closest('a[href="index.html"]');
 if(a){e.preventDefault();try{parent.postMessage('goa-close-gallery','*');}catch(err){}}
