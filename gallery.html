@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
-<script src="music.js?v=6" defer></script>
+<script src="music.js?v=7" defer></script>
 <script src="goa-assets-1.js?v=3" defer></script>
 <script src="goa-assets-2.js?v=3" defer></script>
 <script src="goa-assets-3.js?v=2" defer></script>
@@ -69,6 +69,41 @@ footer{text-align:center;padding:30px 10px 50px;color:#b9a3ee;font-size:14px}
 
 </head>
 <body>
+<div id="goa-splash" role="dialog" aria-label="ברוכים הבאים לפיני טורס">
+<style>
+#goa-splash{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;background:radial-gradient(1200px 800px at 50% 18%,#2a0a4a 0%,#0b0420 58%,#05010e 100%);transition:opacity .5s ease;text-align:center;font-family:'Rubik',sans-serif}
+#goa-splash.gs-hide{opacity:0;pointer-events:none}
+#goa-splash .gs-in{padding:24px;max-width:440px}
+#goa-splash .gs-badge{display:inline-block;color:#ffd166;font-weight:700;letter-spacing:2px;font-size:13px;border:1px solid rgba(255,209,102,.5);border-radius:999px;padding:6px 16px;margin-bottom:22px}
+#goa-splash .gs-title{font-size:46px;line-height:1.15;font-weight:900;margin:0 0 12px;background:linear-gradient(90deg,#ff7ad9,#c96bff,#7af0ff);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(201,107,255,.45))}
+#goa-splash .gs-sub{color:#cbb8ff;font-size:16px;margin:0 0 30px}
+#goa-splash #goa-enter{font-family:inherit;font-size:21px;font-weight:900;color:#1a0530;background:linear-gradient(90deg,#ffd166,#ff7ad9);border:none;border-radius:999px;padding:16px 44px;cursor:pointer;box-shadow:0 0 26px rgba(255,122,217,.65),0 0 60px rgba(201,107,255,.35);animation:gsPulse 1.8s ease-in-out infinite;-webkit-tap-highlight-color:transparent}
+#goa-splash #goa-enter:active{transform:scale(.96)}
+#goa-splash .gs-note{color:#8f7ab8;font-size:13px;margin-top:18px}
+@keyframes gsPulse{0%,100%{transform:scale(1);box-shadow:0 0 26px rgba(255,122,217,.65),0 0 60px rgba(201,107,255,.35)}50%{transform:scale(1.06);box-shadow:0 0 40px rgba(255,122,217,.9),0 0 90px rgba(201,107,255,.55)}}
+@media (prefers-reduced-motion:reduce){#goa-splash #goa-enter{animation:none}}
+</style>
+<div class="gs-in">
+<div class="gs-badge">GOA 2027 · אפריל</div>
+<h1 class="gs-title">פיני טורס<br>טסים להודו</h1>
+<p class="gs-sub">שלוש משפחות, מדינה אחת, ומסיבת חוף אחת גדולה 🕉️</p>
+<button id="goa-enter" type="button">היכנסו לגואה 🌴</button>
+<p class="gs-note">🔊 הכניסה מפעילה מוזיקה - אפשר להשתיק בכל רגע</p>
+</div>
+</div>
+<script>
+(function(){
+var s=document.getElementById('goa-splash');
+if(!s)return;
+try{if(localStorage.getItem('goa27_entered')==='1'){s.parentNode.removeChild(s);return;}}catch(e){}
+document.getElementById('goa-enter').addEventListener('click',function(){
+try{localStorage.setItem('goa27_entered','1');}catch(e){}
+if(window.goaMusic&&window.goaMusic.start){window.goaMusic.start();}
+s.classList.add('gs-hide');
+setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},600);
+});
+})();
+</script>
 <header class="hero">
 <div class="badge">📸 גלריית מטיולי עבר</div>
 <div class="spin" aria-hidden="true"></div>
