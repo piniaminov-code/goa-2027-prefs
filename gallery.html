@@ -2,9 +2,9 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
-<script src="goa-audio-1.js?v=1" defer></script>
-<script src="goa-audio-2.js?v=1" defer></script>
-<script src="music.js?v=9" defer></script>
+<script src="goa-audio-1.js?v=2" defer></script>
+<script src="goa-audio-2.js?v=2" defer></script>
+<script src="music.js?v=10" defer></script>
 <script src="goa-assets-1.js?v=3" defer></script>
 <script src="goa-assets-2.js?v=3" defer></script>
 <script src="goa-assets-3.js?v=2" defer></script>
@@ -89,7 +89,7 @@ footer{text-align:center;padding:30px 10px 50px;color:#b9a3ee;font-size:14px}
 <div class="gs-badge">GOA 2027 · אפריל</div>
 <h1 class="gs-title">פיני טורס<br>טסים להודו</h1>
 <p class="gs-sub">שלוש משפחות, מדינה אחת, ומסיבת חוף אחת גדולה 🕉️</p>
-<button id="goa-enter" type="button">היכנסו לגואה 🌴</button>
+<button id="goa-enter" type="button">ברוכים הבאים לגואה 🌴</button>
 <p class="gs-note">🔊 הכניסה מפעילה מוזיקה - אפשר להשתיק בכל רגע</p>
 </div>
 </div>
@@ -97,9 +97,9 @@ footer{text-align:center;padding:30px 10px 50px;color:#b9a3ee;font-size:14px}
 (function(){
 var s=document.getElementById('goa-splash');
 if(!s)return;
-try{if(localStorage.getItem('goa27_entered')==='1'||/([?&])embed=1/.test(location.search)){s.parentNode.removeChild(s);return;}}catch(e){}
+try{localStorage.removeItem('goa27_entered');if(sessionStorage.getItem('goa27_entered')==='1'||/([?&])embed=1/.test(location.search)){s.parentNode.removeChild(s);return;}}catch(e){}
 document.getElementById('goa-enter').addEventListener('click',function(){
-try{localStorage.setItem('goa27_entered','1');}catch(e){}
+try{sessionStorage.setItem('goa27_entered','1');}catch(e){}
 if(window.goaMusic&&window.goaMusic.start){window.goaMusic.start();}
 s.classList.add('gs-hide');
 setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},600);
