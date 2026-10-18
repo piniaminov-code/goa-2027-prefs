@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
-<script src="music.js?v=3" defer></script>
+<script src="music.js?v=5" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>פיני טורס טסים להודו | גואה 2027</title>
 <meta name="description" content="הטיול הגדול לגואה. ממלאים העדפות בדקה וחצי, פיני טורס דואג לשאר.">
@@ -242,10 +242,17 @@ function summary(){
  if($('more').value.trim())L.push('💬 עוד: '+$('more').value.trim());
  return L.join('\n');
 }
+
+const SUPA_URL='https://ufiggucmbbjmlhjpcerz.supabase.co',SUPA_KEY='sb_publishable_bxXkuwmJ84zh3OhdGnEwyQ_Mbpo5mFf';
+function sendAnswers(summaryText){try{
+const payload={answers:snap(),summary:summaryText,ua:navigator.userAgent.slice(0,200)};
+fetch(SUPA_URL+'/rest/v1/goa27_prefs',{method:'POST',headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify({name:$('name').value.trim(),payload:payload}),keepalive:true})
+.then(r=>{if(r.ok)$('note').textContent+=' ✅ ההעדפות נשמרו אצל פיני'}).catch(()=>{});
+}catch(e){}}
 $('go').onclick=()=>{
  if(!$('name').value.trim()){$('nameErr').style.display='block';$('name').focus();$('name').scrollIntoView({block:'center'});return}
  $('nameErr').style.display='none';
- const s=summary();$('out').textContent=s;$('out').style.display='block';$('acts').style.display='flex';
+ const s=summary();sendAnswers(s);$('out').textContent=s;$('out').style.display='block';$('acts').style.display='flex';
  $('wa').href='https://wa.me/?text='+encodeURIComponent(s);
  $('note').textContent='בוואטסאפ בוחרים את הקבוצה ולוחצים שליחה. אפשר לחזור ולשנות, ההעדפות נשמרות בטלפון.';
  $('out').scrollIntoView({behavior:'smooth',block:'center'});
