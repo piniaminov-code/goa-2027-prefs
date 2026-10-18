@@ -1,8 +1,12 @@
-/* גואה 2027 - מוזיקת רקע מקורית ב-Web Audio. בלי קבצים, בלי יצירות מוגנות.
+/* גואה 2027 - מוזיקת רקע: קובץ goa-loop.mp3 (הופק במיוחד לאתר) בלולאה חלקה.
+   אם הקובץ לא נטען מכל סיבה - נופלים אוטומטית למנוע הסינת' המקורי (Web Audio).
+   מתנגן רק אחרי מחווה של המשתמש (כפתור הכניסה/מגע), עם כפתור השתקה גלוי וזיכרון מצב בין דפים.
    לולאת גואה-טראנס ~146BPM: קיק, בס אסיד, טבלה, טאנפורה, סיטאר-ראגה עם דיליי ופדים מנצנצים.
    מתנגנת רק אחרי לחיצה של המשתמש, בעוצמה נמוכה, עם כפתור השתקה גלוי. */
 (function () {
   'use strict';
+  // כשהגלריה נפתחת כשכבה בתוך index (embed=1) - הדף הראשי כבר מנגן; כאן לא עושים כלום
+  try { if (/([?&])embed=1/.test(location.search)) return; } catch (e) {}
   var BPM = 146;
   var SPB = 60 / BPM;
   var STEP = SPB / 4;          // שישית-עשרית
@@ -13,6 +17,22 @@
   var ctx = null, master = null, noiseBuf = null;
   var delaySend = null;
   var timer = null, storeT = null, nextTime = 0, step = 0, playing = false;
+  var VOL_FILE = 0.5;          // עוצמה למסלול האמיתי
+  var FILE_URL = 'goa-loop.mp3';
+  var fileBuf = null, fileFailed = false, fileSrc = null, fileStartAt = 0, fileStartOff = 0, mode = null;
+  function loadFile() {
+    if (fileBuf) return Promise.resolve(fileBuf);
+    if (fileFailed) return Promise.resolve(null);
+    return fetch(FILE_URL)
+      .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.arrayBuffer(); })
+      .then(function (ab) { return ctx.decodeAudioData(ab); })
+      .then(function (buf) { fileBuf = buf; return buf; })
+      .catch(function () { fileFailed = true; return null; });
+  }
+  function fileNow() {
+    if (!fileSrc || !fileBuf) return 0;
+    return (fileStartOff + ctx.currentTime - fileStartAt) % fileBuf.duration;
+  }
 
   var BASS_SEQ = ['A1', 'A1', 'C2', 'G1', 'A1', 'A1', 'F1', 'G1'];
   // טבלה: תבנית קאידה של 4 תיבות, 8 מטרות (שמיניות) לתיבה
@@ -214,9 +234,37 @@
   }
 
   function persistState() {
-    try { localStorage.setItem('goa27music_state', JSON.stringify({ playing: playing, step: step, at: Date.now() })); } catch (e) {}
+    var pos = (mode === 'file') ? fileNow() : step;
+    try { localStorage.setItem('goa27music_state', JSON.stringify({ playing: playing, mode: mode, pos: pos, at: Date.now() })); } catch (e) {}
   }
-  function start(fromStep) {
+  function startFile(off) {
+    mode = 'file';
+    fileSrc = ctx.createBufferSource();
+    fileSrc.buffer = fileBuf;
+    fileSrc.loop = true;
+    fileSrc.connect(master);
+    fileStartOff = fileBuf.duration ? (off % fileBuf.duration) : 0;
+    fileStartAt = ctx.currentTime + 0.06;
+    master.gain.cancelScheduledValues(ctx.currentTime);
+    master.gain.setTargetAtTime(VOL_FILE, ctx.currentTime, 0.5);
+    fileSrc.start(fileStartAt, fileStartOff);
+    playing = true;
+    storeT = setInterval(persistState, 1000);
+    persistState();
+    ui(true);
+    try { localStorage.setItem('goa27music', 'on'); } catch (e) {}
+  }
+  function start(fromPos) {
+    if (!ctx) initCtx();
+    return ctx.resume().then(function () {
+      if (playing) return;
+      if (!fileBuf && !fileFailed) return loadFile().then(function () { start(fromPos); });
+      if (fileBuf) startFile(fromPos || 0);
+      else { mode = 'synth'; startSynth(fromPos || 0); }
+    });
+  }
+  function startSynth(fromStep) {
+    mode = 'synth';
     if (!ctx) initCtx();
     return ctx.resume().then(function () {
       if (playing) return;
@@ -238,6 +286,7 @@
     playing = false;
     master.gain.cancelScheduledValues(ctx.currentTime);
     master.gain.setTargetAtTime(0, ctx.currentTime, 0.25);
+    if (fileSrc) { var s0 = fileSrc; fileSrc = null; setTimeout(function () { try { s0.stop(); } catch (e) {} }, 600); }
     setTimeout(function () { if (ctx && !playing) ctx.suspend(); }, 900);
     clearInterval(timer);
     clearInterval(storeT);
@@ -288,6 +337,8 @@
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);
   else build();
+  // טוענים את קובץ המוזיקה מראש (ההקשר נשאר מושהה עד מחווה ראשונה) כדי שהכניסה תהיה מיידית
+  try { initCtx(); if (ctx.state === 'suspended') { /* decodeAudioData עובד גם כשמושהה */ } loadFile(); } catch (e) {}
 
   // ברירת מחדל: המוזיקה דולקת. הדפדפן דורש מגע ראשון - מתחילים בכל מגע/גלילה/מקש.
   // אם המשתמש השתיק בעבר - נזכור ולא ננגן.
@@ -295,10 +346,10 @@
     try { return localStorage.getItem('goa27music') !== 'off'; } catch (e) { return true; }
   }
   // המשכיות בין דפים: אם ניגן זה עתה בדף אחר (למשל מעבר סקר <-> גלריה), ממשיכים מאותה נקודה במגע הראשון
-  var pendingStep = 0;
+  var pendingPos = 0;
   try {
     var st = JSON.parse(localStorage.getItem('goa27music_state') || 'null');
-    if (st && st.playing && Date.now() - st.at < 30000) pendingStep = st.step || 0;
+    if (st && st.playing && Date.now() - st.at < 30000) pendingPos = (typeof st.pos === 'number') ? st.pos : (st.step || 0);
   } catch (e) {}
   if (wantsMusic()) {
     // מנסים שוב בכל מגע עד שבאמת מתנגן (מחווה ראשונה כמו גלילה לא תמיד מספיקה לדפדפן)
@@ -309,7 +360,7 @@
         });
         return;
       }
-      start(pendingStep);
+      start(pendingPos);
     };
     ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(function (ev) {
       document.addEventListener(ev, kick, { passive: true });
@@ -324,7 +375,7 @@
 
   // API ציבורי למסך הפתיחה: התחלה מפורשת במחוות משתמש + שאילת מצב
   window.goaMusic = {
-    start: function () { return start(pendingStep); },
+    start: function () { return start(pendingPos); },
     stop: stop,
     isPlaying: function () { return playing; }
   };
