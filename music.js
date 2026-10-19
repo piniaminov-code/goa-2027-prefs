@@ -20,27 +20,43 @@
   var VOL_FILE = 0.5;          // עוצמה למסלול האמיתי
   var FILE_URL = 'goa-loop.mp3';
   var fileBuf = null, fileFailed = false, fileSrc = null, fileStartAt = 0, fileStartOff = 0, mode = null;
-  function loadFile() {
-    if (fileBuf) return Promise.resolve(fileBuf);
-    if (fileFailed) return Promise.resolve(null);
-    if (window.__ga1 && window.__ga2) {
+  // רצועות לפי אזור באתר: main = לולאת הפתיחה; lodging = שיר הלינה של פיני; השאר - יתווספו כשישלחו
+  var TRACKS = {
+    main: function () { return (window.__ga1 && window.__ga2) ? window.__ga1 + window.__ga2 : null; },
+    lodging: function () {
+      var s = '';
+      for (var i = 1; i <= 7; i++) { var c = window['__lod' + i]; if (!c) return null; s += c; }
+      return s;
+    }
+  };
+  var trackBufs = {}, trackFailed = {}, curTrack = 'main';
+  function trackHasAudio(name) { return !!TRACKS[name] && !!TRACKS[name](); }
+  function loadTrack(name) {
+    if (trackBufs[name]) return Promise.resolve(trackBufs[name]);
+    if (trackFailed[name]) return Promise.resolve(null);
+    var payload = TRACKS[name] ? TRACKS[name]() : null;
+    if (payload) {
       try {
-        var bin = atob(window.__ga1 + window.__ga2);
+        var bin = atob(payload);
         var u8 = new Uint8Array(bin.length);
         for (var i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
-        return ctx.decodeAudioData(u8.buffer).then(function (buf) { fileBuf = buf; return buf; })
-          .catch(function () { fileFailed = true; return null; });
-      } catch (e) { fileFailed = true; return Promise.resolve(null); }
+        return ctx.decodeAudioData(u8.buffer).then(function (buf) {
+          trackBufs[name] = buf; if (name === 'main') fileBuf = buf; return buf;
+        }).catch(function () { trackFailed[name] = true; if (name === 'main') fileFailed = true; return null; });
+      } catch (e) { trackFailed[name] = true; if (name === 'main') fileFailed = true; return Promise.resolve(null); }
     }
+    if (name !== 'main') { trackFailed[name] = true; return Promise.resolve(null); }
     return fetch(FILE_URL)
       .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.arrayBuffer(); })
       .then(function (ab) { return ctx.decodeAudioData(ab); })
-      .then(function (buf) { fileBuf = buf; return buf; })
-      .catch(function () { fileFailed = true; return null; });
+      .then(function (buf) { trackBufs.main = buf; fileBuf = buf; return buf; })
+      .catch(function () { trackFailed.main = true; fileFailed = true; return null; });
   }
+  function loadFile() { return loadTrack('main'); }
   function fileNow() {
-    if (!fileSrc || !fileBuf) return 0;
-    return (fileStartOff + ctx.currentTime - fileStartAt) % fileBuf.duration;
+    var buf = trackBufs[curTrack] || fileBuf;
+    if (!fileSrc || !buf) return 0;
+    return (fileStartOff + ctx.currentTime - fileStartAt) % buf.duration;
   }
 
   var BASS_SEQ = ['A1', 'A1', 'C2', 'G1', 'A1', 'A1', 'F1', 'G1'];
@@ -244,15 +260,16 @@
 
   function persistState() {
     var pos = (mode === 'file') ? fileNow() : step;
-    try { localStorage.setItem('goa27music_state', JSON.stringify({ playing: playing, mode: mode, pos: pos, at: Date.now() })); } catch (e) {}
+    try { localStorage.setItem('goa27music_state', JSON.stringify({ playing: playing, mode: mode, pos: pos, at: Date.now(), track: curTrack })); } catch (e) {}
   }
   function startFile(off) {
     mode = 'file';
+    var buf = trackBufs[curTrack] || fileBuf;
     fileSrc = ctx.createBufferSource();
-    fileSrc.buffer = fileBuf;
+    fileSrc.buffer = buf;
     fileSrc.loop = true;
     fileSrc.connect(master);
-    fileStartOff = fileBuf.duration ? (off % fileBuf.duration) : 0;
+    fileStartOff = buf.duration ? (off % buf.duration) : 0;
     fileStartAt = ctx.currentTime + 0.06;
     master.gain.cancelScheduledValues(ctx.currentTime);
     master.gain.setTargetAtTime(VOL_FILE, ctx.currentTime, 0.5);
@@ -262,13 +279,15 @@
     persistState();
     ui(true);
     try { localStorage.setItem('goa27music', 'on'); } catch (e) {}
+    if (!trackBufs.lodging && trackHasAudio('lodging')) loadTrack('lodging');
   }
   function start(fromPos) {
     if (!ctx) initCtx();
     return ctx.resume().then(function () {
       if (playing) return;
-      if (!fileBuf && !fileFailed) return loadFile().then(function () { start(fromPos); });
-      if (fileBuf) startFile(fromPos || 0);
+      var want = (curTrack !== 'main' && trackHasAudio(curTrack)) ? curTrack : 'main';
+      if (!trackBufs[want] && !trackFailed[want]) return loadTrack(want).then(function () { start(fromPos); });
+      if (trackBufs[want]) startFile(fromPos || 0);
       else { mode = 'synth'; startSynth(fromPos || 0); }
     });
   }
@@ -290,7 +309,7 @@
       try { localStorage.setItem('goa27music', 'on'); } catch (e) {}
     });
   }
-  function stop() {
+  function stopPlayback() {
     if (!ctx || !playing) return;
     playing = false;
     master.gain.cancelScheduledValues(ctx.currentTime);
@@ -301,7 +320,24 @@
     clearInterval(storeT);
     persistState();
     ui(false);
+  }
+  function stop() {
+    stopPlayback();
     try { localStorage.setItem('goa27music', 'off'); } catch (e) {}
+  }
+  // מעבר רצועה לפי אזור: עצירה נקייה בלי חפיפה, וניגון הרצועה החדשה. בלי קובץ? נשארים בלולאה הראשית
+  function playTrack(name) {
+    if (!TRACKS[name] || !trackHasAudio(name)) name = 'main';
+    if (name === curTrack) return;
+    var wasPlaying = playing;
+    curTrack = name;
+    if (!wasPlaying) return;
+    stopPlayback();
+    loadTrack(curTrack).then(function (buf) {
+      var on = true;
+      try { on = localStorage.getItem('goa27music') !== 'off'; } catch (e) {}
+      if (!playing && buf && on) start(curTrack === 'main' ? pendingPos : 0);
+    });
   }
 
   var btn, lbl;
@@ -358,7 +394,10 @@
   var pendingPos = 0;
   try {
     var st = JSON.parse(localStorage.getItem('goa27music_state') || 'null');
-    if (st && st.playing && Date.now() - st.at < 30000) pendingPos = (typeof st.pos === 'number') ? st.pos : (st.step || 0);
+    if (st && st.playing && Date.now() - st.at < 30000) {
+      pendingPos = (typeof st.pos === 'number') ? st.pos : (st.step || 0);
+      if (st.track && TRACKS[st.track] && st.track !== 'main' && trackHasAudio(st.track)) curTrack = st.track;
+    }
   } catch (e) {}
   if (wantsMusic()) {
     // מנסים שוב בכל מגע עד שבאמת מתנגן (מחווה ראשונה כמו גלילה לא תמיד מספיקה לדפדפן)
@@ -386,7 +425,10 @@
   window.goaMusic = {
     start: function () { return start(pendingPos); },
     stop: stop,
-    isPlaying: function () { return playing; }
+    isPlaying: function () { return playing; },
+    playTrack: playTrack,
+    preload: function (n) { if (ctx && TRACKS[n]) return loadTrack(n); },
+    currentTrack: function () { return curTrack; }
   };
 })();
 
