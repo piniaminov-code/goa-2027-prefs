@@ -389,3 +389,5 @@
     isPlaying: function () { return playing; }
   };
 })();
+
+/* cache bump 2026-10-19 */
