@@ -61,6 +61,22 @@ input[type=range]{width:100%;accent-color:var(--pink);margin:12px 0 2px}
 footer{text-align:center;padding:30px 10px 50px;color:#b9a3ee;font-size:14px}
 .err{color:#ff7a9a;font-size:14px;display:none;margin-top:6px}
 .sunrays{animation:flow 8s linear infinite}
+
+/* המלצות */
+.rec h3{margin:16px 0 8px;font-size:17px;color:#19f0ff}
+.rec ul{margin:6px 0 10px;padding-inline-start:20px}
+.rec li{margin:6px 0;font-size:15px;line-height:1.55}
+.pill{display:inline-block;font-size:11.5px;padding:2px 10px;border-radius:999px;border:1px solid #ff2bd688;color:#ffb3ef;margin-inline-start:6px;vertical-align:middle}
+.pill.b{border-color:#19f0ff88;color:#a8f6ff}
+.price{color:#ffd166;font-weight:600}
+.note2{font-size:12px;color:#b9aede;margin-top:10px;line-height:1.5}
+/* סקריי מתקפל */
+details.survey{margin:26px 0;border-radius:22px;background:linear-gradient(160deg,#1d0a4acc,#0c0629dd);border:1px solid #ff2bd666;box-shadow:0 0 24px rgba(122,44,255,.35)}
+details.survey>summary{list-style:none;cursor:pointer;padding:18px;text-align:center;font-size:19px;font-weight:800;color:#fff;text-shadow:0 0 12px #ff2bd6}
+details.survey>summary::-webkit-details-marker{display:none}
+details.survey>summary::after{content:' ▼';font-size:13px;color:#19f0ff}
+details.survey[open]>summary::after{content:' ▲'}
+details.survey .pad{padding:0 14px 14px}
 </style>
 </head>
 <body>
@@ -120,7 +136,8 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   <div class="spin" aria-hidden="true"></div>
   <h1><span class="g">פיני טורס</span><br>טסים להודו 🌴</h1>
   <p class="tag">שלוש משפחות, מדינה אחת, אפס מושג בדיוק איפה נישן.<br>תגידו מה בא לכם, ואנחנו נעשה את הקסם ✨</p>
-  <a class="btn" href="#form">יאללה, ממלאים (90 שניות)</a>
+  <a class="btn" href="#recs">מה מומלץ לנו בגואה? 👇</a>
+  <a class="btn ghost" href="#survey" id="survey-open" style="margin-top:10px">יאללה ממלאים (90 שניות) ✍️</a>
 </header>
 
 <main id="form">
@@ -129,6 +146,60 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <p class="hint">כל התמונות של החבורה מטיולי העבר, בסטייל גואה מלא</p>
 <a class="btn" href="gallery.html" id="gal-link" style="display:inline-block;text-decoration:none">לגלריה 🕉️</a>
 </section>
+<section class="card rec" id="recs">
+<h2>🗺️ ההמלצות שלנו לגואה 2027</h2>
+<p class="hint">אספנו בשבילכם את הטוב ביותר לשלוש המשפחות, לפי האזורים שכולם ביקשו: חלק מהזמן בצפון, חלק בדרום, ומקסימום 3 החלפות מלון. כל המחירים משוערים (₹ = רופי הודי, ≈ המרה גסה לשקלים) ונכונים לאוקטובר 2026 - מחירי אפריל 2027 יפתחו מאוחר יותר.</p>
+
+<h3>🌴 צפון גואה - אזור Calangute / Baga / Vagator</h3>
+<p class="hint">הלב של הבילויים, השווקים והמסעדות. לילדים: חול רחב, הרבה אקשן.</p>
+<ul>
+<li><b>Hard Rock Hotel Goa</b> (קלנגוט) - מועדון ילדים Roxity, בריכה גדולה, דקות מהחוף. <span class="price">מ־₹6,400 ללילה ≈ ₪240</span> <span class="pill">אמינוב: מועדון ילדים</span><span class="pill b">טפר: נקי ומרכזי</span></li>
+<li><b>W Goa</b> (וגטור) - 5 כוכבים על הצוק, מסיבות סאנסט, שקט יחסית בחדרים. <span class="price">מ־₹20,700 ≈ ₪780</span> <span class="pill">גרינוולד: מסיבה 8/10 + שקט</span></li>
+<li><b>וילה פרטית עם בריכה</b> באסאגאו או סיולים (3-4 חדרי שינה) - דרך Airbnb או סוכנות וילות מקומית. <span class="pill">אמינוב: וילה פרטית</span></li>
+</ul>
+<p><b>אוכל בצפון:</b> Britto's בבאגה (קלאסיקה מ-1965, נוף לים), Thalassa בוגטור (יווני, הסאנסט הכי מפורסם בגואה), Gunpowder באסאגאו (דרום הודי משובח), Pincode בוגטור (הודי מודרני). צמחוני ואוכל מוכר לילדים יש בשפע בכל מקום.</p>
+<p><b>מה עושים בצפון:</b> שוק דחיפים באנג'ונה (ימי רביעי), שוק הלילה בארפורה (מוצ"ש), ספורט מים 5-ב-1 בקלנגוט/באגה <span class="price">≈ ₹1,300</span>, שייט דולפינים מסינקרים (כשעה וחצי, <span class="price">מ־₹399</span>), מבצרי Aguada ו-Chapora, שיעור יוגה drop-in בארמבול.</p>
+<p><b>קניות:</b> בעיקר בשווקים שלמעלה - בגדים, תכשיטים, תבלינים ומזכרות.</p>
+
+<h3>🏖️ דרום גואה - אזור Palolem / Agonda / Benaulim</h3>
+<p class="hint">שקט, חופים מהיפים בהודו, וגם הבית של חב"ד לקראת ליל הסדר.</p>
+<ul>
+<li><b>The LaLiT Golf &amp; Spa Resort</b> (Rajbaga, קנקונה) - ריזורט ענק עם חוף פרטי, כ־10 דקות מפלולם. <span class="pill">קרוב לסדר</span></li>
+<li><b>Taj Exotica</b> (בנאולים) - ריזורט משפחתי יוקרתי על החוף, פעילויות לילדים.</li>
+<li><b>בקתות על החוף</b> בפלולם/אגונדה - לאוהבי הפשטות (טפר: הכי פשוט ויפה).</li>
+</ul>
+<p><b>אוכל בדרום:</b> Cantine Indienne בפלולם (טבעוני מצוין), The Mill בפלולם, Beno ו-Cavatina בבנאולים, Fisherman's Wharf במובור, Martin's Corner בבטלבטים, Zest ו-La Dolce Vita באגונדה, Joets בבוגמלו על החוף.</p>
+<p><b>מה עושים בדרום:</b> יוגה drop-in ב-Palm Forest או Luma בפלולם, שייט דולפינים ממובור, ויום טיול למפלי דודסאגר - ג'יפים יוצאים מקולם (להזמין מראש באתר איגוד המפעילים) ובדרך אפשר לשלב מטע תבלינים Sahakari בפונדה.</p>
+<p><b>קניות:</b> דוכני בוטיק ותכשיטים ברחוב הראשי של פלולם.</p>
+
+<h3>🕎 ליל הסדר - רביעי בערב, 21.4.2027</h3>
+<ul>
+<li>פסח תשפ"ז מתחיל בצאת היום ב־21.4.2027, כלומר ליל הסדר עצמו (לפי Chabad.org).</li>
+<li><b>בית חב"ד גואה</b> בפלולם (משפחת מרילי) עורך ארוחות חג וסדר פסח ברישום מראש - רעיון יפה: כל הקבוצה יחד בסדר.</li>
+<li>כתובת: Main Street, near Old Syndicate Bank, Palolem, Canacona · וואטסאפ: <a href="https://wa.me/972509467701" style="color:#19f0ff">972-50-946-7701+</a> / <a href="https://wa.me/972507671341" style="color:#19f0ff">972-50-767-1341+</a></li>
+<li>נכון להיום טרם פורסם רישום לסדר תשפ"ז - מומלץ לרשום הודעה בוואטסאפ ולוודא פרטים סמוך לתאריך.</li>
+<li>מונית משדה התעופה לפלולם: <span class="price">₹1,600-2,000 ≈ ₪60-75</span> (אפשר להזמין דרך חב"ד במחיר מוזל).</li>
+</ul>
+
+<h3>✈️ דלהי - מעבר קצר</h3>
+<ul>
+<li>לינת לילה ליד שדה התעופה: <b>Hotel Transit International</b> ב-Aerocity (טרמינל 3), <span class="price">מ־₹2,776 ≈ ₪105</span>. יש עוד מלונות רבים באותו מתחם Aerocity.</li>
+</ul>
+
+<h3>🧭 עקרונות התכנון</h3>
+<ul>
+<li>כמה לילות צפון + כמה לילות דרום, מקסימום 3 החלפות מלון לכל משפחה.</li>
+<li>נהג פרטי לכל הקבוצה - כל שלוש המשפחות ביקשו, ובהודו זה משתלם ונוח עם ילדים.</li>
+<li>אפריל בגואה חם - לתכנן פעילויות בוקר ושקיעה, צהריים בבריכה.</li>
+</ul>
+<p class="note2">מקורות: Chabad.org, chabad-goa.com, Agoda, KAYAK/momondo, Booking.com, Condé Nast Traveller India, LBB Goa, Universal Adventures, Aqua Thrill Goa, אתר איגוד מפעילי הג'יפים דודסאגר (נבדקו אוקטובר 2026).</p>
+</section>
+
+<details class="survey" id="surveybox">
+<summary>יאללה ממלאים (90 שניות) ✍️</summary>
+<div class="pad">
+<p class="hint" style="text-align:center;margin-top:4px">השאלון הקטן שלנו - ממלאים, לוחצים "הכינו לי סיכום", וההעדפות נשמרות אצל פיני.</p>
+
 
   <section class="card">
     <h2>🧑‍🚀 מי אתם?</h2>
@@ -232,6 +303,8 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     </div>
     <p class="note" id="note"></p>
   </section>
+</div>
+</details>
 </main>
 
 <footer>
@@ -310,6 +383,15 @@ $('go').onclick=()=>{
  $('out').scrollIntoView({behavior:'smooth',block:'center'});
 };
 $('copy').onclick=async()=>{const s=$('out').textContent;try{await navigator.clipboard.writeText(s)}catch(e){const r=document.createRange();r.selectNodeContents($('out'));const x=getSelection();x.removeAllRanges();x.addRange(r);document.execCommand('copy')}$('copy').textContent='הועתק ✓ עכשיו להדביק בקבוצה';setTimeout(()=>$('copy').textContent='העתק סיכום',3500)};
+</script>
+
+<script>
+(function(){
+ var d=document.getElementById('surveybox'),b=document.getElementById('survey-open');
+ function openS(e){if(e)e.preventDefault();if(d&&!d.open)d.open=true;if(d)d.scrollIntoView({behavior:'smooth',block:'start'});}
+ if(b)b.addEventListener('click',openS);
+ if(location.hash==='#survey')openS();
+})();
 </script>
 </body>
 </html>
