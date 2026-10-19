@@ -24,10 +24,10 @@
   + '.gcb-badge{align-self:flex-start;font-size:11px;color:#ffd28a;background:rgba(255,190,80,.12);'
   + 'border:1px solid rgba(255,190,80,.35);border-radius:8px;padding:2px 8px}'
   + '.gcb-dots{align-self:flex-start;color:#cbb6e8;font-size:18px;letter-spacing:2px;padding:4px 12px}'
-  + '#goa-chat-inputrow{display:flex;gap:8px;padding:10px;border-top:1px solid rgba(255,255,255,.1)}'
-  + '#goa-chat-input{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:12px;'
+  + '#goa-chat-inputrow{display:flex;gap:8px;padding:10px;border-top:1px solid rgba(255,255,255,.1);align-items:center}'
+  + '#goa-chat-input{flex:1;box-sizing:border-box;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:12px;'
   + 'color:#fff;font-size:14px;padding:10px 12px;outline:none;font-family:inherit;resize:none;height:42px}'
-  + '#goa-chat-send{background:linear-gradient(135deg,#ff5fa2,#a855f7);border:none;color:#fff;font-weight:700;'
+  + '#goa-chat-send{box-sizing:border-box;height:42px;background:linear-gradient(135deg,#ff5fa2,#a855f7);border:none;color:#fff;font-weight:700;'
   + 'border-radius:12px;padding:0 16px;cursor:pointer;font-size:14px;font-family:inherit}'
   + '#goa-chat-send:disabled{opacity:.5;cursor:default}'
   + '#goa-chat-note{padding:7px 12px 9px;font-size:10.5px;color:#9d8ac0;line-height:1.4;border-top:1px solid rgba(255,255,255,.06)}';
