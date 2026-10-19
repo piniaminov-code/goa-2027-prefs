@@ -46,7 +46,7 @@
     + '<div id="goa-chat-msgs"></div>'
     + '<div id="goa-chat-inputrow"><textarea id="goa-chat-input" maxlength="400" rows="1" placeholder="שאלו שאלה על הטיול…"></textarea>'
     + '<button id="goa-chat-send" type="button">שלח</button></div>'
-    + '<div id="goa-chat-note">מופעל ע״י Google Gemini (חינמי). בתוכנית החינמית Google עשויה להשתמש בתוכן לשיפור המוצרים — בלי פרטים אישיים 🙏 · תשובות מסומנות ⚠️ לא מאומת הן מחוץ למידע האתר.</div>';
+    + '<div id="goa-chat-note">מופעל ע״י Google Gemini (חינמי). השאלות נשלחות ל-Google Gemini ועשויות לשמש לשיפור מוצרי Google. אל תכתבו פרטים אישיים. הסינון והגבלת הקצב הם בסיסיים בלבד · תשובות מסומנות ⚠️ לא מאומת הן מחוץ למידע האתר.</div>';
 
   document.body.appendChild(btn); document.body.appendChild(panel);
 
@@ -80,6 +80,9 @@
   async function ask() {
     var q = input.value.trim();
     if (!q || busy) return;
+    if (/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i.test(q) || /(?:\+?\d[\s().-]*){7,}/.test(q) || /\b[A-Z]{1,3}\d{6,9}\b/i.test(q)) {
+      addMsg('הסירו מהשאלה מספרי טלפון, כתובות אימייל או מספרי מסמכים. השאלה לא נשלחה.', 'bot'); return;
+    }
     busy = true; send.disabled = true;
     addMsg(q, 'user'); input.value = '';
     var dots = document.createElement('div');
