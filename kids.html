@@ -586,8 +586,19 @@ document.addEventListener("DOMContentLoaded", function () {
   // Entering an iframe blurs the parent window, including on mobile Safari.
   window.addEventListener('blur', function () { setTimeout(frameFocus, 0); });
   document.addEventListener('focusin', frameFocus);
+  // Moving between two frames does not always fire another window blur.
+  setInterval(frameFocus, 200);
+  document.querySelectorAll('iframe.gframe').forEach(function (frame) {
+    function bind() {
+      try { frame.contentDocument.addEventListener('pointerdown', function () {
+        gameActive = true; update();
+      }, true); } catch (_) {}
+    }
+    frame.addEventListener('load', bind); bind();
+  });
   document.addEventListener('pointerdown', function (e) {
     if (e.target.closest('iframe')) return;
+    if (document.activeElement && document.activeElement.matches('iframe')) document.activeElement.blur();
     gameActive = false;
     if (e.target.closest('#goa-music') && !videoActive && !activeMedia.size) {
       window.goaMusic.setMediaActive(false, true);
