@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>🐣 האנגלית הראשונה שלי | פיני טורס</title>
+<meta name="description" content="משחק אנגלית ראשונה לגיל הגן: צבעים, חיות ומספרים - שומעים ולוחצים, בלי קריאה.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0420;--pink:#ff2bd6;--violet:#7a2cff;--cyan:#19f0ff;--green:#b8ff5e;--yellow:#ffe14d}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#2a1260,var(--bg));color:#fff;font-family:'Rubik',Arial,sans-serif;overflow-x:hidden;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.wrap{max-width:560px;margin:0 auto;padding:14px 12px 40px;min-height:100%;display:flex;flex-direction:column}
+h1{font-size:clamp(24px,7vw,34px);font-weight:900;text-align:center;margin:10px 0 2px;background:linear-gradient(90deg,var(--pink),var(--cyan),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{text-align:center;color:#cdb8ff;margin:0 0 14px;font-size:15px}
+.stars{text-align:center;font-size:22px;min-height:34px;margin:4px 0;letter-spacing:2px}
+.menu{display:flex;flex-direction:column;gap:16px;margin-top:8px}
+.mbtn{border:2px solid #ff2bd688;background:linear-gradient(160deg,#1d0a4a,#0c0629);color:#fff;border-radius:26px;padding:22px 16px;font-family:inherit;cursor:pointer;text-align:center;box-shadow:0 0 20px rgba(122,44,255,.35);transition:transform .12s}
+.mbtn:active{transform:scale(.96)}
+.mbtn .e{font-size:54px;display:block}
+.mbtn .t{font-size:22px;font-weight:900;display:block;margin-top:4px}
+.mbtn .s{font-size:14px;color:#cdb8ff;display:block}
+.game{display:none;flex:1;flex-direction:column}
+.top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.pill{background:#1d0a4a;border:1px solid var(--cyan);color:var(--cyan);border-radius:99px;padding:5px 14px;font-size:14px;font-weight:700}
+.speak{border:2px solid var(--yellow);background:#2a1260;color:#fff;font-size:26px;border-radius:50%;width:64px;height:64px;cursor:pointer;box-shadow:0 0 18px rgba(255,225,77,.4);flex:none}
+.speak:active{transform:scale(.92)}
+.speak.pulse{animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 10px rgba(255,225,77,.3)}50%{box-shadow:0 0 26px rgba(255,225,77,.9)}}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;flex:1;align-content:center;margin-top:6px}
+.opt{border:3px solid #7a2cff66;background:linear-gradient(160deg,#1d0a4acc,#0c0629dd);border-radius:24px;min-height:132px;display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:pointer;transition:transform .12s,border-color .2s;padding:8px}
+.opt:active{transform:scale(.95)}
+.opt.right{border-color:var(--green);box-shadow:0 0 26px rgba(184,255,94,.8)}
+.opt.wrong{animation:shake .45s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px)}40%{transform:translateX(9px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+.opt .emo{font-size:64px;line-height:1.1}
+.opt .dot{width:74px;height:74px;border-radius:50%;border:4px solid rgba(255,255,255,.85);box-shadow:0 0 16px rgba(255,255,255,.25),inset 0 0 14px rgba(0,0,0,.25)}
+.opt .num{font-size:56px;font-weight:900;text-shadow:0 0 14px rgba(25,240,255,.6)}
+.opt .dots{font-size:13px;letter-spacing:3px;margin-top:4px;max-width:100%;line-height:1.7}
+.opt .cap{font-size:15px;color:#cdb8ff;margin-top:6px;font-weight:700;direction:ltr}
+.feedback{text-align:center;font-size:24px;font-weight:900;min-height:36px;margin-top:12px}
+.burst{position:fixed;inset:0;pointer-events:none;z-index:50}
+.burst span{position:absolute;font-size:30px;animation:fly 1.1s ease-out forwards}
+@keyframes fly{0%{transform:translateY(0) scale(.6);opacity:1}100%{transform:translateY(-46vh) scale(1.5);opacity:0}}
+.end{display:none;text-align:center;flex:1;flex-direction:column;justify-content:center}
+.end .big1{font-size:64px}
+.end h2{font-size:30px;font-weight:900;margin:8px 0}
+.end p{color:#cdb8ff}
+.btn{display:inline-block;border:0;cursor:pointer;font:inherit;font-weight:700;color:#fff;padding:14px 26px;border-radius:99px;background:linear-gradient(90deg,var(--pink),var(--violet));box-shadow:0 0 22px rgba(255,43,214,.7);font-size:19px;margin:8px 6px 0}
+.btn.cyan{background:linear-gradient(90deg,#0e7490,var(--cyan));color:#04222b;box-shadow:0 0 22px rgba(25,240,255,.55)}
+.home{position:absolute;top:10px;left:10px;background:none;border:0;color:#cdb8ff;font-size:26px;cursor:pointer;z-index:5}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <button class="home" id="homeBtn" style="display:none" title="תפריט">🏠</button>
+  <h1>🐣 האנגלית הראשונה שלי</h1>
+  <p class="sub">שומעים את המילה באנגלית ולוחצים על התמונה 👂👆</p>
+  <div class="stars" id="stars">🤍🤍🤍🤍🤍🤍🤍🤍</div>
+
+  <div class="menu" id="menu">
+    <button class="mbtn" data-world="colors"><span class="e">🎨</span><span class="t">Colors</span><span class="s">צבעים</span></button>
+    <button class="mbtn" data-world="animals"><span class="e">🐶</span><span class="t">Animals</span><span class="s">חיות</span></button>
+    <button class="mbtn" data-world="numbers"><span class="e">🔢</span><span class="t">Numbers</span><span class="s">מספרים 1-10</span></button>
+  </div>
+
+  <div class="game" id="game">
+    <div class="top">
+      <div class="pill" id="worldName"></div>
+      <button class="speak" id="speakBtn" title="שמעו שוב">🔊</button>
+      <div class="pill" id="roundNo"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="feedback" id="fb">&nbsp;</div>
+  </div>
+
+  <div class="end" id="end">
+    <div class="big1">🎉🏆🎉</div>
+    <h2>כל הכבוד!</h2>
+    <p id="endStars"></p>
+    <div>
+      <button class="btn" id="againBtn">🔁 עוד פעם</button>
+      <button class="btn cyan" id="menuBtn">🏠 תפריט</button>
+    </div>
+  </div>
+</div>
+<div class="burst" id="burst"></div>
+
+<script>
+(function(){
+"use strict";
+var WORLDS={
+ colors:{name:'🎨 צבעים',en:'Colors',items:[
+  {en:'red',cap:'red',c:'#e53935'},{en:'blue',cap:'blue',c:'#1e88e5'},{en:'yellow',cap:'yellow',c:'#fdd835'},
+  {en:'green',cap:'green',c:'#43a047'},{en:'orange',cap:'orange',c:'#fb8c00'},{en:'purple',cap:'purple',c:'#8e24aa'},
+  {en:'pink',cap:'pink',c:'#ec407a'},{en:'brown',cap:'brown',c:'#8d6e63'},{en:'black',cap:'black',c:'#37474f'},{en:'white',cap:'white',c:'#f5f5f5'}]},
+ animals:{name:'🐶 חיות',en:'Animals',items:[
+  {en:'dog',emo:'🐶'},{en:'cat',emo:'🐱'},{en:'lion',emo:'🦁'},{en:'monkey',emo:'🐵'},
+  {en:'elephant',emo:'🐘'},{en:'fish',emo:'🐟'},{en:'bird',emo:'🐦'},{en:'duck',emo:'🦆'},
+  {en:'frog',emo:'🐸'},{en:'cow',emo:'🐮'},{en:'rabbit',emo:'🐰'},{en:'bee',emo:'🐝'}]},
+ numbers:{name:'🔢 מספרים',en:'Numbers',items:[1,2,3,4,5,6,7,8,9,10].map(function(n){return {en:String(n),num:n};})}
+};
+var NUMWORDS={1:'one',2:'two',3:'three',4:'four',5:'five',6:'six',7:'seven',8:'eight',9:'nine',10:'ten'};
+var ROUNDS=8;
+var $=function(id){return document.getElementById(id)};
+var menu=$('menu'),game=$('game'),end=$('end'),grid=$('grid'),fb=$('fb'),starsEl=$('stars'),burst=$('burst');
+var world=null,queue=[],round=0,score=0,target=null,lock=false;
+
+var voice=null;
+function pickVoice(){
+ try{
+  var vs=speechSynthesis.getVoices();
+  voice=vs.filter(function(v){return /^en([-_]|$)/i.test(v.lang)&&/female|zira|samantha|aria|google us english/i.test(v.name)})[0]
+       ||vs.filter(function(v){return v.lang==='en-US'})[0]
+       ||vs.filter(function(v){return /^en([-_]|$)/i.test(v.lang)})[0]||null;
+ }catch(e){}
+}
+if('speechSynthesis' in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice;}
+function say(text,rate){
+ if(!('speechSynthesis' in window))return;
+ try{
+  speechSynthesis.cancel();
+  setTimeout(function(){
+   var u=new SpeechSynthesisUtterance(text);
+   u.lang='en-US';if(voice)u.voice=voice;
+   u.rate=rate||0.75;u.pitch=1.1;
+   speechSynthesis.speak(u);
+  },80);
+ }catch(e){}
+}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function drawStars(){
+ var s='';for(var i=0;i<ROUNDS;i++)s+=i<score?'⭐':'🤍';
+ starsEl.textContent=s;
+}
+function startWorld(k){
+ world=WORLDS[k];queue=shuffle(world.items.slice()).concat(shuffle(world.items.slice())).slice(0,ROUNDS);
+ round=0;score=0;drawStars();
+ $('worldName').textContent=world.name;
+ menu.style.display='none';end.style.display='none';game.style.display='flex';$('homeBtn').style.display='block';
+ say(world.en+'!');
+ setTimeout(nextRound,700);
+}
+function nextRound(){
+ if(round>=ROUNDS){finish();return}
+ target=queue[round];round++;lock=false;
+ $('roundNo').textContent='סיבוב '+round+'/'+ROUNDS;
+ fb.innerHTML='&nbsp;';
+ var others=shuffle(world.items.filter(function(it){return it.en!==target.en})).slice(0,3);
+ var opts=shuffle([target].concat(others));
+ grid.innerHTML='';
+ opts.forEach(function(it){
+  var b=document.createElement('button');b.className='opt';
+  if(it.c){b.innerHTML='<span class="dot" style="background:'+it.c+'"></span><span class="cap">'+it.cap+'</span>';}
+  else if(it.emo){b.innerHTML='<span class="emo">'+it.emo+'</span><span class="cap">'+it.en+'</span>';}
+  else{var d='';for(var i=0;i<it.num;i++)d+='🟣';b.innerHTML='<span class="num">'+it.num+'</span><span class="dots">'+d+'</span><span class="cap">'+it.en+'</span>';}
+  b.addEventListener('click',function(){pick(it,b)});
+  grid.appendChild(b);
+ });
+ promptWord();
+}
+function wordOf(it){return it.num?NUMWORDS[it.num]:it.en;}
+function promptWord(){
+ var w=wordOf(target);
+ $('speakBtn').classList.add('pulse');
+ say('Find the '+w+'!  '+w);
+}
+function pick(it,btn){
+ if(lock)return;
+ if(it.en===target.en){
+  lock=true;$('speakBtn').classList.remove('pulse');
+  btn.classList.add('right');score++;drawStars();
+  var praise=['Great job!','Well done!','Amazing!','Super!','Fantastic!'][Math.floor(Math.random()*5)];
+  fb.textContent='🌟 '+({'Great job!':'איזה יופי!','Well done!':'כל הכבוד!','Amazing!':'מדהים!','Super!':'סופר!','Fantastic!':'פנטסטי!'}[praise]);
+  say(praise+' '+wordOf(target)+'!');
+  doBurst();
+  setTimeout(nextRound,1500);
+ }else{
+  btn.classList.add('wrong');
+  say('Oops! Try again!');
+  setTimeout(function(){btn.classList.remove('wrong');say(wordOf(target));},1100);
+ }
+}
+function doBurst(){
+ var em=['🌟','🎉','✨','💜','🎈','🐬'];
+ for(var i=0;i<14;i++){
+  var s=document.createElement('span');
+  s.textContent=em[Math.floor(Math.random()*em.length)];
+  s.style.left=(8+Math.random()*84)+'%';
+  s.style.top=(55+Math.random()*30)+'%';
+  s.style.animationDelay=(Math.random()*0.25)+'s';
+  burst.appendChild(s);
+  (function(el){setTimeout(function(){el.remove()},1500)})(s);
+ }
+}
+function finish(){
+ game.style.display='none';end.style.display='flex';$('homeBtn').style.display='none';
+ $('endStars').textContent='⭐ '+score+' מתוך '+ROUNDS+' ⭐';
+ say('Wow! You did it! Great job!');
+ doBurst();setTimeout(doBurst,600);
+}
+document.querySelectorAll('.mbtn').forEach(function(b){
+ b.addEventListener('click',function(){
+  if('speechSynthesis' in window){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u);}catch(e){}}
+  startWorld(b.dataset.world);
+ });
+});
+$('speakBtn').addEventListener('click',function(){if(target&&!lock)say(wordOf(target));});
+$('againBtn').addEventListener('click',function(){
+ var k=Object.keys(WORLDS).filter(function(k){return WORLDS[k]===world})[0];startWorld(k);
+});
+$('menuBtn').addEventListener('click',backToMenu);
+$('homeBtn').addEventListener('click',backToMenu);
+function backToMenu(){game.style.display='none';end.style.display='none';menu.style.display='flex';$('homeBtn').style.display='none';starsEl.textContent='🤍🤍🤍🤍🤍🤍🤍🤍';}
+})();
+</script>
+</body>
+</html>
