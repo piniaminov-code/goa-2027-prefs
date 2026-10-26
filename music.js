@@ -30,8 +30,33 @@
     }
   };
   var trackBufs = {}, trackFailed = {}, curTrack = 'main';
-  function trackHasAudio(name) { return !!TRACKS[name] && !!TRACKS[name](); }
+  // the lodging song (about 6 MB of base64) is fetched only when music starts, not on every page load
+  var lodPromise = null;
+  function loadLodgingScripts() {
+    if (window.__lod7) return Promise.resolve();
+    if (lodPromise) return lodPromise;
+    lodPromise = new Promise(function (resolve) {
+      var n = 0;
+      for (var i = 1; i <= 7; i++) {
+        (function (k) {
+          var s = document.createElement('script');
+          s.src = 'goa-lodging-' + k + '.js?v=1';
+          s.async = true;
+          s.onload = s.onerror = function () { if (++n === 7) resolve(); };
+          document.head.appendChild(s);
+        })(i);
+      }
+    });
+    return lodPromise;
+  }
+  function trackHasAudio(name) { return name === 'lodging' ? true : (!!TRACKS[name] && !!TRACKS[name]()); }
   function loadTrack(name) {
+    if (name === 'lodging' && !trackBufs.lodging && !trackFailed.lodging && !TRACKS.lodging()) {
+      return loadLodgingScripts().then(function () { return loadTrackNow(name); });
+    }
+    return loadTrackNow(name);
+  }
+  function loadTrackNow(name) {
     if (trackBufs[name]) return Promise.resolve(trackBufs[name]);
     if (trackFailed[name]) return Promise.resolve(null);
     var payload = TRACKS[name] ? TRACKS[name]() : null;
@@ -336,7 +361,8 @@
     loadTrack(curTrack).then(function (buf) {
       var on = true;
       try { on = localStorage.getItem('goa27music') !== 'off'; } catch (e) {}
-      if (!playing && buf && on) start(curTrack === 'main' ? pendingPos : 0);
+      if (!buf && curTrack !== 'main') curTrack = 'main'; // lodging song failed to load: fall back to the main loop
+      if (!playing && on && (buf || curTrack === 'main')) start(curTrack === 'main' ? pendingPos : 0);
     });
   }
 
