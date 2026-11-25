@@ -37,14 +37,18 @@
   var btn = document.createElement('button');
   btn.id = 'goa-chat-btn'; btn.type = 'button';
   btn.setAttribute('aria-label', 'פתחו את בוט הטיול');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.setAttribute('aria-controls', 'goa-chat-panel');
   btn.innerHTML = '<span style="font-size:18px">🦚</span><span>שאלו את הבוט</span>';
 
   var panel = document.createElement('div');
   panel.id = 'goa-chat-panel';
+  panel.setAttribute('role', 'dialog');
+  panel.setAttribute('aria-label', 'בוט גואה 2027');
   panel.innerHTML = ''
     + '<div id="goa-chat-head"><b>בוט גואה 2027 🦚</b><button id="goa-chat-close" type="button" aria-label="סגירה">✕</button></div>'
-    + '<div id="goa-chat-msgs"></div>'
-    + '<div id="goa-chat-inputrow"><textarea id="goa-chat-input" maxlength="400" rows="1" placeholder="שאלו שאלה על הטיול…"></textarea>'
+    + '<div id="goa-chat-msgs" aria-live="polite"></div>'
+    + '<div id="goa-chat-inputrow"><textarea id="goa-chat-input" maxlength="400" rows="1" aria-label="השאלה שלכם לבוט" placeholder="שאלו שאלה על הטיול…"></textarea>'
     + '<button id="goa-chat-send" type="button">שלח</button></div>'
     + '<div id="goa-chat-note">מופעל ע״י Google Gemini (חינמי). השאלות נשלחות ל-Google Gemini ועשויות לשמש לשיפור מוצרי Google. אל תכתבו פרטים אישיים. הסינון והגבלת הקצב הם בסיסיים בלבד · תשובות מסומנות ⚠️ לא מאומת הן מחוץ למידע האתר.</div>';
 
@@ -68,14 +72,21 @@
     msgs.appendChild(d);
   }
 
+  function setOpen(on) {
+    panel.classList.toggle('open', on);
+    btn.setAttribute('aria-expanded', on ? 'true' : 'false');
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && panel.classList.contains('open')) { setOpen(false); btn.focus(); }
+  });
   btn.addEventListener('click', function () {
-    panel.classList.toggle('open');
+    setOpen(!panel.classList.contains('open'));
     if (panel.classList.contains('open') && !msgs.children.length) {
       addMsg('היי! אני הבוט של הטיול 🌴 שאלו אותי על לינה, אוכל, אטרקציות, ויזה — על הכל.', 'bot');
       input.focus();
     }
   });
-  panel.querySelector('#goa-chat-close').addEventListener('click', function () { panel.classList.remove('open'); });
+  panel.querySelector('#goa-chat-close').addEventListener('click', function () { setOpen(false); btn.focus(); });
 
   async function ask() {
     var q = input.value.trim();
@@ -94,7 +105,8 @@
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ q: q }),
       });
-      var data = await res.json();
+      var data = await res.json().catch(function () { return null; });
+      if (!res.ok && !(data && data.answer)) throw new Error('http ' + res.status);
       dots.remove();
       var ans = String(data && data.answer || 'לא הצלחתי לענות. נסו שוב 🙂');
       if (data && data.grounded === false) {

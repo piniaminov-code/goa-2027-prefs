@@ -67,6 +67,9 @@ input[type=range]{width:100%;accent-color:var(--pink);margin:12px 0 2px}
 footer{text-align:center;padding:30px 10px 50px;color:#b9a3ee;font-size:14px}
 .err{color:#ff7a9a;font-size:14px;display:none;margin-top:6px}
 .sunrays{animation:flow 8s linear infinite}
+@media (max-width:560px){.hero .badge{position:static;margin-bottom:14px}}
+@media (prefers-reduced-motion:reduce){h1 .g,.spin{animation:none}}
+a:focus-visible,button:focus-visible{outline:3px solid #19f0ff;outline-offset:3px}
 </style>
 
 </head>
@@ -111,7 +114,7 @@ setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},600);
 <div class="spin" aria-hidden="true"></div>
 <h1><span class="g">גלריית פיני טורס</span><br>מטיולי עבר 🌴</h1>
 <p class="tag">טיולי העבר של החבורה, עם שדרוג ניאון לקראת גואה 2027 ✨</p>
-<a class="btn" href="index.html" style="text-decoration:none">חזרה לסקר ההעדפות ←</a>
+<a class="btn" href="index.html" style="text-decoration:none">חזרה לאתר הטיול ←</a>
 <script>
 (function(){
 if(!/([?&])embed=1/.test(location.search))return;
