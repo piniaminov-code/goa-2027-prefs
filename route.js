@@ -96,6 +96,27 @@ G.DAYS.forEach(function (x) {
   card.appendChild(body); list.appendChild(card);
 });
 
+/* ---------- overview ---------- */
+function rainChanges(x) { return !/^(אין שינוי|נוסעים כרגיל|מנוחה במלון)/.test(x.rain[0]); }
+(function () {
+  var t = el('table', 'tbl ov'), th = el('thead'), tr = el('tr');
+  ['יום', 'לינה', 'מה בתוכנית', '☔'].forEach(function (h) { tr.appendChild(el('th', '', h)); }); th.appendChild(tr); t.appendChild(th);
+  var tb = el('tbody'); t.appendChild(tb);
+  G.DAYS.forEach(function (x) {
+    var r = el('tr'), wd = G.WD[new Date(2027, 3, x.d).getDay()];
+    r.style.setProperty('--c', STAGE[x.stage].c);
+    var c0 = el('td', 'nw'); var a = el('a', '', x.d + '.4'); a.href = '#d' + x.d; c0.appendChild(a); c0.appendChild(el('small', '', 'יום ' + wd)); r.appendChild(c0);
+    r.appendChild(el('td', '', x.night));
+    var c2 = el('td', '', x.t); if (x.fixed) c2.appendChild(el('span', 'fixed', 'קבוע'));
+    var n = x.stops.filter(function (s) { return !s[3]; }).length, o = x.stops.length - n;
+    c2.appendChild(el('small', '', n + ' נקודות' + (o ? ' + ' + o + ' ברשות' : ''))); r.appendChild(c2);
+    var c3 = el('td', '', rainChanges(x) ? 'משתנה' : '—'); c3.title = x.rain[0]; r.appendChild(c3);
+    tb.appendChild(r);
+  });
+  document.getElementById('ovBody').appendChild(t);
+  document.getElementById('ovBody').appendChild(el('p', 'sub', '☔ "משתנה" = ביום גשם או חום התוכנית מתחלפת. הפירוט בכרטיס היום ובלשונית "תוכנית גשם".'));
+})();
+
 /* ---------- travel-time table ---------- */
 function td(tr, txt, label, cls) { var c = el('td', cls || '', txt); if (label) c.setAttribute('data-l', label); tr.appendChild(c); return c; }
 function table(caption, heads) {
@@ -161,7 +182,7 @@ function table(caption, heads) {
       l.appendChild(li);
     });
     s.appendChild(l);
-    var changed = G.DAYS.filter(function (x) { return x.stage === a.stage && !/^(אין שינוי|נוסעים כרגיל|מנוחה במלון)/.test(x.rain[0]); });
+    var changed = G.DAYS.filter(function (x) { return x.stage === a.stage && rainChanges(x); });
     if (changed.length) {
       var p = el('p', 'sub', 'ימים שבהם גשם משנה את התוכנית: ');
       changed.forEach(function (x, i) { if (i) p.appendChild(document.createTextNode(' · ')); var lk = el('a', '', x.d + '.4 ' + x.t); lk.href = '#d' + x.d; p.appendChild(lk); });
