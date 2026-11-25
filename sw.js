@@ -2,8 +2,9 @@
    - Only same-origin GET requests for the plan pages and the main page's small files are handled.
    - Network first (fresh content whenever online), with a short timeout, then the saved copy.
    - Everything else (big media chunks, the gallery, Supabase, the chat bot, maps) is left to the network. */
-var CACHE = 'goa-plan-v1';
-var PRECACHE = ['route.html', 'pack.html', 'plan.css?v=1', 'plan.js?v=1', 'route.js?v=1', 'pack.js?v=1', 'trip-data.js?v=1'];
+var CACHE = 'goa-plan-v2';
+var PRECACHE = ['route.html', 'pack.html', 'plan.css?v=1', 'plan.js?v=1', 'route.js?v=1', 'pack.js?v=1', 'trip-data.js?v=1',
+  'index.html', 'personal-questions.js', 'chat.js', 'music.js'];
 var HANDLED = /\/(?:index\.html|route\.html|pack\.html|plan\.css|plan\.js|route\.js|pack\.js|trip-data\.js|personal-questions\.js|chat\.js|music\.js)?$/;
 
 self.addEventListener('install', function (e) {
@@ -18,7 +19,13 @@ self.addEventListener('activate', function (e) {
   }).then(function () { return self.clients.claim(); }));
 });
 
-function fromCache(req) { return caches.match(req, { ignoreSearch: true }); }
+function fromCache(req) {
+  return caches.match(req, { ignoreSearch: true }).then(function (r) {
+    // the site root is the main page
+    if (r || !/\/$/.test(new URL(req.url).pathname)) return r;
+    return caches.match('index.html', { ignoreSearch: true });
+  });
+}
 
 self.addEventListener('fetch', function (e) {
   var req = e.request;

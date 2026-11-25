@@ -17,6 +17,12 @@ h1 .g{background:linear-gradient(90deg,var(--sand),var(--pink),var(--cyan));-web
 .lead{margin:0 0 14px;color:#e3d9fa;font-size:16px}
 .draft{border:1px solid #ffd16688;background:#ffd16612;border-radius:14px;padding:12px 14px;font-size:14px;line-height:1.65;color:#ffeac0}
 .draft b{color:var(--sand)}
+details.draft>summary{cursor:pointer;list-style:none;min-height:24px}
+details.draft>summary::-webkit-details-marker{display:none}
+details.draft .more{color:var(--cyan);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+details.draft .more:after{content:' ▾'}
+details.draft[open] .more:after{content:' ▴'}
+details.draft p{margin:6px 0 0}
 .status{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0 0}
 .pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;border-radius:99px;padding:6px 12px;border:1px solid #ffffff33;background:#ffffff0d;color:#e9e1ff}
 .pill.ok{border-color:#b6ff3b88;color:#d9ffa8}
@@ -163,6 +169,7 @@ ol.dl .tx small{display:block;color:var(--soft);font-size:12px}
  .panel[hidden]{display:block!important}
  h1 .g{color:#000;background:none;-webkit-text-fill-color:#000}
  .draft{border:1px solid #999;background:none;color:#000}
+ details.draft .more{display:none}
  .day{display:block;overflow:visible;box-shadow:none;border:1px solid #999;background:none;break-inside:avoid;margin:6px 0;border-radius:8px}
  .stub{display:flex;flex-direction:row;align-items:baseline;gap:8px;padding:4px 10px;background:none;border:0;border-bottom:1px dashed #999}.stub:before,.stub:after{display:none}
  .stub .d{font-size:18pt}.stub .w,.stub .n{margin:0;padding:0}.stub .n{white-space:normal;margin-inline-start:auto}
