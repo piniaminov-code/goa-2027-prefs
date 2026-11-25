@@ -304,7 +304,7 @@
     persistState();
     ui(true);
     try { localStorage.setItem('goa27music', 'on'); } catch (e) {}
-    if (!trackBufs.lodging && trackHasAudio('lodging')) loadTrack('lodging');
+    // the lodging song (~6 MB) is no longer fetched here; the page asks for it via goaMusic.preload('lodging')
   }
   function start(fromPos) {
     if (!ctx) initCtx();
