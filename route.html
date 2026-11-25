@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>המסלול היומי | פיני טורס גואה 2027</title>
 <meta name="description" content="טיוטת מסלול יום־אחר־יום לגואה 2027: עצירות, זמני נסיעה ידועים, מה עוד לא נבדק, וחלופה ליום גשם או חום.">
+<meta property="og:title" content="המסלול היומי · פיני טורס גואה 2027 🧭">
+<meta property="og:description" content="יום אחרי יום, 12-28.4: לאן נוסעים, זמני נסיעה ידועים, ומה עושים ביום גשם או חום. טיוטה לדיון.">
 <meta name="theme-color" content="#0b0420">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -100,6 +102,7 @@ details.rain li{margin:5px 0}
 </head>
 <body>
 <div class="wrap">
+<header>
   <div class="top">
     <a class="back" href="index.html#recs"><span aria-hidden="true">🏠</span> חזרה לאתר</a>
     <span class="stamp">טיוטה · נובמבר 2026</span>
@@ -114,19 +117,22 @@ details.rain li{margin:5px 0}
     <span><span class="opt-tag" style="margin:0">רשות</span> עצירה שאפשר לדלג עליה</span>
   </div>
   <div class="stages" id="stages" aria-hidden="true"></div>
+</header>
   <nav class="days" id="days" aria-label="בחירת יום"></nav>
+  <main>
   <div class="tools">
     <button type="button" id="rainAll" aria-pressed="false">☔ להציג את כל חלופות הגשם</button>
   </div>
-  <main id="list"></main>
+  <div id="list"></div>
+  </main>
   <noscript><p class="draft">כדי לראות את המסלול צריך להפעיל JavaScript בדפדפן.</p></noscript>
-  <section class="foot">
+  <footer class="foot">
     <h3>על מה זה מבוסס</h3>
     <p>הטיסות, תאריכי השלבים וליל הסדר: מכרטיסי "לוח הטיסות", "הצעות לינה מסוננות" ו"ליל הסדר" באתר. זמני הנסיעה המסומנים ✅: מ"אפשרות חלופית למסלול" (הערכות מקנדולים ומשדה דבולים, תלוי בתנועה) ומהבדיקה בדלהי. המקומות והקישורים למפה: מכרטיסי ההמלצות. מזג האוויר: לפי Rough Guides ו־TUI שמצוטטים באתר, באפריל כמעט לא יורד גשם (3-11 מ״מ בממוצע לחודש), אז חלופת הגשם משמשת בעיקר לשעות החום של הצהריים.</p>
     <p>⚠️ בטיחות בים, כמו בכרטיס ההמלצות: נכנסים למים רק לפי דגלי המציל. בקנדולים דווח על זרמי ריפ, ובפאלולם אזורי איסור הרחצה משתנים מיום ליום.</p>
     <p>יש באתר גם חלופה רגועה יותר: 6 לילות בקנדולים ו־8 בפאלולם, עם מעבר אחד בלבד (בכרטיס "אפשרות חלופית למסלול" בהמלצות). המסלול כאן עוקב אחרי 4 השלבים של פיני.</p>
     <p><a href="index.html#recs">לכל ההמלצות, המחירים המשוערים והקישורים ←</a></p>
-  </section>
+  </footer>
 </div>
 <script>
 (function(){

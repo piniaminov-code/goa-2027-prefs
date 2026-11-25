@@ -48,7 +48,7 @@
     st.textContent = CSS;
     document.head.appendChild(st);
 
-    var sec = document.createElement('section');
+    var sec = document.createElement('main'); // the gallery's main content landmark
     sec.id = 'goa-crew';
     var h = document.createElement('h2');
     h.textContent = 'החבורה מתאמנת על גואה';
