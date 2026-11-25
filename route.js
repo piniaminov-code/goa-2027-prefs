@@ -19,7 +19,7 @@ function legChip(a, b) {
   if (k) { c.classList.add('ok'); c.appendChild(el('span', '', '🚐 ' + k.t + ' ✅')); c.title = 'מקור: ' + k.src; }
   else {
     c.classList.add('unk'); c.appendChild(el('span', 'q', '🚐 ❓ זמן לא נבדק'));
-    var via = P[b].via || P[a].via; if (via) c.appendChild(el('span', '', via));
+    var via = P[b].via || P[a].viaBack; if (via) c.appendChild(el('span', '', via));
     var d = G.airKm(a, b);
     if (d != null) c.appendChild(el('span', '', '📏 ' + (d < 1 ? 'פחות מק״מ' : 'כ־' + Math.round(d) + ' ק״מ') + ' באוויר'));
     else if (P[a].base || P[b].base) c.appendChild(el('span', '', 'המלון טרם נבחר'));
@@ -76,6 +76,11 @@ G.DAYS.forEach(function (x) {
     });
     body.appendChild(md);
     if (routes.some(function (r) { return r.waypoints > 3; })) body.appendChild(el('p', 'ds', 'אם בטלפון לא מופיעות כל העצירות במסלול, פותחים אותו לפי קטעים (הקישורים "מסלול ↗" בין העצירות).'));
+  }
+  if (x.bring && x.bring.length) {
+    var br = el('p', 'bring'); br.appendChild(el('b', '', '🎒 לא לשכוח היום: '));
+    br.appendChild(document.createTextNode(x.bring.map(function (k) { return G.BRING[k]; }).join(' · ') + ' '));
+    var pl = el('a', '', 'לרשימה המלאה'); pl.href = 'pack.html'; br.appendChild(pl); body.appendChild(br);
   }
   if (x.notes.length) { var ul = el('ul', 'notes'); x.notes.forEach(function (t) { ul.appendChild(el('li', '', t)); }); body.appendChild(ul); }
   var r = el('details', 'rain'); r.appendChild(el('summary', '', '☔ אם יורד גשם או שחם מדי')); var ru = el('ul');
@@ -158,7 +163,7 @@ function table(caption, heads) {
   order.forEach(function (key) {
     var L = legs[key], tr = el('tr');
     var c = td(tr, P[L.a].n + ' ← ' + P[L.b].n, '');
-    var via = P[L.b].via || P[L.a].via; if (via) c.appendChild(el('small', '', via));
+    var via = P[L.b].via || P[L.a].viaBack; if (via) c.appendChild(el('small', '', via));
     c.appendChild(document.createTextNode(' ')); c.appendChild(link(G.dirUrl(L.a, L.b), 'מפות ↗'));
     var dc = td(tr, '', 'בימים'); L.days.forEach(function (d, i) { if (i) dc.appendChild(document.createTextNode(', ')); var a = el('a', '', d + '.4'); a.href = '#d' + d; dc.appendChild(a); });
     var km = G.airKm(L.a, L.b); td(tr, km == null ? (P[L.a].base || P[L.b].base ? 'המלון טרם נבחר' : '—') : (km < 1 ? 'פחות מק״מ' : 'כ־' + Math.round(km) + ' ק״מ'), 'קו אווירי');

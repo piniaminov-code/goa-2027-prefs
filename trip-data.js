@@ -35,7 +35,7 @@ var P = {
  zest:{n:'Zest, אגונדה',ll:[15.0392696,73.9892874]},
  dolce:{n:'La Dolce Vita, אגונדה',ll:[15.0374596,73.9896413]},
  butterfly:{n:'סירה לחוף הפרפרים (Butterfly) ול־Honeymoon Beach',u:'https://goatours.co.in/palolem-boat-trip-dolphins-and-beach/',q:'Butterfly Beach Goa',boat:1},
- dudh:{n:'מפלי דודסאגר (ג׳יפים מקולם)',ll:[15.3144375,74.3143073],u:'https://www.dudhsagarjeeps.com/',rq:'Collem, Goa',via:'ברכב עד קולם, ומשם בג׳יפ של המפעילים'},
+ dudh:{n:'מפלי דודסאגר (ג׳יפים מקולם)',ll:[15.3144375,74.3143073],u:'https://www.dudhsagarjeeps.com/',rq:'Collem, Goa',via:'ברכב עד קולם, ומשם בג׳יפ של המפעילים',viaBack:'בג׳יפ חזרה לקולם, ומשם ברכב'},
  spice:{n:'מטע התבלינים Sahakari, פונדה',ll:[15.4094752,74.0237045],u:'https://sahakarispicefarm.com/'},
  south:{n:'בסיס הסיום: אזור בנאולים (המלון טרם נבחר)',sn:'חזרה לבסיס בדרום',q:'Benaulim, Goa',base:1},
  benaulim:{n:'חוף בנאולים',ll:[15.2570626,73.9187138]},
@@ -83,39 +83,39 @@ var STAGE = {
 
 // stop = [placeKey, time?, note?, optional?]
 var DAYS = [
-{d:12,stage:'delhi',t:'טסים! לילה אחד בדלהי',night:'דלהי',fixed:true,
+{d:12,bring:['passport','eta','tickets','overnight'],stage:'delhi',t:'טסים! לילה אחד בדלהי',night:'דלהי',fixed:true,
  stops:[['tlv','11:40','המראה, Air India AI140'],['del','20:20','נחיתה בטרמינל 3'],['delhiHotel','','לילה לשינה, לא לטיול. לאשר צ׳ק־אין מאוחר מול המלון']],
  rain:['אין שינוי: יום של טיסה ושינה.'],
  notes:['טיפ: תיק קטן אחד ללילה בדלהי, כדי לא לפתוח מזוודות.']},
-{d:13,stage:'north',t:'דלהי ← גואה ← הצפון',night:'צפון',fixed:true,
+{d:13,bring:['passport','eta','tickets'],stage:'north',t:'דלהי ← גואה ← הצפון',night:'צפון',fixed:true,
  stops:[['delhiHotel','בוקר','צ׳ק־אאוט'],['del','11:50','AI2495 לגואה. להיות בשדה עד כ־09:30'],['goi','14:30','נחיתה בדבולים. לוודא שההסעה מדבולים ולא ממופה (GOX)'],['candolim','','צ׳ק־אין ומנוחה'],['sinq','שקיעה','הליכה על החוף, בלי להיכנס למים בלי מציל',1]],
  rain:['מוותרים על החוף ונשארים במלון אחרי יום נסיעות ארוך.'],
  notes:['יום ארוך עם ילדים: עדיף לא לתכנן שום דבר מעבר לארוחת ערב.']},
-{d:14,stage:'north',t:"יום רביעי = שוק אנג'ונה",night:'צפון',
+{d:14,bring:['hats','sunscreen','bottles'],stage:'north',t:"יום רביעי = שוק אנג'ונה",night:'צפון',
  stops:[['candolim'],['anjuna','בוקר','השוק פתוח בימי רביעי (לפי ההמלצות). להגיע מוקדם, לפני החום'],['candolim','צהריים','בריכה במלון'],['chapora','אחה״צ','',1],['pincode','ערב','ארוחת ערב בוגטור',1]],
  rain:['Snow Park (פארק שלג) - כ־24 דק׳ מקנדולים ✅.','ארוחה ארוכה באחת המסעדות מההמלצות במקום השוק.'],
  notes:["אם יורד גשם ביום רביעי, השוק של השבוע הזה כנראה ירד מהתוכנית. שוק הלילה בארפורה הוא במוצאי שבת, וזה יוצא ב־17.4 - יום המעבר לדרום."]},
-{d:15,stage:'north',t:'דולפינים ומבצר',night:'צפון',
+{d:15,bring:['hats','sunscreen','bottles'],stage:'north',t:'דולפינים ומבצר',night:'צפון',
  stops:[['candolim'],['sinq','בוקר','שייט דולפינים מסינקרים, כשעה וחצי. הקישור הרשמי לא זמין כרגע; ראיית דולפינים לא מובטחת'],['aguada','','ליד סינקרים',1],['candolim','צהריים','בריכה ומנוחה'],['britto','ערב','ארוחת ערב בבאגה, נוף לים']],
  rain:['Snow Park במקום השייט (כ־24 דק׳ מקנדולים ✅).','מבצר Reis Magos הוא עצירה קצרה (כ־18 דק׳ ✅), אבל בחוץ.'],
  notes:['שייט בים פתוח: לבדוק מראש מי בקבוצה רגיש לים (גם שאלה בשאלון האישי).']},
-{d:16,stage:'north',t:'יום מים',night:'צפון',
+{d:16,bring:['swim','sunscreen','bottles'],stage:'north',t:'יום מים',night:'צפון',
  stops:[['candolim'],['splash','בוקר','פארק מים. כ־23 דק׳ מקנדולים'],['candolim','צהריים','מנוחה'],['gunpowder','ערב','מטבח דרום הודי, אסאגאו',1]],
  rain:['Snow Park במקום פארק המים - כ־24 דק׳ ✅.'],
  notes:['חלופה ליום הזה מההמלצות: צלילה ושנורקל סביב האי Grande, טיול יום מהצפון. לא נכלל כאן כי זמני ההגעה לא נבדקו.']},
-{d:17,stage:'palolem',t:'מעבר לפאלולם',night:'פאלולם',
+{d:17,bring:['ride','snacks'],stage:'palolem',t:'מעבר לפאלולם',night:'פאלולם',
  stops:[['candolim','בוקר','צ׳ק־אאוט'],['palolem','צהריים','כ־2 שעות נסיעה, לפי ההערכה באתר'],['palbeach','אחה״צ','החוף, במים רק באזור מסומן'],['mill','ערב','',1]],
  rain:['נוסעים כרגיל ונכנסים מוקדם למלון.'],
  notes:['יום שבת: שוק הלילה בארפורה (צפון) מתנגש עם המעבר. מי שרוצה אותו צריך להזיז את המעבר, וזה משנה את לילות הלינה בשלבים 2 ו־3.']},
-{d:18,stage:'palolem',t:'יוגה וחוף',night:'פאלולם',
+{d:18,bring:['swim','sunscreen'],stage:'palolem',t:'יוגה וחוף',night:'פאלולם',
  stops:[['palolem'],['palm','בוקר','שיעור drop-in. אפשר גם ב־Luma',1],['palbeach','','חוף ובריכה'],['cantine','ערב','טבעוני, פאלולם']],
  rain:['שיטוט בדוכני הבוטיק ברחוב הראשי של פאלולם.','מנוחה במלון.'],
  notes:[]},
-{d:19,stage:'palolem',t:'סירה לחוף הפרפרים',night:'פאלולם',
+{d:19,bring:['hats','sunscreen','bottles','swim'],stage:'palolem',t:'סירה לחוף הפרפרים',night:'פאלולם',
  stops:[['palolem'],['palbeach','בוקר','יוצאים מהחוף עצמו'],['butterfly','','סירה פרטית, לרוב משלבים גם Honeymoon Beach. דולפינים לא מובטחים'],['palolem','צהריים','מנוחה'],['agonda','שקיעה','',1],['zest','ערב','או La Dolce Vita, אגונדה',1]],
  rain:['אם הים סוער לא יוצאים לשייט. אפשר לנסות שוב ב־20.4 או ב־21.4 בבוקר.','רחוב הדוכנים בפאלולם.'],
  notes:[]},
-{d:20,stage:'palolem',t:'יום טיול: דודסאגר ותבלינים',night:'פאלולם',
+{d:20,bring:['ride','snacks','bottles'],stage:'palolem',t:'יום טיול: דודסאגר ותבלינים',night:'פאלולם',
  stops:[['palolem','מוקדם'],['dudh','','הג׳יפים יוצאים מקולם. להזמין מראש אצל איגוד המפעילים'],['spice','','בדרך אפשר לשלב, פונדה',1],['palolem','ערב']],
  rain:['לא יוצאים לטיול היום הארוך ביום גשם. נשארים בפאלולם, ואת היום מזיזים לתאריך אחר בשלב הזה אם יש מקום.'],
  notes:['זה היום עם הכי הרבה נסיעה בטיול. זמני הנסיעה פאלולם-קולם-פונדה לא נבדקו: לבדוק לפני שמתחייבים, במיוחד עם הילדים הקטנים.']},
@@ -127,11 +127,11 @@ var DAYS = [
  stops:[['palolem','בוקר','צ׳ק־אאוט'],['mobor','צהריים','ארוחה בדרך, אם המיקום מתאים',1],['south','אחה״צ','צ׳ק־אין']],
  rain:['נוסעים כרגיל.'],
  notes:['זמן הנסיעה מפאלולם לבסיס הסיום לא נבדק. תלוי באיזה מלון ייבחר (Sea Queen, Alila Diwa או Taj Exotica ברשימה).']},
-{d:23,stage:'south',t:'דולפינים ממובור',night:'דרום',
+{d:23,bring:['hats','sunscreen','bottles'],stage:'south',t:'דולפינים ממובור',night:'דרום',
  stops:[['south'],['mobordol','בוקר','שייט דולפינים, לפי ההמלצות'],['south','צהריים','בריכה'],['beno','ערב','או Cavatina, בנאולים',1]],
  rain:['ארוחה ארוכה ב־Martin\'s Corner בבטלבטים.','מנוחה במלון.'],
  notes:['אם השייט כבר נעשה בצפון ב־15.4, היום הזה פנוי לחוף.']},
-{d:24,stage:'south',t:'יום חוף (ופסטיבל, אם יהיה)',night:'דרום',
+{d:24,bring:['swim','sunscreen'],stage:'south',t:'יום חוף (ופסטיבל, אם יהיה)',night:'דרום',
  stops:[['south'],['benaulim','בוקר','חוף, במים רק לפי דגלי המציל'],['colva','ערב','Spirit of Goa Festival - אם ייערך בתאריכים האלה',1],['martin','ערב','',1]],
  rain:['Martin\'s Corner בבטלבטים.'],
  notes:['ב־2026 הפסטיבל נערך בקולבה ב־24-26.4. תאריכי 2027 טרם פורסמו, אז אין לדעת אם ייפול בתקופה שלנו.']},
@@ -143,7 +143,7 @@ var DAYS = [
  stops:[['south'],['cavatina','ערב','',1]],
  rain:['מנוחה במלון.'],
  notes:[]},
-{d:27,stage:'south',t:'יום אחרון, טיסה בלילה',night:'בטיסה',fixed:true,
+{d:27,bring:['passport','tickets'],stage:'south',t:'יום אחרון, טיסה בלילה',night:'בטיסה',fixed:true,
  stops:[['south','','לבקש צ׳ק־אאוט מאוחר. הטיסה רק בלילה'],['joets','ערב','ארוחה אחרונה על החוף בבוגמלו',1],['goi','23:10','להיות בשדה עד כ־20:00. AI2510 לדלהי ממריאה ב־23:10']],
  rain:['אין שינוי.'],
  notes:['זמן הנסיעה מבסיס הסיום לשדה לא נבדק. משאירים מרווח.']},
@@ -152,6 +152,10 @@ var DAYS = [
  rain:['אין שינוי.'],
  notes:[]}
 ];
+
+// Short names of packing-list items, for the 'don't forget today' line on day cards (ids from PACK below).
+var BRING = {passport:'דרכונים',eta:'אישורי e-Visa מודפסים',tickets:'כרטיסי טיסה',overnight:'תיק קטן ללילה בדלהי',
+ hats:'כובעים',sunscreen:'קרם הגנה',bottles:'מים מבוקבקים',swim:'בגדי ים',ride:'משהו לנסיעה הארוכה',snacks:'חטיף מוכר לילדים'};
 
 // Rain / heat plan by area. Only places and facts that are already on the site.
 var RAIN = [
@@ -184,11 +188,11 @@ var RAIN_RULES = [
 var DEADLINES = [
  {date:'2027-03-15',approx:true,t:'להגיש ויזה אלקטרונית (e-Visa) לכל נוסע, כולל ילדים',src:'האתר ממליץ באמצע מרץ',link:'https://indianvisaonline.gov.in/evisa/'},
  {date:'2027-03-15',approx:true,t:'מרפאת מטיילים, כחודש לפני הנסיעה',src:'לפי ה־CDC, מצוטט באתר. מידע כללי, לא ייעוץ רפואי',link:'https://www.gov.il/he/service/vaccination_abroad'},
- {date:'2027-03-20',t:'ביטול חינם ב־The Ark Comforts (אם ייבחר)',src:'כרטיס שלב 3 בלינה',cond:true},
- {date:'2027-04-06',t:'ביטול חינם ב־The Astor (אם ייבחר)',src:'כרטיס שלב 2 בלינה',cond:true},
- {date:'2027-04-08',t:'דד־ליין רשמי לבקשת e-Visa (4 ימים לפני הנחיתה)',src:'כרטיס הוויזה באתר',link:'https://indianvisaonline.gov.in/evisa/'},
- {date:'2027-04-11',t:'ביטול חינם ב־Radisson Blu בדלהי (אם ייבחר; השעה טעונה בדיקה)',src:'כרטיס שלב 1 בלינה',cond:true},
- {date:'2027-04-12',t:'ביטול חינם ב־Airport Le Premier בדלהי עד 18:00 שעון המלון (אם ייבחר)',src:'כרטיס שלב 1 בלינה',cond:true},
+ {date:'2027-03-20',t:'ביטול חינם ב־The Ark Comforts',src:'כרטיס שלב 3 בלינה',cond:true},
+ {date:'2027-04-06',t:'ביטול חינם ב־The Astor',src:'כרטיס שלב 2 בלינה',cond:true},
+ {date:'2027-04-08',t:'דד־ליין רשמי לבקשת ויזה אלקטרונית: 4 ימים לפני הנחיתה',src:'כרטיס הוויזה באתר',link:'https://indianvisaonline.gov.in/evisa/'},
+ {date:'2027-04-11',t:'ביטול חינם ב־Radisson Blu בדלהי (השעה המדויקת טעונה בדיקה)',src:'כרטיס שלב 1 בלינה',cond:true},
+ {date:'2027-04-12',t:'ביטול חינם ב־Airport Le Premier בדלהי, עד 18:00 שעון המלון',src:'כרטיס שלב 1 בלינה',cond:true},
  {date:'2027-04-12',t:'המראה מנתב״ג ב־11:40 (AI140)',src:'לוח הטיסות'},
  {date:'2027-04-21',t:'ליל הסדר בבית חב״ד פאלולם. הרישום לתשפ״ז טרם נפתח: לשלוח הודעה מוקדם',src:'כרטיס ליל הסדר'},
  {date:'2027-04-27',t:'להיות בשדה דבולים עד כ־20:00, המראה 23:10',src:'לוח הטיסות'}
@@ -263,6 +267,6 @@ function dayRoute(day) {
  });
 }
 
-window.GOA_TRIP = {P:P,KNOWN:KNOWN,FLIGHTS:FLIGHTS,STAGE:STAGE,DAYS:DAYS,RAIN:RAIN,RAIN_RULES:RAIN_RULES,DEADLINES:DEADLINES,PACK:PACK,
+window.GOA_TRIP = {P:P,BRING:BRING,KNOWN:KNOWN,FLIGHTS:FLIGHTS,STAGE:STAGE,DAYS:DAYS,RAIN:RAIN,RAIN_RULES:RAIN_RULES,DEADLINES:DEADLINES,PACK:PACK,
  km:km,loc:loc,rloc:rloc,boatLeg:boatLeg,known:known,isFlight:isFlight,airKm:airKm,mapUrl:mapUrl,dirUrl:dirUrl,dayRoute:dayRoute,WD:['א׳','ב׳','ג׳','ד׳','ה׳','ו׳','ש׳']};
 })();
