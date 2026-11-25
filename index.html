@@ -184,6 +184,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   <a href="#personal-questionnaires">📝 שאלונים</a>
   <a href="#recs">🗺️ המלצות</a>
   <a href="route.html" class="hot">🧭 המסלול היומי</a>
+  <a href="pack.html">🎒 ציוד ותאריכים</a>
   <a href="#lodging-filtered">🛏️ לינה</a>
   <a href="#info">ℹ️ מידע</a>
   <a href="#faq">❓ שאלות</a>
@@ -199,7 +200,8 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <section class="card rec" id="recs">
 <h2>🗺️ ההמלצות שלנו לגואה 2027</h2>
 <p class="hint">אספנו את הטוב ביותר לשלוש המשפחות: חלק מהזמן בצפון, חלק בדרום, מקסימום 3 החלפות מלון. לוחצים על רובריקה כדי לפתוח. המחירים משוערים (₹ = רופי, ≈ המרה גסה לשקלים), נכונים לאוקטובר 2026 - מחירי אפריל 2027 ייפתחו מאוחר יותר.</p>
-<a class="routecard" href="route.html"><i aria-hidden="true">🧭</i><span><b>חדש: המסלול היומי ←</b>יום אחרי יום, 12-28.4: לאן נוסעים, זמני נסיעה ידועים, מה עוד לא נבדק, ומה עושים ביום גשם או חום.</span></a>
+<a class="routecard" href="route.html"><i aria-hidden="true">🧭</i><span><b>חדש: המסלול היומי ←</b>יום אחרי יום, 12-28.4: עצירות לפי הסדר עם פתיחה בגוגל מפות, טבלת זמני נסיעה, ומה עושים ביום גשם או חום. עובד גם בלי אינטרנט.</span></a>
+<a class="routecard" href="pack.html" style="border-color:var(--sand);background:#ffd16610"><i aria-hidden="true">🎒</i><span><b style="color:var(--sand)">ציוד ותאריכים חשובים ←</b>מתי מגישים ויזה, מה לארוז, ומה לסדר לפני הטיסה. מסמנים בטלפון.</span></a>
 <p style="text-align:center"><a class="btn" href="#lodging-filtered">🛏️ חדש (20.10): הצעות לינה מסוננות מ-Booking, לפי שלבי הטיול 👇</a></p>
 
 <h3>🌴 צפון גואה - Calangute / Baga / Vagator</h3>
@@ -732,6 +734,8 @@ function pre(){if(window.goaMusic&&goaMusic.preload)goaMusic.preload('lodging')}
 if(!('IntersectionObserver' in window)){recs.addEventListener('toggle',pre,true);return}
 var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();pre()}});io.observe(recs);
 })();
+// שמירה לשימוש בלי אינטרנט (sw.js: רק דפי התכנון והקבצים הקטנים, תמיד מהרשת כשיש חיבור)
+if('serviceWorker' in navigator&&location.protocol!=='file:'){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}
 // ניווט: מסמנים את האזור שבו נמצאים
 (function(){
 var nav=document.getElementById('secnav');if(!nav||!('IntersectionObserver' in window))return;

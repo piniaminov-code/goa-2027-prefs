@@ -4,101 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>המסלול היומי | פיני טורס גואה 2027</title>
-<meta name="description" content="טיוטת מסלול יום־אחר־יום לגואה 2027: עצירות, זמני נסיעה ידועים, מה עוד לא נבדק, וחלופה ליום גשם או חום.">
+<meta name="description" content="טיוטת מסלול יום־אחר־יום לגואה 2027: עצירות לפי הסדר, פתיחה בגוגל מפות, טבלת זמני נסיעה, מה עוד לא נבדק, ותוכנית ליום גשם או חום.">
 <meta property="og:title" content="המסלול היומי · פיני טורס גואה 2027 🧭">
 <meta property="og:description" content="יום אחרי יום, 12-28.4: לאן נוסעים, זמני נסיעה ידועים, ומה עושים ביום גשם או חום. טיוטה לדיון.">
 <meta name="theme-color" content="#0b0420">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#0b0420;--ink:#f4ecff;--soft:#cdb8ff;--pink:#ff2bd6;--cyan:#19f0ff;--lime:#b6ff3b;--orange:#ff9a1f;--violet:#7a2cff;--sand:#ffd166;
- --delhi:#ff9a1f;--north:#19f0ff;--palolem:#b6ff3b;--south:#ff7ad9;--home:#c9b8ff}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:radial-gradient(900px 500px at 85% -10%,#3a0f5e,transparent 60%),radial-gradient(700px 500px at 0% 30%,#0d2a4a,transparent 60%),var(--bg);background-attachment:fixed;color:var(--ink);font-family:'Rubik',Arial,sans-serif;font-size:16px;line-height:1.55;overflow-x:hidden}
-a{color:var(--cyan)}
-a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--cyan);outline-offset:2px;border-radius:8px}
-.wrap{max-width:680px;margin:0 auto;padding:0 14px 90px}
-.top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 0 4px}
-.back{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:8px 14px;border-radius:99px;border:1px solid #ffffff44;background:#ffffff10;color:#fff;text-decoration:none;font-weight:700;font-size:15px}
-.stamp{font-size:12px;letter-spacing:1.5px;color:var(--sand);border:1px dashed #ffd16699;border-radius:8px;padding:4px 9px;transform:rotate(-3deg)}
-h1{margin:18px 0 6px;font-size:clamp(30px,9vw,46px);font-weight:900;line-height:1.05}
-h1 .g{background:linear-gradient(90deg,var(--sand),var(--pink),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
-.lead{margin:0 0 14px;color:#e3d9fa;font-size:16px}
-.draft{border:1px solid #ffd16688;background:#ffd16612;border-radius:14px;padding:12px 14px;font-size:14px;line-height:1.65;color:#ffeac0}
-.draft b{color:var(--sand)}
-.legend{display:flex;flex-wrap:wrap;gap:6px 12px;margin:14px 0 4px;font-size:13px;color:var(--soft)}
-.legend>span{max-width:100%}
-
-/* stage strip */
-.stages{display:flex;gap:6px;margin:18px 0 6px}
-.stages div{flex:var(--n) 1 0;min-width:34px;border-radius:8px;padding:6px 6px 5px;font-size:12px;font-weight:700;color:#14062c;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-/* day picker */
-.days{position:sticky;top:0;z-index:20;margin:0 -14px;padding:10px 14px;background:linear-gradient(#0b0420f2,#0b0420e6);backdrop-filter:blur(8px);border-bottom:1px solid #ffffff1a;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain}
-.days::-webkit-scrollbar{display:none}
-.days a{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:48px;min-height:52px;border-radius:12px;border:1px solid #ffffff2a;border-top:3px solid var(--c);background:#ffffff0a;color:#fff;text-decoration:none;font-weight:700;font-size:15px;line-height:1.1}
-.days a small{font-weight:500;font-size:11px;color:var(--soft);margin-top:3px}
-.days a.on{background:color-mix(in srgb,var(--c) 28%,transparent);border-color:var(--c)}
-.tools{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
-.tools button{font:inherit;font-size:14px;font-weight:700;min-height:44px;padding:8px 14px;border-radius:99px;border:1px solid #ffffff44;background:#ffffff10;color:#fff;cursor:pointer}
-.tools button[aria-pressed=true]{background:#1b4a73;border-color:var(--cyan)}
-
-/* day = boarding pass */
-.day{display:flex;margin:18px 0;border-radius:18px;background:linear-gradient(165deg,#1d0a4af2,#0f0732f2);border:1px solid #ffffff22;box-shadow:0 10px 30px #0006;scroll-margin-top:84px;overflow:hidden}
-.stub{flex:0 0 74px;display:flex;flex-direction:column;align-items:center;padding:14px 4px;background:color-mix(in srgb,var(--c) 16%,#120636);border-inline-end:2px dashed #ffffff33;position:relative;text-align:center}
-.stub:before,.stub:after{content:"";position:absolute;inset-inline-end:-9px;width:16px;height:16px;border-radius:50%;background:var(--bg)}
-.stub:before{top:-8px}.stub:after{bottom:-8px}
-.stub .d{font-size:30px;font-weight:900;line-height:1;color:var(--c)}
-.stub .m{font-size:12px;color:var(--soft)}
-.stub .w{margin-top:6px;font-size:13px;font-weight:700}
-.stub .n{white-space:pre-line;margin-top:auto;padding-top:10px;font-size:11px;color:var(--soft);line-height:1.3}
-.body{flex:1;min-width:0;padding:14px 14px 12px}
-.day h2{margin:0 0 2px;font-size:19px;line-height:1.3}
-.where{margin:0 0 10px;font-size:13px;color:var(--soft)}
-.fixed{display:inline-block;font-size:11.5px;font-weight:700;color:#14062c;background:var(--sand);border-radius:6px;padding:1px 7px;margin-inline-start:4px;vertical-align:2px}
-
-/* route line */
-ol.route{list-style:none;margin:0;padding:0;position:relative}
-ol.route>li{position:relative;padding-inline-start:26px}
-ol.route>li:before{content:"";position:absolute;inset-inline-start:7px;top:0;bottom:0;border-inline-start:2px dotted color-mix(in srgb,var(--c) 70%,transparent)}
-ol.route>li:first-child:before{top:12px}
-ol.route>li:last-child:before{bottom:calc(100% - 12px)}
-li.stop{padding-top:3px;padding-bottom:3px}
-li.stop:after{content:"";position:absolute;inset-inline-start:1px;top:7px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--c)}
-li.stop.opt:after{border-style:dashed}
-.st{font-weight:700;font-size:15.5px;overflow-wrap:anywhere}
-.st a{color:#fff;text-decoration-color:#ffffff55;text-underline-offset:3px}
-.tm{font-size:12px;font-weight:700;color:var(--sand);margin-inline-end:6px}
-.ds{font-size:13.5px;color:#ddd0fb;margin:1px 0 2px;overflow-wrap:anywhere}
-li.leg{padding-top:4px;padding-bottom:6px}
-.chip{display:inline-flex;flex-wrap:wrap;align-items:center;gap:2px 10px;font-size:12.5px;line-height:1.4;border-radius:10px;padding:3px 9px;background:#ffffff0c;border:1px solid #ffffff22;color:#e9e1ff;max-width:100%}
-.chip.ok{border-color:#b6ff3b66;background:#b6ff3b10}
-.chip.unk{border-style:dashed;border-color:#ffd16677}
-.chip a{color:var(--cyan);white-space:nowrap;display:inline-block;padding:6px 2px;margin:-3px 0}
-.opt-tag{display:inline-block;font-size:11px;font-weight:700;color:var(--soft);border:1px dashed #cdb8ff88;border-radius:6px;padding:0 6px;margin-inline-start:6px;vertical-align:2px}
-.chip .q{color:var(--sand);font-weight:700}
-
-/* rain */
-details.rain{margin-top:12px;border-radius:12px;border:1px solid #19f0ff44;background:#0b2a4a55}
-details.rain>summary{cursor:pointer;list-style:none;padding:10px 12px;font-weight:700;font-size:14.5px;color:#a8f6ff;min-height:44px;display:flex;align-items:center;gap:6px}
-details.rain>summary::-webkit-details-marker{display:none}
-details.rain>summary:after{content:"▾";margin-inline-start:auto;color:var(--cyan);transition:transform .2s}
-details.rain[open]>summary:after{transform:rotate(180deg)}
-a.share{display:inline-flex;align-items:center;min-height:44px;margin-top:6px;font-size:13.5px;font-weight:700;color:#9fffd0;text-decoration:none}
-.today{display:inline-block;font-size:11.5px;font-weight:900;color:#14062c;background:var(--lime);border-radius:6px;padding:1px 7px;margin-inline-start:4px;vertical-align:2px}
-details.rain ul{margin:0;padding:0 14px 12px;padding-inline-start:30px;font-size:14px}
-details.rain li{margin:5px 0}
-.notes{margin:10px 0 0;padding:0;list-style:none;font-size:13px;color:#d9cdf7}
-.notes li{margin:4px 0;padding-inline-start:20px;position:relative}
-.notes li:before{content:"⚠️";position:absolute;inset-inline-start:0;font-size:12px}
-.notes li.i:before{content:"ℹ️"}
-.foot{margin:30px 0 0;font-size:13px;color:#b9a3ee;line-height:1.7}
-.foot h3{color:var(--cyan);font-size:16px;margin:0 0 6px}
-@media (max-width:360px){.stub{flex-basis:60px}.stub .d{font-size:25px}.body{padding:12px 10px}}
-@media print{.days,.tools,.back{display:none}.day{break-inside:avoid;box-shadow:none}body{background:#fff;color:#000}}
-</style>
+<link rel="stylesheet" href="plan.css?v=1">
+<script src="trip-data.js?v=1" defer></script>
+<script src="plan.js?v=1" defer></script>
+<script src="route.js?v=1" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -108,227 +24,57 @@ details.rain li{margin:5px 0}
     <span class="stamp">טיוטה · נובמבר 2026</span>
   </div>
   <h1><span class="g">המסלול היומי</span><br>גואה, 12-28.4.2027</h1>
-  <p class="lead">יום אחרי יום: לאן נוסעים, כמה זמן בדרך, ומה עושים אם יורד גשם או שחם מדי.</p>
+  <p class="lead">יום אחרי יום: לאן נוסעים ובאיזה סדר, כמה זמן בדרך, ומה עושים אם יורד גשם או שחם מדי.</p>
   <div class="draft"><b>טיוטה לדיון, לא תוכנית סגורה ולא הזמנה.</b> בנוי רק מהמידע שכבר באתר: הטיסות, 4 שלבי הלינה של פיני (דלהי · צפון · פאלולם · סיום בדרום), ליל הסדר וההמלצות. המלונות עוד לא נבחרו, ולכן נקודת המוצא בכל אזור היא האזור עצמו. שעות פתיחה ומחירים לא נבדקו ולא מופיעים כאן, וזמני נסיעה מופיעים רק כשנבדקו. את השאר מסמנים כ"לא נבדק".</div>
-  <div class="legend" aria-label="מקרא">
-    <span>✅ זמן נסיעה מהמחקר באתר</span>
-    <span>❓ לא נבדק</span>
-    <span>📏 מרחק בקו אווירי, מחושב מנקודות המפה שבאתר (הכביש ארוך יותר)</span>
-    <span><span class="opt-tag" style="margin:0">רשות</span> עצירה שאפשר לדלג עליה</span>
+  <p class="print-only">הודפס מתוך אתר פיני טורס · <span id="printDate"></span></p>
+  <div class="status" id="status" aria-live="polite"></div>
+  <div class="btnrow">
+    <button type="button" id="printBtn">🖨️ הדפסה / PDF</button>
+    <a class="b hot" href="pack.html">🎒 ציוד ותאריכים חשובים</a>
   </div>
-  <div class="stages" id="stages" aria-hidden="true"></div>
+  <nav class="tabs" role="tablist" aria-label="תצוגות המסלול">
+    <a href="#days-view" role="tab" id="tab-days" aria-controls="days-view"><span aria-hidden="true">🗺️</span>יום אחרי יום</a>
+    <a href="#times" role="tab" id="tab-times" aria-controls="times"><span aria-hidden="true">⏱️</span>זמני נסיעה</a>
+    <a href="#rain" role="tab" id="tab-rain" aria-controls="rain"><span aria-hidden="true">☔</span>תוכנית גשם</a>
+  </nav>
 </header>
-  <nav class="days" id="days" aria-label="בחירת יום"></nav>
-  <main>
-  <div class="tools">
-    <button type="button" id="rainAll" aria-pressed="false">☔ להציג את כל חלופות הגשם</button>
-  </div>
-  <div id="list"></div>
-  </main>
+<main>
+  <section class="panel" id="days-view" role="tabpanel" aria-labelledby="tab-days">
+    <div class="legend" aria-label="מקרא">
+      <span>① ② ③ סדר העצירות ביום</span>
+      <span>✅ זמן נסיעה מהמחקר באתר</span>
+      <span>❓ לא נבדק</span>
+      <span>📏 קו אווירי בין שתי נקודות מהמפה שבאתר (הכביש ארוך יותר)</span>
+      <span><span class="opt-tag" style="margin:0">רשות</span> אפשר לדלג</span>
+    </div>
+    <div class="stages" id="stages" aria-hidden="true"></div>
+    <nav class="days" id="days" aria-label="בחירת יום"></nav>
+    <div class="btnrow">
+      <button type="button" id="rainAll" aria-pressed="false">☔ להציג את כל חלופות הגשם</button>
+    </div>
+    <div id="list"></div>
+  </section>
+
+  <section class="panel" id="times" role="tabpanel" aria-labelledby="tab-times" hidden>
+    <h2 class="sec">⏱️ טבלת זמני נסיעה</h2>
+    <p class="sub">מה שנבדק כבר באתר, ומה שעוד לא. זמן "לא נבדק" לא מנחשים: פותחים את הקישור למפות סמוך לנסיעה, כשיודעים באיזה מלון ישנים.</p>
+    <div id="timesBody"></div>
+  </section>
+
+  <section class="panel" id="rain" role="tabpanel" aria-labelledby="tab-rain" hidden>
+    <h2 class="sec">☔ תוכנית ליום גשם או חום</h2>
+    <p class="sub">חלופות לפי אזור, רק ממקומות שכבר מופיעים באתר. לכל יום יש גם חלופה משלו בכרטיס היום.</p>
+    <div id="rainBody"></div>
+  </section>
   <noscript><p class="draft">כדי לראות את המסלול צריך להפעיל JavaScript בדפדפן.</p></noscript>
-  <footer class="foot">
-    <h3>על מה זה מבוסס</h3>
-    <p>הטיסות, תאריכי השלבים וליל הסדר: מכרטיסי "לוח הטיסות", "הצעות לינה מסוננות" ו"ליל הסדר" באתר. זמני הנסיעה המסומנים ✅: מ"אפשרות חלופית למסלול" (הערכות מקנדולים ומשדה דבולים, תלוי בתנועה) ומהבדיקה בדלהי. המקומות והקישורים למפה: מכרטיסי ההמלצות. מזג האוויר: לפי Rough Guides ו־TUI שמצוטטים באתר, באפריל כמעט לא יורד גשם (3-11 מ״מ בממוצע לחודש), אז חלופת הגשם משמשת בעיקר לשעות החום של הצהריים.</p>
-    <p>⚠️ בטיחות בים, כמו בכרטיס ההמלצות: נכנסים למים רק לפי דגלי המציל. בקנדולים דווח על זרמי ריפ, ובפאלולם אזורי איסור הרחצה משתנים מיום ליום.</p>
-    <p>יש באתר גם חלופה רגועה יותר: 6 לילות בקנדולים ו־8 בפאלולם, עם מעבר אחד בלבד (בכרטיס "אפשרות חלופית למסלול" בהמלצות). המסלול כאן עוקב אחרי 4 השלבים של פיני.</p>
-    <p><a href="index.html#recs">לכל ההמלצות, המחירים המשוערים והקישורים ←</a></p>
-  </footer>
+</main>
+<footer class="foot">
+  <h3>על מה זה מבוסס</h3>
+  <p>הטיסות, תאריכי השלבים וליל הסדר: מכרטיסי "לוח הטיסות", "הצעות לינה מסוננות" ו"ליל הסדר" באתר. זמני הנסיעה המסומנים ✅: מ"אפשרות חלופית למסלול" (הערכות מקנדולים ומשדה דבולים, תלוי בתנועה) ומהבדיקה בדלהי. המקומות והקישורים למפה: מכרטיסי ההמלצות. מזג האוויר: לפי Rough Guides ו־TUI שמצוטטים באתר.</p>
+  <p>⚠️ בטיחות בים, כמו בכרטיס ההמלצות: נכנסים למים רק לפי דגלי המציל. בקנדולים דווח על זרמי ריפ, ובפאלולם אזורי איסור הרחצה משתנים מיום ליום.</p>
+  <p>יש באתר גם חלופה רגועה יותר: 6 לילות בקנדולים ו־8 בפאלולם, עם מעבר אחד בלבד (בכרטיס "אפשרות חלופית למסלול" בהמלצות). המסלול כאן עוקב אחרי 4 השלבים של פיני.</p>
+  <p class="no-print"><a href="index.html#recs">לכל ההמלצות, המחירים המשוערים והקישורים ←</a></p>
+</footer>
 </div>
-<script>
-(function(){
-'use strict';
-// Coordinates are copied from the Google Maps links already in index.html. No new places, hours or prices.
-var P={
- sinq:{n:'חוף סינקרים',ll:[15.4991464,73.7674666]},
- aguada:{n:'מבצר Aguada',ll:[15.4922519,73.7737462],u:'https://www.goa.gov.in/places/aguada-fort/fort-aguada/'},
- anjuna:{n:"שוק הפשפשים באנג'ונה",ll:[15.5720689,73.7419735],u:'https://goa-tourism.org.in/anjuna-flea-market-goa'},
- chapora:{n:'מבצר Chapora',ll:[15.6046375,73.7369631],u:'https://www.goa.gov.in/places/chapora-fort/'},
- vagator:{n:'חוף וגטור',ll:[15.5976,73.7357]},
- pincode:{n:'Pincode, וגטור',ll:[15.5949577,73.7528907]},
- britto:{n:"Britto's, באגה",ll:[15.5613278,73.7494609]},
- baga:{n:'חוף באגה',ll:[15.5552787,73.7517307]},
- calangute:{n:'חוף קלנגוט',ll:[15.549441,73.7534857]},
- gunpowder:{n:'Gunpowder, אסאגאו',ll:[15.5969557,73.788323]},
- splash:{n:'Splashdown (פארק מים)',u:'https://www.splashdowngoa.com/',q:'Splashdown Waterpark Goa'},
- snow:{n:'Snow Park',u:'https://snowparkgoa.com/',q:'Snow Park Goa'},
- reis:{n:'מבצר Reis Magos',u:'https://www.goa.gov.in/places/reis-magos-fort/',q:'Reis Magos Fort'},
- candolim:{n:'בסיס הצפון: קנדולים / קלנגוט',sn:'חזרה לבסיס בצפון',q:'Candolim, Goa'},
- goi:{n:'שדה התעופה דבולים (GOI)',q:'Dabolim Airport, Goa'},
- palolem:{n:'בסיס פאלולם (חוף פאלולם)',sn:'חזרה לבסיס בפאלולם',ll:[15.0099648,74.0232186]},
- palbeach:{n:'חוף פאלולם',ll:[15.0099648,74.0232186]},
- chabad:{n:'בית חב"ד פאלולם',ll:[15.01276,74.0243252]},
- palm:{n:'יוגה ב־Palm Forest',ll:[15.0132911,74.0190633],u:'https://thepalmcollection.in/palm-forest-palolem/palm-forest-palolem-yoga/'},
- luma:{n:'יוגה ב־Luma',ll:[15.0126252,74.0210419],u:'https://lumagoa.com/yoga-shala'},
- cantine:{n:'Cantine Indienne',ll:[15.0076604,74.0300394]},
- mill:{n:'The Mill',ll:[15.0110151,74.0278915]},
- agonda:{n:'חוף אגונדה',ll:[15.0425,73.9872]},
- zest:{n:'Zest, אגונדה',ll:[15.0392696,73.9892874]},
- dolce:{n:'La Dolce Vita, אגונדה',ll:[15.0374596,73.9896413]},
- butterfly:{n:'סירה לחוף הפרפרים (Butterfly) ול־Honeymoon Beach',u:'https://goatours.co.in/palolem-boat-trip-dolphins-and-beach/',q:'Butterfly Beach Goa'},
- dudh:{n:'מפלי דודסאגר (ג׳יפים מקולם)',ll:[15.3144375,74.3143073],u:'https://www.dudhsagarjeeps.com/'},
- spice:{n:'מטע התבלינים Sahakari, פונדה',ll:[15.4094752,74.0237045],u:'https://sahakarispicefarm.com/'},
- south:{n:'בסיס הסיום: אזור בנאולים (המלון טרם נבחר)',sn:'חזרה לבסיס בדרום',ll:[15.2570626,73.9187138]},
- benaulim:{n:'חוף בנאולים',ll:[15.2570626,73.9187138]},
- colva:{n:'חוף קולבה',ll:[15.2805316,73.9119945]},
- beno:{n:'Beno, בנאולים',ll:[15.251476,73.9353349]},
- cavatina:{n:'Cavatina, בנאולים',ll:[15.2433783,73.9298956]},
- mobor:{n:"Fisherman's Wharf, מובור",ll:[15.1576183,73.9521909]},
- mobordol:{n:'שייט דולפינים ממובור',u:'https://goatoursplanner.com/experience/dolphin-trip',q:'Mobor Beach Goa'},
- martin:{n:"Martin's Corner, בטלבטים",ll:[15.303788,73.914329]},
- joets:{n:'Joets, בוגמלו',ll:[15.3708346,73.8325205]},
- delhiHotel:{n:'מלון ליד שדה התעופה בדלהי (טרם הוזמן)',q:'Aerocity, New Delhi'},
- del:{n:'דלהי, טרמינל 3',q:'Indira Gandhi International Airport Terminal 3'},
- tlv:{n:'נתב״ג',q:'Ben Gurion Airport'}
-};
-// Travel times that already appear on the site. Key = "from>to" (either direction).
-var KNOWN={
- 'goi>candolim':'כ־60 דק׳','goi>palolem':'כ־1:40 שעות','candolim>palolem':'כ־2 שעות',
- 'candolim>splash':'כ־23 דק׳','candolim>snow':'כ־24 דק׳','candolim>reis':'כ־18 דק׳','candolim>sinq':'כ־12 דק׳',
- 'delhiHotel>del':'כ־10 דק׳ (4.5-4.6 ק״מ, לפי הבדיקה בדלהי)'
-};
-var FLIGHT={'tlv>del':1,'del>goi':1,'goi>del':1,'del>tlv':1};
-var STAGE={delhi:{n:'דלהי',s:'🛫',c:'var(--delhi)'},north:{n:'צפון גואה',c:'var(--north)'},palolem:{n:'פאלולם',c:'var(--palolem)'},south:{n:'סיום בדרום',c:'var(--south)'},home:{n:'בית',s:'🏠',c:'var(--home)'}};
-var WD=['א׳','ב׳','ג׳','ד׳','ה׳','ו׳','ש׳'];
-// s = stop [placeKey, time?, note?, optional?]; legs are drawn automatically between consecutive stops.
-var DAYS=[
-{d:12,stage:'delhi',t:'טסים! לילה אחד בדלהי',night:'דלהי',fixed:true,
- stops:[['tlv','11:40','המראה, Air India AI140'],['del','20:20','נחיתה בטרמינל 3'],['delhiHotel','','לילה לשינה, לא לטיול. לאשר צ׳ק־אין מאוחר מול המלון']],
- rain:['אין שינוי: יום של טיסה ושינה.'],
- notes:[]},
-{d:13,stage:'north',t:'דלהי ← גואה ← הצפון',night:'צפון',fixed:true,
- stops:[['delhiHotel','בוקר','צ׳ק־אאוט'],['del','11:50','AI2495 לגואה. להיות בשדה עד כ־09:30'],['goi','14:30','נחיתה בדבולים. לוודא שההסעה מדבולים ולא ממופה (GOX)'],['candolim','','צ׳ק־אין ומנוחה'],['sinq','שקיעה','הליכה על החוף, בלי להיכנס למים בלי מציל',1]],
- rain:['מוותרים על החוף ונשארים במלון אחרי יום נסיעות ארוך.'],
- notes:['יום ארוך עם ילדים: עדיף לא לתכנן שום דבר מעבר לארוחת ערב.']},
-{d:14,stage:'north',t:"יום רביעי = שוק אנג'ונה",night:'צפון',
- stops:[['candolim'],['anjuna','בוקר','השוק פתוח בימי רביעי (לפי ההמלצות). להגיע מוקדם, לפני החום'],['candolim','צהריים','בריכה במלון'],['chapora','אחה״צ','',1],['pincode','ערב','ארוחת ערב בוגטור',1]],
- rain:['Snow Park (פארק שלג) - כ־24 דק׳ מקנדולים ✅.','ארוחה ארוכה באחת המסעדות מההמלצות במקום השוק.'],
- notes:["אם יורד גשם ביום רביעי, השוק של השבוע הזה כנראה ירד מהתוכנית. שוק הלילה בארפורה הוא במוצאי שבת, וזה יוצא ב־17.4 - יום המעבר לדרום."]},
-{d:15,stage:'north',t:'דולפינים ומבצר',night:'צפון',
- stops:[['candolim'],['sinq','בוקר','שייט דולפינים מסינקרים, כשעה וחצי. הקישור הרשמי לא זמין כרגע; ראיית דולפינים לא מובטחת'],['aguada','','ליד סינקרים',1],['candolim','צהריים','בריכה ומנוחה'],['britto','ערב','ארוחת ערב בבאגה, נוף לים']],
- rain:['Snow Park במקום השייט (כ־24 דק׳ מקנדולים ✅).','מבצר Reis Magos הוא עצירה קצרה (כ־18 דק׳ ✅), אבל בחוץ.'],
- notes:['שייט בים פתוח: לבדוק מראש מי בקבוצה רגיש לים (גם שאלה בשאלון האישי).']},
-{d:16,stage:'north',t:'יום מים',night:'צפון',
- stops:[['candolim'],['splash','בוקר','פארק מים. כ־23 דק׳ מקנדולים'],['candolim','צהריים','מנוחה'],['gunpowder','ערב','מטבח דרום הודי, אסאגאו',1]],
- rain:['Snow Park במקום פארק המים - כ־24 דק׳ ✅.'],
- notes:['חלופה ליום הזה מההמלצות: צלילה ושנורקל סביב האי Grande, טיול יום מהצפון. לא נכלל כאן כי זמני ההגעה לא נבדקו.']},
-{d:17,stage:'palolem',t:'מעבר לפאלולם',night:'פאלולם',
- stops:[['candolim','בוקר','צ׳ק־אאוט'],['palolem','צהריים','כ־2 שעות נסיעה, לפי ההערכה באתר'],['palbeach','אחה״צ','החוף, במים רק באזור מסומן'],['mill','ערב','',1]],
- rain:['נוסעים כרגיל ונכנסים מוקדם למלון.'],
- notes:['יום שבת: שוק הלילה בארפורה (צפון) מתנגש עם המעבר. מי שרוצה אותו צריך להזיז את המעבר, וזה משנה את לילות הלינה בשלבים 2 ו־3.']},
-{d:18,stage:'palolem',t:'יוגה וחוף',night:'פאלולם',
- stops:[['palolem'],['palm','בוקר','שיעור drop-in. אפשר גם ב־Luma',1],['palbeach','','חוף ובריכה'],['cantine','ערב','טבעוני, פאלולם']],
- rain:['שיטוט בדוכני הבוטיק ברחוב הראשי של פאלולם.','מנוחה במלון.'],
- notes:[]},
-{d:19,stage:'palolem',t:'סירה לחוף הפרפרים',night:'פאלולם',
- stops:[['palolem'],['palbeach','בוקר','יוצאים מהחוף עצמו'],['butterfly','','סירה פרטית, לרוב משלבים גם Honeymoon Beach. דולפינים לא מובטחים'],['palolem','צהריים','מנוחה'],['agonda','שקיעה','',1],['zest','ערב','או La Dolce Vita, אגונדה',1]],
- rain:['אם הים סוער לא יוצאים לשייט. אפשר לנסות שוב ב־20.4 או ב־21.4 בבוקר.','רחוב הדוכנים בפאלולם.'],
- notes:[]},
-{d:20,stage:'palolem',t:'יום טיול: דודסאגר ותבלינים',night:'פאלולם',
- stops:[['palolem','מוקדם'],['dudh','','הג׳יפים יוצאים מקולם. להזמין מראש אצל איגוד המפעילים'],['spice','','בדרך אפשר לשלב, פונדה',1],['palolem','ערב']],
- rain:['לא יוצאים לטיול היום הארוך ביום גשם. נשארים בפאלולם, ואת היום מזיזים לתאריך אחר בשלב הזה אם יש מקום.'],
- notes:['זה היום עם הכי הרבה נסיעה בטיול. זמני הנסיעה פאלולם-קולם-פונדה לא נבדקו: לבדוק לפני שמתחייבים, במיוחד עם הילדים הקטנים.']},
-{d:21,stage:'palolem',t:'ליל הסדר',night:'פאלולם',fixed:true,
- stops:[['palolem','','יום רגוע: חוף, בריכה, מנוחה'],['chabad','ערב','סדר בבית חב״ד, ברישום מראש. רישום לתשפ״ז טרם נפתח']],
- rain:['אין שינוי. הסדר בפנים.'],
- notes:['הסדר מתחיל בערב, ולכן לא מתכננים יציאה רחוקה ביום הזה.']},
-{d:22,stage:'south',t:'מעבר לסיום בדרום',night:'דרום',
- stops:[['palolem','בוקר','צ׳ק־אאוט'],['mobor','צהריים','ארוחה בדרך, אם המיקום מתאים',1],['south','אחה״צ','צ׳ק־אין']],
- rain:['נוסעים כרגיל.'],
- notes:['זמן הנסיעה מפאלולם לבסיס הסיום לא נבדק. תלוי באיזה מלון ייבחר (Sea Queen, Alila Diwa או Taj Exotica ברשימה).']},
-{d:23,stage:'south',t:'דולפינים ממובור',night:'דרום',
- stops:[['south'],['mobordol','בוקר','שייט דולפינים, לפי ההמלצות'],['south','צהריים','בריכה'],['beno','ערב','או Cavatina, בנאולים',1]],
- rain:['ארוחה ארוכה ב־Martin\'s Corner בבטלבטים.','מנוחה במלון.'],
- notes:['אם השייט כבר נעשה בצפון ב־15.4, היום הזה פנוי לחוף.']},
-{d:24,stage:'south',t:'יום חוף (ופסטיבל, אם יהיה)',night:'דרום',
- stops:[['south'],['benaulim','בוקר','חוף, במים רק לפי דגלי המציל'],['colva','ערב','Spirit of Goa Festival - אם ייערך בתאריכים האלה',1],['martin','ערב','',1]],
- rain:['Martin\'s Corner בבטלבטים.'],
- notes:['ב־2026 הפסטיבל נערך בקולבה ב־24-26.4. תאריכי 2027 טרם פורסמו, אז אין לדעת אם ייפול בתקופה שלנו.']},
-{d:25,stage:'south',t:'יום פתוח',night:'דרום',
- stops:[['south','','בריכה, חוף, מנוחה. היום הזה נשאר פתוח בכוונה']],
- rain:['מנוחה במלון.'],
- notes:['ימים פתוחים כאן הם מקום לחלופות מהשאלונים האישיים, אחרי שיתמלאו.']},
-{d:26,stage:'south',t:'יום פתוח',night:'דרום',
- stops:[['south'],['cavatina','ערב','',1]],
- rain:['מנוחה במלון.'],
- notes:[]},
-{d:27,stage:'south',t:'יום אחרון, טיסה בלילה',night:'בטיסה',fixed:true,
- stops:[['south','','לבקש צ׳ק־אאוט מאוחר. הטיסה רק בלילה'],['joets','ערב','ארוחה אחרונה על החוף בבוגמלו',1],['goi','23:10','להיות בשדה עד כ־20:00. AI2510 לדלהי ממריאה ב־23:10']],
- rain:['אין שינוי.'],
- notes:['זמן הנסיעה מבסיס הסיום לשדה לא נבדק. משאירים מרווח.']},
-{d:28,stage:'home',t:'נחיתה בבית',night:'בבית',fixed:true,
- stops:[['del','01:50','נחיתה, קונקשן קצר של 2:35 שעות בלי מלון'],['tlv','08:15','AI139 יוצאת מדלהי ב־04:25']],
- rain:['אין שינוי.'],
- notes:[]}
-];
-function km(a,b){var R=6371,r=Math.PI/180,dl=(b[0]-a[0])*r,dn=(b[1]-a[1])*r,x=Math.sin(dl/2)*Math.sin(dl/2)+Math.cos(a[0]*r)*Math.cos(b[0]*r)*Math.sin(dn/2)*Math.sin(dn/2);return 2*R*Math.asin(Math.sqrt(x))}
-function loc(p){return p.ll?p.ll.join(','):p.q}
-function mapUrl(p){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(loc(p))}
-function dirUrl(a,b){return 'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(loc(a))+'&destination='+encodeURIComponent(loc(b))+'&travelmode=driving'}
-function el(t,c,txt){var n=document.createElement(t);if(c)n.className=c;if(txt!=null)n.textContent=txt;return n}
-function link(href,txt,cls){var a=el('a',cls,txt);a.href=href;a.target='_blank';a.rel='noopener';return a}
-function leg(fromK,toK){
- if(fromK===toK)return null;
- var a=P[fromK],b=P[toK],li=el('li','leg'),c=el('span','chip');li.appendChild(c);
- if(FLIGHT[fromK+'>'+toK]){c.classList.add('ok');c.appendChild(el('span','', '✈️ טיסה'));return li}
- if(fromK==='palolem'&&toK==='palbeach'||fromK==='palbeach'&&toK==='palolem'){c.appendChild(el('span','','🚶 באותו חוף'));return li}
- var t=KNOWN[fromK+'>'+toK]||KNOWN[toK+'>'+fromK];
- if(t){c.classList.add('ok');c.appendChild(el('span','','🚐 '+t+' ✅'))}
- else{c.classList.add('unk');c.appendChild(el('span','q','🚐 ❓ זמן לא נבדק'))}
- if(a.ll&&b.ll){var d=km(a.ll,b.ll);c.appendChild(el('span','','📏 '+(d<1?'פחות מק״מ':'כ־'+Math.round(d)+' ק״מ')+' באוויר'))}
- c.appendChild(link(dirUrl(a,b),'מסלול ↗'));c.lastChild.setAttribute('aria-label','מסלול נסיעה בגוגל מפות מ'+a.n+' אל '+b.n);
- return li;
-}
-var days=document.getElementById('days'),list=document.getElementById('list'),stages=document.getElementById('stages');
-// stage strip, proportional to days
-var counts={};DAYS.forEach(function(x){counts[x.stage]=(counts[x.stage]||0)+1});
-Object.keys(counts).forEach(function(k){var s=el('div','',STAGE[k].s||STAGE[k].n);s.title=STAGE[k].n;s.style.background=STAGE[k].c;s.style.setProperty('--n',counts[k]);stages.appendChild(s)});
-DAYS.forEach(function(x){
- var date=new Date(2027,3,x.d),wd=WD[date.getDay()],c=STAGE[x.stage].c,id='d'+x.d;
- var pill=el('a');pill.href='#'+id;pill.style.setProperty('--c',c);pill.appendChild(document.createTextNode(x.d+'.4'));pill.appendChild(el('small','',wd));pill.setAttribute('aria-label',x.d+' באפריל, יום '+wd+': '+x.t);days.appendChild(pill);
- var card=el('article','day');card.id=id;card.style.setProperty('--c',c);card.setAttribute('aria-labelledby',id+'h');
- var stub=el('div','stub');stub.appendChild(el('div','d',String(x.d)));stub.appendChild(el('div','m','אפריל'));stub.appendChild(el('div','w','יום '+wd));stub.appendChild(el('div','n','לינה:\n'+x.night));card.appendChild(stub);
- var body=el('div','body');var h=el('h2','',x.t);h.id=id+'h';if(x.fixed){h.appendChild(el('span','fixed','קבוע'))}body.appendChild(h);
- body.appendChild(el('p','where',STAGE[x.stage].n));
- var ol=el('ol','route'),prev=null,seen={};
- x.stops.forEach(function(s){
-  var k=s[0],p=P[k],nm=(seen[k]&&p.sn)?p.sn:p.n;seen[k]=1;
-  if(prev){var l=leg(prev,k);if(l)ol.appendChild(l)}
-  var li=el('li','stop'+(s[3]?' opt':''));
-  var line=el('div','st');if(s[1])line.appendChild(el('span','tm',s[1]));
-  if(p.u)line.appendChild(link(p.u,nm));else line.appendChild(el('span','',nm));
-  if(p.ll||p.q){var m=link(mapUrl(p),' 🗺️');m.setAttribute('aria-label','במפה: '+p.n);m.title='במפה';line.appendChild(m)}
-  if(s[3])line.appendChild(el('span','opt-tag','רשות'));
-  li.appendChild(line);if(s[2])li.appendChild(el('div','ds',s[2]));ol.appendChild(li);prev=k;
- });
- body.appendChild(ol);
- if(x.notes.length){var ul=el('ul','notes');x.notes.forEach(function(n){ul.appendChild(el('li','',n))});body.appendChild(ul)}
- var r=el('details','rain');r.appendChild(el('summary','','☔ אם יורד גשם או שחם מדי'));var ru=el('ul');x.rain.forEach(function(t){ru.appendChild(el('li','',t))});
- ru.appendChild(el('li','','שעות פתיחה ומחירים: לא נבדקו. לבדוק סמוך לנסיעה.'));
- if(x.fixed)ru.lastChild.remove();
- r.appendChild(ru);body.appendChild(r);
- var share=el('a','share','📤 לשלוח את היום הזה לקבוצה');
- var txt='🧭 '+x.d+'.4 (יום '+wd+'): '+x.t+'\n'+x.stops.map(function(s,i){var p=P[s[0]];return (s[1]?s[1]+' · ':'')+((x.stops.slice(0,i).some(function(o){return o[0]===s[0]})&&p.sn)?p.sn:p.n)}).join('\n')+'\nטיוטה, לא סגור: '+location.href.split('#')[0]+'#'+id;
- share.href='https://wa.me/?text='+encodeURIComponent(txt);share.target='_blank';share.rel='noopener';
- share.addEventListener('click',function(e){if(navigator.share){e.preventDefault();navigator.share({text:txt}).catch(function(){})}});
- body.appendChild(share);
- card.appendChild(body);list.appendChild(card);
-});
-// highlight the day in view
-var pills=[].slice.call(days.querySelectorAll('a'));
-if('IntersectionObserver' in window){
- var io=new IntersectionObserver(function(es){if(Date.now()-lock<1200)return;es.forEach(function(e){if(e.isIntersecting){pills.forEach(function(p){var on=p.getAttribute('href')==='#'+e.target.id;p.classList.toggle('on',on);if(on){p.setAttribute('aria-current','true');var r=p.getBoundingClientRect(),dr=days.getBoundingClientRect();if(r.left<dr.left||r.right>dr.right)days.scrollLeft+=r.left-dr.left-dr.width/2+r.width/2}else p.removeAttribute('aria-current')})}})},{rootMargin:'-90px 0px -60% 0px'});
- [].forEach.call(list.children,function(c){io.observe(c)});
-}
-var lock=0;pills.forEach(function(p){p.addEventListener('click',function(){lock=Date.now();pills.forEach(function(q){q.classList.toggle('on',q===p);if(q===p)q.setAttribute('aria-current','true');else q.removeAttribute('aria-current')})})});
-// during the trip itself, jump to today's card
-var now=new Date();
-if(now.getFullYear()===2027&&now.getMonth()===3&&now.getDate()>=12&&now.getDate()<=28&&!location.hash){
- var tc=document.getElementById('d'+now.getDate());
- if(tc){tc.querySelector('h2').appendChild(el('span','today','היום'));window.addEventListener('load',function(){tc.scrollIntoView({block:'start',behavior:'instant'})})}
-}
-var btn=document.getElementById('rainAll');
-btn.addEventListener('click',function(){var on=btn.getAttribute('aria-pressed')!=='true';btn.setAttribute('aria-pressed',String(on));btn.textContent=on?'☔ להסתיר את חלופות הגשם':'☔ להציג את כל חלופות הגשם';list.querySelectorAll('details.rain').forEach(function(d){d.open=on})});
-})();
-</script>
 </body>
 </html>
