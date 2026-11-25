@@ -3,6 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="גואה 2027">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="pwa.css?v=1">
+<script src="pwa.js?v=1" defer></script>
 <title>ציוד ותאריכים | פיני טורס גואה 2027</title>
 <meta name="description" content="רשימת ציוד וסידורים לגואה 2027 ותאריכים חשובים לפני הטיסה, לפי המידע שבאתר. מסמנים בטלפון, עובד גם בלי אינטרנט.">
 <meta property="og:title" content="ציוד ותאריכים · פיני טורס גואה 2027 🎒">
@@ -30,6 +40,7 @@
   <div class="status" id="status" aria-live="polite"></div>
   <div class="btnrow">
     <button type="button" id="printBtn">🖨️ הדפסה / PDF</button>
+    <span data-app-ctl></span>
     <button type="button" id="copyList">📋 העתקת הרשימה</button>
     <button type="button" id="resetList">↺ איפוס הסימונים</button>
     <button type="button" id="icsBtn">🗓️ הוספה ליומן בטלפון</button>
