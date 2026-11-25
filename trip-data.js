@@ -64,11 +64,13 @@ var KNOWN = {
  'delhiHotel>del':{t:'כ־10 דק׳ (4.5-4.6 ק״מ)',src:'בדיקת המלונות בדלהי מ־20.10.2026, בתנאים רגילים'}
 };
 
+// Local times are the site's. utc = the same moment in UTC, for the calendar file:
+// Israel is UTC+3 in April 2027 (summer time from 26.3.2027), India is UTC+5:30 all year.
 var FLIGHTS = [
- {code:'AI140',from:'tlv',to:'del',dep:'12.4 · 11:40',arr:'12.4 · 20:20',note:'נחיתה בטרמינל 3'},
- {code:'AI2495',from:'del',to:'goi',dep:'13.4 · 11:50',arr:'13.4 · 14:30',note:'להיות בשדה עד כ־09:30'},
- {code:'AI2510',from:'goi',to:'del',dep:'27.4 · 23:10',arr:'28.4 · 01:50',note:'להיות בשדה עד כ־20:00'},
- {code:'AI139',from:'del',to:'tlv',dep:'28.4 · 04:25',arr:'28.4 · 08:15',note:'קונקשן של 2:35 שעות, בלי מלון'}
+ {code:'AI140',from:'tlv',to:'del',dep:'12.4 · 11:40',arr:'12.4 · 20:20',note:'נחיתה בטרמינל 3',utc:['20270412T084000Z','20270412T145000Z']},
+ {code:'AI2495',from:'del',to:'goi',dep:'13.4 · 11:50',arr:'13.4 · 14:30',note:'להיות בשדה עד כ־09:30',utc:['20270413T062000Z','20270413T090000Z']},
+ {code:'AI2510',from:'goi',to:'del',dep:'27.4 · 23:10',arr:'28.4 · 01:50',note:'להיות בשדה עד כ־20:00',utc:['20270427T174000Z','20270427T202000Z']},
+ {code:'AI139',from:'del',to:'tlv',dep:'28.4 · 04:25',arr:'28.4 · 08:15',note:'קונקשן של 2:35 שעות, בלי מלון',utc:['20270427T225500Z','20270428T051500Z']}
 ];
 
 var STAGE = {
