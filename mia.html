@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="גואה 2027">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="pwa.css?v=1">
+<script src="pwa.js?v=1" defer></script>
+<meta name="theme-color" content="#0b0420">
 <title>🐣 האנגלית הראשונה שלי | פיני טורס</title>
 <meta name="description" content="משחק אנגלית ראשונה לגיל הגן: צבעים, חיות ומספרים - שומעים ולוחצים, בלי קריאה.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +25,9 @@
 html,body{height:100%}
 body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#2a1260,var(--bg));color:#fff;font-family:'Rubik',Arial,sans-serif;overflow-x:hidden;touch-action:manipulation;user-select:none;-webkit-user-select:none}
 .wrap{max-width:560px;margin:0 auto;padding:14px 12px 40px;min-height:100%;display:flex;flex-direction:column}
-h1{font-size:clamp(24px,7vw,34px);font-weight:900;text-align:center;margin:10px 0 2px;background:linear-gradient(90deg,var(--pink),var(--cyan),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+h1{font-size:clamp(24px,7vw,34px);font-weight:900;text-align:center;margin:10px 0 2px;}
+h1 .gt{background:linear-gradient(90deg,var(--pink),var(--cyan),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 .emo{color:initial}
 .sub{text-align:center;color:#cdb8ff;margin:0 0 14px;font-size:15px}
 .stars{text-align:center;font-size:22px;min-height:34px;margin:4px 0;letter-spacing:2px}
 .menu{display:flex;flex-direction:column;gap:16px;margin-top:8px}
@@ -53,12 +66,13 @@ h1{font-size:clamp(24px,7vw,34px);font-weight:900;text-align:center;margin:10px 
 .btn.cyan{background:linear-gradient(90deg,#0e7490,var(--cyan));color:#04222b;box-shadow:0 0 22px rgba(25,240,255,.55)}
 .home{position:absolute;top:10px;left:10px;background:none;border:0;color:#cdb8ff;font-size:26px;cursor:pointer;z-index:5}
 .wrap h1{padding:0 48px}
+.backlink{align-self:center;margin-top:6px;padding:10px 16px;min-height:44px;color:#19f0ff;font-weight:700;font-size:15px;text-decoration:none}
 </style>
 </head>
-<body>
-<div class="wrap">
+<body data-app-ctl-side="end">
+<main class="wrap">
   <button class="home" id="homeBtn" style="display:none" title="תפריט">🏠</button>
-  <h1>🐣 האנגלית הראשונה שלי</h1>
+  <h1><span class="emo" aria-hidden="true">🐣</span> <span class="gt">האנגלית הראשונה שלי</span></h1>
   <p class="sub">שומעים את המילה באנגלית ולוחצים על התמונה 👂👆</p>
   <div class="stars" id="stars">🤍🤍🤍🤍🤍🤍🤍🤍</div>
 
@@ -66,6 +80,8 @@ h1{font-size:clamp(24px,7vw,34px);font-weight:900;text-align:center;margin:10px 
     <button class="mbtn" data-world="colors"><span class="e">🎨</span><span class="t">Colors</span><span class="s">צבעים</span></button>
     <button class="mbtn" data-world="animals"><span class="e">🐶</span><span class="t">Animals</span><span class="s">חיות</span></button>
     <button class="mbtn" data-world="numbers"><span class="e">🔢</span><span class="t">Numbers</span><span class="s">מספרים 1-10</span></button>
+    <a class="backlink" href="kids.html">🏠 חזרה לעולם הילדים</a>
+    <script>try{if(window.top!==window.self)document.currentScript.previousElementSibling.remove()}catch(e){}</script>
   </div>
 
   <div class="game" id="game">
@@ -87,7 +103,7 @@ h1{font-size:clamp(24px,7vw,34px);font-weight:900;text-align:center;margin:10px 
       <button class="btn cyan" id="menuBtn">🏠 תפריט</button>
     </div>
   </div>
-</div>
+</main>
 <div class="burst" id="burst"></div>
 
 <script>

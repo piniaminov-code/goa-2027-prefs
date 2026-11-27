@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="גואה 2027">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="pwa.css?v=1">
+<script src="pwa.js?v=1" defer></script>
+<title>ציוד ותאריכים | פיני טורס גואה 2027</title>
+<meta name="description" content="רשימת ציוד וסידורים לגואה 2027 ותאריכים חשובים לפני הטיסה, לפי המידע שבאתר. מסמנים בטלפון, עובד גם בלי אינטרנט.">
+<meta property="og:title" content="ציוד ותאריכים · פיני טורס גואה 2027 🎒">
+<meta property="og:description" content="מה לארוז, מה לסדר ועד מתי: ויזה, דרכונים, מתאם, ביטוח, הסדר ועוד.">
+<meta name="theme-color" content="#0b0420">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="plan.css?v=1">
+<script src="trip-data.js?v=1" defer></script>
+<script src="plan.js?v=1" defer></script>
+<script src="pack.js?v=1" defer></script>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="top">
+    <a class="back" href="index.html"><span aria-hidden="true">🏠</span> חזרה לאתר</a>
+    <a class="back" href="route.html"><span aria-hidden="true">🧭</span> המסלול היומי</a>
+  </div>
+  <h1><span class="g">ציוד ותאריכים</span><br>לפני שטסים לגואה</h1>
+  <p class="lead">מה לסדר ועד מתי, ומה לשים בתיק. הסימונים נשמרים רק בטלפון הזה, לכל משפחה בטלפון שלה.</p>
+  <div class="draft"><b>מבוסס על מה שכבר באתר:</b> כרטיסי הוויזה, הבריאות, הכסף, הסים, ההסעה, ליל הסדר, לוח הטיסות והלינה. פריטים בלי מקור הם טיפים מעשיים פשוטים. אין כאן ייעוץ רפואי, מחירים או הזמנות.</div>
+  <p class="print-only">הודפס מתוך אתר פיני טורס · <span id="printDate"></span></p>
+  <div class="status" id="status" aria-live="polite"></div>
+  <div class="btnrow">
+    <button type="button" id="printBtn">🖨️ הדפסה / PDF</button>
+    <span data-app-ctl></span>
+    <button type="button" id="copyList">📋 העתקת הרשימה</button>
+    <button type="button" id="resetList">↺ איפוס הסימונים</button>
+    <button type="button" id="icsBtn">🗓️ הוספה ליומן בטלפון</button>
+  </div>
+</header>
+<main>
+  <section aria-labelledby="dlh">
+    <h2 class="sec" id="dlh">⏳ תאריכים חשובים</h2>
+    <p class="sub" id="dlsub">לפי מה שכתוב באתר. "אם ייבחר" = תאריך ביטול חינם של אפשרות לינה שעוד לא הוזמנה.</p>
+    <ol class="dl" id="deadlines"></ol>
+    <p class="sub" id="icsNote">"הוספה ליומן" מורידה קובץ יומן (‎.ics) עם הטיסות, זמני ההגעה לשדה, ליל הסדר ותאריכי הוויזה ומרפאת המטיילים. השעות לפי לוח הטיסות באתר, כל אחת בשעון המקומי של השדה. תאריכי ביטול של מלונות שלא הוזמנו לא נכללים.</p>
+  </section>
+  <section aria-labelledby="ckh">
+    <h2 class="sec" id="ckh">🎒 רשימת ציוד וסידורים</h2>
+    <div class="prog" aria-live="polite"><div class="bar"><i id="bar"></i></div><p id="count"></p></div>
+    <p class="sub" id="storeNote" hidden>הדפדפן הזה לא שומר סימונים (למשל במצב גלישה פרטית). אפשר לסמן, אבל זה יימחק ביציאה.</p>
+    <div id="checklist"></div>
+  </section>
+</main>
+<footer class="foot">
+  <h3>מקורות</h3>
+  <p>ויזה ודרכון: האתר הרשמי של ממשלת הודו ותנאי ה־e-Visa, כפי שמצוטטים בכרטיס הוויזה. בריאות: CDC ומשרד הבריאות, מידע כללי בלבד. חשמל, כסף, מים ושמש: כרטיסי "שאלות ותשובות". תאריכי ביטול: כרטיסי הלינה (Booking, 20.10.2026), למקרה שהאפשרות תיבחר.</p>
+  <p class="no-print"><a href="index.html#info">למידע הכללי המלא ←</a></p>
+</footer>
+</div>
+</body>
+</html>

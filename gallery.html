@@ -4,14 +4,24 @@
 <meta charset="utf-8">
 <script src="goa-audio-1.js?v=2" defer></script>
 <script src="goa-audio-2.js?v=2" defer></script>
-<script src="music.js?v=11" defer></script>
+<script src="music.js?v=13" defer></script>
 <script src="goa-assets-1.js?v=3" defer></script>
 <script src="goa-assets-2.js?v=3" defer></script>
 <script src="goa-assets-3.js?v=2" defer></script>
 <script src="goa-assets-4.js?v=2" defer></script>
 <script src="goa-assets-5.js?v=2" defer></script>
-<script src="goa-stage.js?v=5" defer></script>
+<script src="goa-stage.js?v=6" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="גואה 2027">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="pwa.css?v=1">
+<script src="pwa.js?v=1" defer></script>
 <title>גלריית פיני טורס - מטיולי עבר 📸</title>
 <meta name="description" content="כל התמונות של החבורה מטיולי העבר, בסטייל גואה-טראנס ניאון.">
 <meta property="og:title" content="גלריית פיני טורס - מטיולי עבר 📸">
@@ -67,6 +77,9 @@ input[type=range]{width:100%;accent-color:var(--pink);margin:12px 0 2px}
 footer{text-align:center;padding:30px 10px 50px;color:#b9a3ee;font-size:14px}
 .err{color:#ff7a9a;font-size:14px;display:none;margin-top:6px}
 .sunrays{animation:flow 8s linear infinite}
+@media (max-width:560px){.hero .badge{position:static;margin-bottom:14px}}
+@media (prefers-reduced-motion:reduce){h1 .g,.spin{animation:none}}
+a:focus-visible,button:focus-visible{outline:3px solid #19f0ff;outline-offset:3px}
 </style>
 
 </head>
@@ -111,7 +124,7 @@ setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},600);
 <div class="spin" aria-hidden="true"></div>
 <h1><span class="g">גלריית פיני טורס</span><br>מטיולי עבר 🌴</h1>
 <p class="tag">טיולי העבר של החבורה, עם שדרוג ניאון לקראת גואה 2027 ✨</p>
-<a class="btn" href="index.html" style="text-decoration:none">חזרה לסקר ההעדפות ←</a>
+<a class="btn" href="index.html" style="text-decoration:none">חזרה לאתר הטיול ←</a>
 <script>
 (function(){
 if(!/([?&])embed=1/.test(location.search))return;

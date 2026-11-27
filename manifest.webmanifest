@@ -1,0 +1,25 @@
+{
+  "id": "./",
+  "name": "פיני טורס טסים להודו · גואה 2027",
+  "short_name": "גואה 2027",
+  "description": "הטיול של שלוש המשפחות לגואה, אפריל 2027: המלצות, מסלול יומי, ציוד ותאריכים.",
+  "lang": "he",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["fullscreen", "standalone", "minimal-ui"],
+  "orientation": "any",
+  "theme_color": "#0b0420",
+  "background_color": "#0b0420",
+  "categories": ["travel"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "המסלול היומי", "short_name": "מסלול", "url": "./route.html", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" }] },
+    { "name": "ציוד ותאריכים", "short_name": "ציוד", "url": "./pack.html", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" }] }
+  ]
+}

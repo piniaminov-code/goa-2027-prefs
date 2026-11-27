@@ -5,9 +5,20 @@
 <script src="personal-questions.js?v=20261118-2" defer></script>
   <script src="goa-audio-1.js?v=2" defer></script>
 <script src="goa-audio-2.js?v=2" defer></script>
-<script src="chat.js?v=3" defer></script>
-<script src="music.js?v=12" defer></script>
+<script src="chat.js?v=5" defer></script>
+<script src="trip-data.js?v=1" defer></script>
+<script src="music.js?v=13" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="גואה 2027">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="pwa.css?v=1">
+<script src="pwa.js?v=1" defer></script>
 <title>פיני טורס טסים להודו | גואה 2027</title>
 <meta name="description" content="הטיול הגדול לגואה. ממלאים העדפות בדקה וחצי, פיני טורס דואג לשאר.">
 <meta property="og:title" content="פיני טורס טסים להודו 🌴🕉️">
@@ -91,6 +102,30 @@ details.survey .pad{padding:0 14px 14px}
 .songbox .credit{width:100%;font-size:12px;opacity:.7}
 .rec a,.qa a{color:#19f0ff}
 .gl{white-space:nowrap}.gl a{text-decoration:none;font-size:13px;margin-inline-start:2px}
+
+/* QA sprint: focus, motion, hero badge, map-icon tap targets, section nav, route card, song loader */
+a:focus-visible,button:focus-visible,summary:focus-visible,[role=button]:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}h1 .g,.spin,.sunrays{animation:none}}
+@media (max-width:560px){.hero .badge{position:static;margin-bottom:14px}}
+.hero .btn{width:min(100%,340px);text-align:center}
+.gl a{display:inline-block;min-width:30px;min-height:30px;line-height:30px;text-align:center;vertical-align:middle}
+.secnav{position:sticky;top:0;z-index:50;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:8px 12px;background:linear-gradient(#0b0420f5,#0b0420e8);backdrop-filter:blur(8px);border-bottom:1px solid #ff2bd644;overscroll-behavior-x:contain}
+.secnav::-webkit-scrollbar{display:none}
+.secnav a{flex:0 0 auto;display:inline-flex;align-items:center;min-height:40px;padding:6px 13px;border-radius:99px;border:1px solid #ffffff33;background:#ffffff0d;color:#fff;text-decoration:none;font-size:14.5px;font-weight:500;white-space:nowrap}
+.secnav a.hot{border-color:var(--lime);color:var(--lime);font-weight:700}
+.secnav a[aria-current=true]{background:linear-gradient(90deg,#ff2bd655,#7a2cff55);border-color:var(--pink)}
+@media (min-width:700px){.secnav{justify-content:center}}
+#personal-questionnaires,#recs,#info,#faq,#lodging-filtered,.pq-body,#kout,#out{scroll-margin-top:64px}
+.routecard{display:flex;gap:12px;align-items:center;margin:14px 0 6px;padding:14px;border-radius:16px;border:1px dashed var(--lime);background:#b6ff3b10;color:#fff;text-decoration:none}
+.routecard b{display:block;font-size:17px;color:var(--lime)}
+.routecard span{font-size:14px;color:#e3d9fa;line-height:1.5}
+.routecard i{font-style:normal;font-size:34px;line-height:1}
+.routecard .nextdl{display:block;margin-top:6px;font-style:normal;font-size:13.5px;font-weight:700;color:#ffe3a1}
+.songload{font:inherit;font-size:14px;font-weight:700;min-height:44px;padding:8px 16px;border-radius:99px;border:1px solid #19f0ff88;background:#19f0ff18;color:#fff;cursor:pointer}
+.songload:disabled{opacity:.7;cursor:progress}
+.songmsg{width:100%;font-size:13px;color:#ffd166}
+footer{padding-bottom:90px}
+.rec a.btn{color:#fff}
 </style>
 </head>
 <body>
@@ -130,21 +165,23 @@ setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},600);
 })();
 </script>
 <div id="goa-gal" style="display:none;position:fixed;inset:0;z-index:9000;background:#0b0420">
-<button id="goa-gal-close" type="button" style="position:absolute;top:10px;left:10px;z-index:9001;background:rgba(20,6,45,.85);color:#e8dcff;border:1px solid rgba(190,120,255,.5);border-radius:999px;padding:8px 16px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer">✕ חזרה לסקר</button>
+<button id="goa-gal-close" type="button" style="position:absolute;top:10px;left:10px;z-index:9001;background:rgba(20,6,45,.85);color:#e8dcff;border:1px solid rgba(190,120,255,.5);border-radius:999px;padding:8px 16px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer">✕ חזרה לאתר</button>
 <iframe id="goa-gal-frame" src="about:blank" style="width:100%;height:100%;border:0" title="גלריית פיני טורס"></iframe>
 </div>
 <script>
 function goaGalInit(){
 var ov=document.getElementById('goa-gal'),fr=document.getElementById('goa-gal-frame');
-function openGal(e){if(e)e.preventDefault();if(!fr.dataset.loaded){fr.src='gallery.html?embed=1';fr.dataset.loaded='1';}ov.style.display='block';document.body.style.overflow='hidden';}
-function closeGal(){ov.style.display='none';document.body.style.overflow='';}
+var opener=null;ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','גלריית פיני טורס');
+function openGal(e){if(e)e.preventDefault();opener=document.activeElement;if(!fr.dataset.loaded){fr.src='gallery.html?embed=1';fr.dataset.loaded='1';}ov.style.display='block';document.body.style.overflow='hidden';document.getElementById('goa-gal-close').focus();}
+function closeGal(){if(ov.style.display==='none')return;ov.style.display='none';document.body.style.overflow='';if(opener&&opener.focus)opener.focus();}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeGal();});
 var l=document.getElementById('gal-link');if(l)l.addEventListener('click',openGal);
 document.getElementById('goa-gal-close').addEventListener('click',closeGal);
 window.addEventListener('message',function(e){if(e.data==='goa-close-gallery')closeGal();});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',goaGalInit);else goaGalInit();
 </script>
-<div class="bar"><i id="prog"></i></div>
+<i id="prog" hidden></i>
 <header class="hero">
   <div class="badge">GOA 2027 · אפריל</div>
   <div class="spin" aria-hidden="true"></div>
@@ -155,6 +192,16 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   <a class="btn ghost" href="#kidsbox" id="kids-open" style="margin-top:10px">גם הילדים ממלאים 🎈 (60 שניות)</a>
   <a class="btn" href="kids.html" id="kidsworld-link" style="margin-top:10px">🌈 עולם הילדים בהודו 🌈</a>
 </header>
+<nav class="secnav" id="secnav" aria-label="ניווט באתר">
+  <a href="#personal-questionnaires">📝 שאלונים</a>
+  <a href="#recs">🗺️ המלצות</a>
+  <a href="route.html" class="hot">🧭 המסלול היומי</a>
+  <a href="pack.html">🎒 ציוד ותאריכים</a>
+  <a href="#lodging-filtered">🛏️ לינה</a>
+  <a href="#info">ℹ️ מידע</a>
+  <a href="#faq">❓ שאלות</a>
+  <a href="kids.html">🌈 ילדים</a>
+</nav>
 
 <main id="form">
 <section class="card" style="text-align:center">
@@ -165,20 +212,22 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <section class="card rec" id="recs">
 <h2>🗺️ ההמלצות שלנו לגואה 2027</h2>
 <p class="hint">אספנו את הטוב ביותר לשלוש המשפחות: חלק מהזמן בצפון, חלק בדרום, מקסימום 3 החלפות מלון. לוחצים על רובריקה כדי לפתוח. המחירים משוערים (₹ = רופי, ≈ המרה גסה לשקלים), נכונים לאוקטובר 2026 - מחירי אפריל 2027 ייפתחו מאוחר יותר.</p>
+<a class="routecard" href="route.html"><i aria-hidden="true">🧭</i><span><b>חדש: המסלול היומי ←</b>יום אחרי יום, 12-28.4: עצירות לפי הסדר עם פתיחה בגוגל מפות, טבלת זמני נסיעה, ומה עושים ביום גשם או חום. עובד גם בלי אינטרנט.</span></a>
+<a class="routecard" href="pack.html" style="border-color:#ffd166;background:#ffd16610"><i aria-hidden="true">🎒</i><span><b style="color:#ffd166">ציוד ותאריכים חשובים ←</b>מתי מגישים ויזה, מה לארוז, ומה לסדר לפני הטיסה. מסמנים בטלפון.<em id="nextDl" class="nextdl" hidden></em></span></a>
 <p style="text-align:center"><a class="btn" href="#lodging-filtered">🛏️ חדש (20.10): הצעות לינה מסוננות מ-Booking, לפי שלבי הטיול 👇</a></p>
 
 <h3>🌴 צפון גואה - Calangute / Baga / Vagator</h3>
 <p class="hint">הלב של הבילויים, השווקים והמסעדות. חול רחב, הרבה אקשן לילדים.</p>
 <details class="qa" data-track="lodging"><summary>🛏️ לינה בצפון</summary><div class="a"><p class="hint">עודכן 20.10: <a href="https://www.booking.com/hotel/in/swissa-tel-goa.html?checkin=2027-04-13&checkout=2027-04-17&group_adults=6&group_children=8&no_rooms=3&age=5&age=7&age=7&age=8&age=9&age=11&age=11&age=11&selected_currency=USD" target="_blank" rel="noopener" title="ב-Booking עם תאריכי השלב וכמות הנוסעים">Hard Rock</a> (ציון Booking 7.2) ו-<a href="https://www.booking.com/hotel/in/w-retreat-spa-goa.html?checkin=2027-04-13&checkout=2027-04-17&group_adults=6&group_children=8&no_rooms=3&age=5&age=7&age=7&age=8&age=9&age=11&age=11&age=11&selected_currency=USD" target="_blank" rel="noopener" title="ב-Booking עם תאריכי השלב וכמות הנוסעים">W Goa</a> (8.4) ירדו מההמלצות - מתחת לרף ה־8.5 של פיני.</p><p><a class="btn ghost" href="#lodging-filtered">🛏️ להצעות הלינה המסוננות בצפון (Booking 8.5 ומעלה) 👇</a></p><ul><li><b>וילה פרטית עם בריכה</b> באסאגאו או סיולים (3-4 חדרי שינה) - דרך Airbnb או סוכנות וילות מקומית; אין ציון Booking, נבדק בנפרד. <span class="pill">אמינוב: וילה פרטית</span></li></ul></div></details>
-<details class="qa" data-track="restaurants"><summary>🍽️ אוכל בצפון</summary><div class="a">Britto's <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Britto%27s+Bar+%26+Restaurant&query_place_id=ChIJRzXF3x3qvzsRRNDmKZGp8ko" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.5613278,73.7494609&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.5613278,73.7494609" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span> בבאגה (קלאסיקה מ-1965, נוף לים), Thalassa  בוגטור (יווני, הסאנסט הכי מפורסם בגואה), Gunpowder <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Gunpowder&query_place_id=ChIJkU2VCqzrvzsRSnOAngvPSKE" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.5969557,73.7883230&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.5969557,73.7883230" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span> באסאגאו (דרום הודי משובח), Pincode <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Pincode+Bungalow&query_place_id=ChIJJfF7OQDrvzsRgKlXTNKUjtM" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.5949577,73.7528907&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a></span> בוגטור (הודי מודרני). צמחוני ואוכל מוכר לילדים יש בשפע בכל מקום.</div></details>
-<details class="qa" data-track="attractions"><summary>🎯 מה עושים בצפון</summary><div class="a"><a href="https://goa-tourism.org.in/anjuna-flea-market-goa" target="_blank" rel="noopener">שוק דחיפים באנג'ונה</a> <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Anjuna+Flea+Market&query_place_id=ChIJFY-F1BLpvzsRyVdPrarA5bs" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.5720689,73.7419735&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.5720689,73.7419735" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span> (ימי רביעי), <a href="https://goa-tourism.com/siteseeing/markets-of-north-goa/" target="_blank" rel="noopener">שוק הלילה בארפורה</a> <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Saturday+Night+Market+Arpora+Goa" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.5671497,73.7654163&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.5671497,73.7654163" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span> (מוצ"ש), <a href="https://www.universaladventures.in/products/water-sports-at-baga-calangute-premium" target="_blank" rel="noopener">ספורט מים 5-ב-1 בקלנגוט/באגה</a> <span class="price">≈ ₹1,300</span>, <span class="gl-dead" title="הקישור הרשמי לא זמין כרגע">שייט דולפינים מסינקרים <small>(הקישור הרשמי לא זמין כרגע)</small></span> <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Sinquerim+Beach&query_place_id=ChIJn5OqQp7BvzsR7YB4KherD64" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.4991464,73.7674666&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.4991464,73.7674666" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span> (כשעה וחצי, <span class="price">מ־₹399</span>), <a href="https://www.universaladventures.in/products/scuba-diving-in-grand-island-goa" target="_blank" rel="noopener">צלילה ושנורקל סביב האי Grande</a> (טיול יום מהצפון, צלילת היכרות, <span class="price">מ־₹1,099</span>), <a href="https://www.goa.gov.in/places/aguada-fort/fort-aguada/" target="_blank" rel="noopener">מבצרי Aguada</a> <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Fort+Aguada&query_place_id=ChIJa72MxnXBvzsRHHtpszB2g6M" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.4922519,73.7737462&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.4922519,73.7737462" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span> ו-<a href="https://www.goa.gov.in/places/chapora-fort/" target="_blank" rel="noopener">Chapora</a> <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Chapora+Fort&query_place_id=ChIJ56FVYsbpvzsRB6GFWwDiCzc" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.6046375,73.7369631&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.6046375,73.7369631" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span>, שיעור יוגה drop-in בארמבול <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Arambol+Beach&query_place_id=ChIJU2YT71LuvzsRFgfxISbKed0" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.6846886,73.7032836&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.6846886,73.7032836" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span>.<div class="songbox">🐬 <b>השיר של הדולפינים</b> - הפקה של פיני (4:17): <audio class="goa-song" controls preload="none"></audio></div></div></details>
+<details class="qa" data-track="restaurants"><summary>🍽️ אוכל בצפון</summary><div class="a">Britto's <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Britto%27s+Bar+%26+Restaurant&query_place_id=ChIJRzXF3x3qvzsRRNDmKZGp8ko" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.5613278,73.7494609&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.5613278,73.7494609" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span> בבאגה (קלאסיקה מ-1965, נוף לים), Thalassa בוגטור (יווני, הסאנסט הכי מפורסם בגואה), Gunpowder <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Gunpowder&query_place_id=ChIJkU2VCqzrvzsRSnOAngvPSKE" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.5969557,73.7883230&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.5969557,73.7883230" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span> באסאגאו (דרום הודי משובח), Pincode <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Pincode+Bungalow&query_place_id=ChIJJfF7OQDrvzsRgKlXTNKUjtM" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.5949577,73.7528907&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a></span> בוגטור (הודי מודרני). צמחוני ואוכל מוכר לילדים יש בשפע בכל מקום.</div></details>
+<details class="qa" data-track="attractions"><summary>🎯 מה עושים בצפון</summary><div class="a"><a href="https://goa-tourism.org.in/anjuna-flea-market-goa" target="_blank" rel="noopener">שוק הפשפשים באנג'ונה</a> <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Anjuna+Flea+Market&query_place_id=ChIJFY-F1BLpvzsRyVdPrarA5bs" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.5720689,73.7419735&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.5720689,73.7419735" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span> (ימי רביעי), <a href="https://goa-tourism.com/siteseeing/markets-of-north-goa/" target="_blank" rel="noopener">שוק הלילה בארפורה</a> <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Saturday+Night+Market+Arpora+Goa" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.5671497,73.7654163&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.5671497,73.7654163" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span> (מוצ"ש), <a href="https://www.universaladventures.in/products/water-sports-at-baga-calangute-premium" target="_blank" rel="noopener">ספורט מים 5-ב-1 בקלנגוט/באגה</a> <span class="price">≈ ₹1,300</span>, <span class="gl-dead" title="הקישור הרשמי לא זמין כרגע">שייט דולפינים מסינקרים <small>(הקישור הרשמי לא זמין כרגע)</small></span> <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Sinquerim+Beach&query_place_id=ChIJn5OqQp7BvzsR7YB4KherD64" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.4991464,73.7674666&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.4991464,73.7674666" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span> (כשעה וחצי, <span class="price">מ־₹399</span>), <a href="https://www.universaladventures.in/products/scuba-diving-in-grand-island-goa" target="_blank" rel="noopener">צלילה ושנורקל סביב האי Grande</a> (טיול יום מהצפון, צלילת היכרות, <span class="price">מ־₹1,099</span>), <a href="https://www.goa.gov.in/places/aguada-fort/fort-aguada/" target="_blank" rel="noopener">מבצרי Aguada</a> <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Fort+Aguada&query_place_id=ChIJa72MxnXBvzsRHHtpszB2g6M" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.4922519,73.7737462&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.4922519,73.7737462" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span> ו-<a href="https://www.goa.gov.in/places/chapora-fort/" target="_blank" rel="noopener">Chapora</a> <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Chapora+Fort&query_place_id=ChIJ56FVYsbpvzsRB6GFWwDiCzc" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.6046375,73.7369631&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.6046375,73.7369631" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span>, שיעור יוגה drop-in בארמבול <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Arambol+Beach&query_place_id=ChIJU2YT71LuvzsRFgfxISbKed0" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.6846886,73.7032836&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.6846886,73.7032836" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span>.<div class="songbox">🐬 <b>השיר של הדולפינים</b> - הפקה של פיני (4:17): <audio class="goa-song" controls preload="none"></audio></div></div></details>
 <details class="qa" data-track="shopping"><summary>🛍️ קניות בצפון</summary><div class="a">בעיקר בשווקים: אנג'ונה (ד׳) וארפורה (מוצ"ש) - בגדים, תכשיטים, תבלינים ומזכרות.</div></details>
 
 <h3>🏖️ דרום גואה - Palolem / Agonda / Benaulim</h3>
 <p class="hint">שקט, חופים מהיפים בהודו, והבית של חב"ד לקראת ליל הסדר.</p>
 <details class="qa" data-track="lodging"><summary>🛏️ לינה בדרום</summary><div class="a"><p class="hint">עודכן 20.10: <a href="https://www.booking.com/hotel/in/intercontinental-the-lalit-goa-resort.html?checkin=2027-04-22&checkout=2027-04-27&group_adults=6&group_children=8&no_rooms=3&age=5&age=7&age=7&age=8&age=9&age=11&age=11&age=11&selected_currency=USD" target="_blank" rel="noopener" title="ב-Booking עם תאריכי השלב וכמות הנוסעים">The LaLiT</a> ירד מההמלצות (ציון Booking 7.8, מתחת לרף ה־8.5).</p><p><a class="btn ghost" href="#lodging-filtered">🛏️ להצעות הלינה המסוננות בדרום ובפאלולם (Booking 8.5 ומעלה) 👇</a></p><ul><li><a href="https://www.booking.com/hotel/in/taj-exotica-goa.html?checkin=2027-04-22&checkout=2027-04-27&group_adults=6&group_children=8&no_rooms=3&age=5&age=7&age=7&age=8&age=9&age=11&age=11&age=11&selected_currency=USD" target="_blank" rel="noopener" title="ב-Booking עם תאריכי השלב וכמות הנוסעים"><b>Taj Exotica</b></a> <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Taj+Exotica+Resort+%26+Spa%2C+Goa&query_place_id=ChIJiVbna6ywvzsRaASo1KU8pzE" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.2452367,73.9248133&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.2452367,73.9248133" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span> (בנאולים) - ריזורט משפחתי יוקרתי על החוף, פעילויות לילדים. <span class="hint">ציון Booking 8.5 בדיוק - על הסף, ויקר מאוד (~$609 ללילה).</span></li></ul></div></details>
 <details class="qa" data-track="restaurants"><summary>🍽️ אוכל בדרום</summary><div class="a">Cantine Indienne <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Cantine+indienne+-+Plant-based+canteen&query_place_id=ChIJN4POSTtbvjsR_IR2HIcLE4g" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.0076604,74.0300394&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a></span> בפלולם (טבעוני מצוין), The Mill <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=The+Mill+Cafe&query_place_id=ChIJxzJDqF5FvjsRI5dEDegxBOc" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.0110151,74.0278915&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a></span> בפלולם, Beno <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=BENO&query_place_id=ChIJI1MglIC1vzsRXJHyQcDncvg" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.251476,73.9353349&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a></span> ו-Cavatina <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Cavatina&query_place_id=ChIJVZpHKXy0vzsRBKVTKjv6dLg" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.2433783,73.9298956&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.2433783,73.9298956" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span> בבנאולים, Fisherman's Wharf <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=The+Fishermans+Wharf&query_place_id=ChIJRTUYPI5MvjsRxAHlDWzTpYY" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.1576183,73.9521909&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a></span> במובור, Martin's Corner <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Martin%27s+Corner&query_place_id=ChIJY7N6pt22vzsRld7p1M9Cvgc" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.303788,73.914329&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.303788,73.914329" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span> בבטלבטים, Zest <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Zest+Cafe+Agonda&query_place_id=ChIJDynHrZhPvjsRUuBAJjRcjk8" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.0392696,73.9892874&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a></span> ו-La Dolce Vita <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=LA+DOLCE+VITA+PIZZERIA&query_place_id=ChIJsxuuDdZPvjsRzYiHCdzalmI" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.0374596,73.9896413&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a></span> באגונדה, Joets <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Joets+Bar+%26+Restaurant&query_place_id=ChIJiRnMkvzHvzsRPz2JOH574kU" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.3708346,73.8325205&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a></span> בבוגמלו על החוף.</div></details>
-<details class="qa" data-track="attractions"><summary>🎯 מה עושים בדרום</summary><div class="a">יוגה drop-in ב-<a href="https://thepalmcollection.in/palm-forest-palolem/palm-forest-palolem-yoga/" target="_blank" rel="noopener">Palm Forest</a> <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Palm+Forest+Palolem&query_place_id=ChIJt9tsslBFvjsRzUdco_AG2WU" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.0132911,74.0190633&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.0132911,74.0190633" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span> או <a href="https://lumagoa.com/yoga-shala" target="_blank" rel="noopener">Luma</a> <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=LUMA+goa&query_place_id=ChIJLQjFN7dFvjsR8yezomPB5ao" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.0126252,74.0210419&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a></span> בפלולם, <a href="https://goatoursplanner.com/experience/dolphin-trip" target="_blank" rel="noopener">שייט דולפינים ממובור</a>, <a href="https://goatours.co.in/palolem-boat-trip-dolphins-and-beach/" target="_blank" rel="noopener">סירה פרטית מחוף פאלולם לחוף הפרפרים (Butterfly)</a> - יוצאים מהחוף עצמו, משלבים לרוב גם Honeymoon Beach, וראיית דולפינים לא מובטחת, ויום טיול ל<a href="https://www.dudhsagarjeeps.com/" target="_blank" rel="noopener">מפלי דודסאגר</a> <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Dudhsagar+Falls&query_place_id=ChIJQ4srFBimvzsRJQI7KOdIlP0" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.3144375,74.3143073&zoom=15&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.3144375,74.3143073" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span> - ג'יפים יוצאים מקולם  (להזמין מראש אצל <a href="https://www.dudhsagarjeeps.com/" target="_blank" rel="noopener">איגוד המפעילים</a>) ובדרך אפשר לשלב <a href="https://sahakarispicefarm.com/" target="_blank" rel="noopener">מטע תבלינים Sahakari</a> <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Sahakari+Spice+Farm&query_place_id=ChIJKcWnYsm6vzsRAMlwqeHP5dg" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.4094752,74.0237045&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a></span> בפונדה.<div class="songbox">🌴 <b>השיר של החופים של פאלולם</b> - הפקה של פיני (2:35): <audio class="goa-song" data-prefix="pal" data-chunks="7" controls preload="none"></audio><small class="credit">נוצר עם <a href="https://suno.com" target="_blank" rel="noopener">Suno</a> · לשימוש אישי ולא מסחרי</small></div></div></details>
+<details class="qa" data-track="attractions"><summary>🎯 מה עושים בדרום</summary><div class="a">יוגה drop-in ב-<a href="https://thepalmcollection.in/palm-forest-palolem/palm-forest-palolem-yoga/" target="_blank" rel="noopener">Palm Forest</a> <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Palm+Forest+Palolem&query_place_id=ChIJt9tsslBFvjsRzUdco_AG2WU" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.0132911,74.0190633&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.0132911,74.0190633" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span> או <a href="https://lumagoa.com/yoga-shala" target="_blank" rel="noopener">Luma</a> <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=LUMA+goa&query_place_id=ChIJLQjFN7dFvjsR8yezomPB5ao" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.0126252,74.0210419&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a></span> בפלולם, <a href="https://goatoursplanner.com/experience/dolphin-trip" target="_blank" rel="noopener">שייט דולפינים ממובור</a>, <a href="https://goatours.co.in/palolem-boat-trip-dolphins-and-beach/" target="_blank" rel="noopener">סירה פרטית מחוף פאלולם לחוף הפרפרים (Butterfly)</a> - יוצאים מהחוף עצמו, משלבים לרוב גם Honeymoon Beach, וראיית דולפינים לא מובטחת, ויום טיול ל<a href="https://www.dudhsagarjeeps.com/" target="_blank" rel="noopener">מפלי דודסאגר</a> <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Dudhsagar+Falls&query_place_id=ChIJQ4srFBimvzsRJQI7KOdIlP0" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.3144375,74.3143073&zoom=15&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.3144375,74.3143073" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span> - ג'יפים יוצאים מקולם (להזמין מראש אצל <a href="https://www.dudhsagarjeeps.com/" target="_blank" rel="noopener">איגוד המפעילים</a>) ובדרך אפשר לשלב <a href="https://sahakarispicefarm.com/" target="_blank" rel="noopener">מטע תבלינים Sahakari</a> <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Sahakari+Spice+Farm&query_place_id=ChIJKcWnYsm6vzsRAMlwqeHP5dg" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.4094752,74.0237045&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a></span> בפונדה.<div class="songbox">🌴 <b>השיר של החופים של פאלולם</b> - הפקה של פיני (2:35): <audio class="goa-song" data-prefix="pal" data-chunks="7" controls preload="none"></audio><small class="credit">נוצר עם <a href="https://suno.com" target="_blank" rel="noopener">Suno</a> · לשימוש אישי ולא מסחרי</small></div></div></details>
 <details class="qa" data-track="shopping"><summary>🛍️ קניות בדרום</summary><div class="a">דוכני בוטיק ותכשיטים ברחוב הראשי של פלולם <span class="gl"><a href="https://www.google.com/maps/search/?api=1&query=Palolem+Beach&query_place_id=ChIJuwJb0FFFvjsR9bsPS33GGx4" target="_blank" rel="noopener" title="כרטיס מקום">🗺️</a><a href="https://www.google.com/maps/@?api=1&map_action=map&center=15.0099648,74.0232186&zoom=17&basemap=satellite" target="_blank" rel="noopener" title="תצוגת לוויין">🛰️</a><a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=15.0099648,74.0232186" target="_blank" rel="noopener" title="פנורמת 360° בסביבה">📷</a></span>.</div></details>
 
 <h3>🧭 אפשרות חלופית למסלול: רגוע, עם מעבר אחד</h3>
@@ -647,25 +696,73 @@ document.querySelectorAll('#recs details.qa').forEach(function(d){
 });
 </script>
 <script>
-// שיר הדולפינים: משתיק את מוזיקת הרקע בזמן הניגון ומחזיר אותה כשעוצרים
+// השירים (דולפינים / פאלולם): נטענים רק כשלוחצים, כי הם כמה מגה־בייט. בזמן הניגון מוזיקת הרקע מושתקת וחוזרת בסוף.
+(function(){
+var SONGS={dol:{file:'goa-dolphins-',n:10,mb:6},pal:{file:'goa-palolem-',n:7,mb:4}};
+function have(prefix,n){for(var i=1;i<=n;i++){if(!window['__'+prefix+i])return false}return true}
+function loadChunks(prefix){
+  var s=SONGS[prefix];
+  if(have(prefix,s.n))return Promise.resolve();
+  if(s.p)return s.p;
+  s.p=new Promise(function(res,rej){
+    var left=s.n,failed=false;
+    for(var i=1;i<=s.n;i++){
+      var el=document.createElement('script');el.src=s.file+i+'.js?v=1';el.async=true;
+      el.onload=function(){if(--left===0){failed||!have(prefix,s.n)?rej():res()}};
+      el.onerror=function(){failed=true;if(--left===0)rej()};
+      document.head.appendChild(el);
+    }
+  }).catch(function(){s.p=null;throw new Error('load')});
+  return s.p;
+}
 document.querySelectorAll('audio.goa-song').forEach(function(a){
-  var built=false;
-  function build(){ if(built) return;
-    var prefix=a.dataset.prefix||'dol', n=parseInt(a.dataset.chunks||'10',10);
-    var s=''; for(var i=1;i<=n;i++){ var c=window['__'+prefix+i]; if(!c) return; s+=c; }
-    try { var bin=atob(s); var u8=new Uint8Array(bin.length);
-      for(var j=0;j<bin.length;j++) u8[j]=bin.charCodeAt(j);
+  var prefix=a.dataset.prefix||'dol',song=SONGS[prefix];if(!song)return;
+  var box=a.parentNode,btn=document.createElement('button'),msg=document.createElement('span');
+  btn.type='button';btn.className='songload';btn.textContent='▶ להשמיע את השיר (טעינה של כ־'+song.mb+'MB)';
+  msg.className='songmsg';msg.setAttribute('role','status');
+  a.hidden=true;box.insertBefore(btn,a);box.appendChild(msg);
+  btn.addEventListener('click',function(){
+    btn.disabled=true;btn.textContent='⏳ טוען את השיר...';msg.textContent='';
+    loadChunks(prefix).then(function(){
+      var s='';for(var i=1;i<=song.n;i++)s+=window['__'+prefix+i];
+      var bin=atob(s),u8=new Uint8Array(bin.length);
+      for(var j=0;j<bin.length;j++)u8[j]=bin.charCodeAt(j);
       a.src=URL.createObjectURL(new Blob([u8],{type:'audio/mpeg'}));
-      built=true;
-    } catch(e){}
-  }
-  window.addEventListener('load',build);
-  if('requestIdleCallback' in window) requestIdleCallback(build,{timeout:6000}); else setTimeout(build,2500);
-  a.addEventListener('pointerdown',build);
+      btn.remove();a.hidden=false;
+      var pr=a.play();if(pr&&pr.catch)pr.catch(function(){msg.textContent='השיר מוכן. לוחצים ▶ בנגן.'});
+    }).catch(function(){
+      btn.disabled=false;btn.textContent='▶ לנסות שוב';msg.textContent='השיר לא נטען. כנראה בעיית חיבור, אפשר לנסות שוב.';
+    });
+  });
   a.addEventListener('play',function(){ if(window.goaMusic&&goaMusic.isPlaying&&goaMusic.isPlaying()){ goaMusic.stop(); a.dataset.rbg='1'; } });
   function rb(){ if(a.dataset.rbg==='1'){ a.dataset.rbg=''; if(window.goaMusic&&goaMusic.start) goaMusic.start(); } }
   a.addEventListener('pause',rb); a.addEventListener('ended',rb);
 });
+})();
+// שיר הלינה (כ־6MB) נטען מראש רק כשמגיעים להמלצות, ולא בכל כניסה לאתר
+(function(){
+var recs=document.getElementById('recs');if(!recs)return;
+function pre(){if(window.goaMusic&&goaMusic.preload)goaMusic.preload('lodging')}
+if(!('IntersectionObserver' in window)){recs.addEventListener('toggle',pre,true);return}
+var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();pre()}});io.observe(recs);
+})();
+// התאריך הבא מרשימת התאריכים (trip-data.js)
+(function(){function go(){var G=window.GOA_TRIP,box=document.getElementById('nextDl');if(!G||!box)return;
+var t=new Date();t.setHours(0,0,0,0);
+var nx=G.DEADLINES.filter(function(x){var p=x.date.split('-');return new Date(+p[0],+p[1]-1,+p[2])>=t})[0];if(!nx)return;
+var p=nx.date.split('-'),n=Math.round((new Date(+p[0],+p[1]-1,+p[2])-t)/864e5);
+box.textContent='⏳ הבא בתור: '+nx.t+' · '+(n===0?'היום':'בעוד '+n+' ימים')+(nx.approx?' (בערך)':'');box.hidden=false}
+if(document.readyState==='complete')go();else window.addEventListener('load',go)})();
+// שמירה לשימוש בלי אינטרנט (sw.js: רק דפי התכנון והקבצים הקטנים, תמיד מהרשת כשיש חיבור)
+if('serviceWorker' in navigator&&location.protocol!=='file:'){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}
+// ניווט: מסמנים את האזור שבו נמצאים
+(function(){
+var nav=document.getElementById('secnav');if(!nav||!('IntersectionObserver' in window))return;
+var links=[].slice.call(nav.querySelectorAll('a[href^="#"]'));
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;links.forEach(function(l){var on=l.getAttribute('href')==='#'+e.target.id;if(on){l.setAttribute('aria-current','true');var r=l.getBoundingClientRect(),nr=nav.getBoundingClientRect();if(r.left<nr.left||r.right>nr.right)nav.scrollLeft+=r.left-nr.left-nr.width/2+r.width/2}else l.removeAttribute('aria-current')})})},{rootMargin:'-70px 0px -65% 0px'});
+function watch(){links.forEach(function(l){var s=document.getElementById(l.getAttribute('href').slice(1));if(s)io.observe(s)})}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',watch);else watch();
+})();
 </script>
 </body>
   </html>
