@@ -1,0 +1,41 @@
+PASS index.html 375x667: no horizontal scroll  375
+PASS index.html 375x667: no page errors  []
+PASS route.html 375x667: no horizontal scroll  375
+PASS route.html 375x667: no page errors  []
+PASS pack.html 375x667: no horizontal scroll  375
+PASS pack.html 375x667: no page errors  []
+PASS kids.html 375x667: no horizontal scroll  375
+PASS kids.html 375x667: no page errors  []
+PASS mia.html 375x667: no horizontal scroll  375
+PASS mia.html 375x667: no page errors  []
+PASS gallery.html 375x667: no horizontal scroll  375
+PASS gallery.html 375x667: no page errors  []
+PASS index.html 667x375: no horizontal scroll  667
+PASS index.html 667x375: no page errors  []
+PASS route.html 667x375: no horizontal scroll  667
+PASS route.html 667x375: no page errors  []
+PASS pack.html 667x375: no horizontal scroll  667
+PASS pack.html 667x375: no page errors  []
+PASS kids.html 667x375: no horizontal scroll  667
+PASS kids.html 667x375: no page errors  []
+PASS mia.html 667x375: no horizontal scroll  667
+PASS mia.html 667x375: no page errors  []
+PASS gallery.html 667x375: no horizontal scroll  667
+PASS gallery.html 667x375: no page errors  []
+PASS chat 375x667: input is one line (<= 48px)  42
+PASS chat 375x667: close button >= 44x44  [44,44]
+PASS chat 375x667: panel inside viewport  [109,589,667]
+PASS chat 375x667: message area >= 120px  284
+PASS chat 375x667: greeting visible
+PASS chat 375x667: panel background opaque  "rgb(24, 10, 46)"
+PASS chat 375x667: Esc closes and returns focus
+PASS chat 667x375: input is one line (<= 48px)  42
+PASS chat 667x375: close button >= 44x44  [44,44]
+PASS chat 667x375: panel inside viewport  [8,367,375]
+PASS chat 667x375: message area >= 120px  168
+PASS chat 667x375: greeting visible
+PASS chat 667x375: panel background opaque  "rgb(24, 10, 46)"
+PASS chat 667x375: Esc closes and returns focus
+PASS kids.html: back link target >= 44px tall  [184,51]
+
+39 passed, 0 failed

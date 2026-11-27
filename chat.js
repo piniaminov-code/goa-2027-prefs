@@ -10,13 +10,13 @@
   + '#goa-chat-btn:active{transform:scale(.96)}'
   + '#goa-chat-panel{position:fixed;bottom:78px;right:16px;z-index:9000;width:min(360px,calc(100vw - 32px));'
   + 'height:min(480px,calc(100dvh - 120px));display:none;flex-direction:column;overflow:hidden;'
-  + 'background:rgba(24,10,46,.97);border:1px solid rgba(255,255,255,.14);border-radius:18px;'
+  + 'background:#180a2e;border:1px solid rgba(255,255,255,.14);border-radius:18px;'
   + 'box-shadow:0 12px 40px rgba(0,0,0,.55);direction:rtl;font-family:inherit}'
   + '#goa-chat-panel.open{display:flex}'
   + '#goa-chat-head{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;'
   + 'background:linear-gradient(135deg,rgba(255,95,162,.25),rgba(168,85,247,.25));border-bottom:1px solid rgba(255,255,255,.1)}'
   + '#goa-chat-head b{color:#fff;font-size:15px}'
-  + '#goa-chat-close{background:none;border:none;color:#cbb6e8;font-size:20px;cursor:pointer;line-height:1;padding:2px 6px}'
+  + '#goa-chat-close{background:none;border:none;color:#cbb6e8;font-size:20px;cursor:pointer;line-height:1;padding:0;width:44px;height:44px;margin:-10px -8px -10px -10px;border-radius:12px}'
   + '#goa-chat-msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}'
   + '.gcb-msg{max-width:85%;padding:9px 12px;border-radius:14px;font-size:14px;line-height:1.5;white-space:pre-wrap;word-break:break-word}'
   + '.gcb-bot{align-self:flex-start;background:rgba(255,255,255,.08);color:#f3ecff;border-bottom-left-radius:4px}'
@@ -26,11 +26,13 @@
   + '.gcb-dots{align-self:flex-start;color:#cbb6e8;font-size:18px;letter-spacing:2px;padding:4px 12px}'
   + '#goa-chat-inputrow{display:flex;gap:8px;padding:10px;border-top:1px solid rgba(255,255,255,.1);align-items:center}'
   + '#goa-chat-input{flex:1;box-sizing:border-box;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:12px;'
-  + 'color:#fff;font-size:14px;padding:10px 12px;outline:none;font-family:inherit;resize:none;height:42px}'
+  + 'color:#fff;font-size:14px;padding:10px 12px;outline:none;font-family:inherit;resize:none;height:42px;min-height:0;width:auto}'
   + '#goa-chat-send{box-sizing:border-box;height:42px;background:linear-gradient(135deg,#ff5fa2,#a855f7);border:none;color:#fff;font-weight:700;'
   + 'border-radius:12px;padding:0 16px;cursor:pointer;font-size:14px;font-family:inherit}'
   + '#goa-chat-send:disabled{opacity:.5;cursor:default}'
-  + '#goa-chat-note{padding:7px 12px 9px;font-size:10.5px;color:#9d8ac0;line-height:1.4;border-top:1px solid rgba(255,255,255,.06)}';
+  + '#goa-chat-note{padding:7px 12px 9px;font-size:10.5px;color:#9d8ac0;line-height:1.4;border-top:1px solid rgba(255,255,255,.06)}'
+  // short screens (phone in landscape): use the full height so the messages stay readable
+  + '@media (max-height:520px){html body #goa-chat-panel{bottom:calc(8px + env(safe-area-inset-bottom,0px));height:calc(100dvh - 16px)}#goa-chat-note{padding:5px 12px 6px}}';
 
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
 
